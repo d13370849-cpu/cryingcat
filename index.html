@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人簡介 | 台南應用科技大學</title>
+    <!-- Google Fonts 引入現代字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 圖標庫 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === 核心色彩變數與主題設計 === */
+        :root {
+            --bg-gradient: radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.1) 0%, transparent 60%),
+                #0a0e17;
+            --card-bg: rgba(22, 27, 46, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --item-bg: rgba(255, 255, 255, 0.04);
+            --item-border: rgba(255, 255, 255, 0.08);
+
+            /* 保留原本的彩虹色彩概念並全面升級質感 */
+            --color-red: #ff4d6d;
+            --color-orange: #ff9e00;
+            --color-yellow: #ffd166;
+            --color-green: #06d6a0;
+            --color-blue: #118ab2;
+            --color-purple: #8338ec;
+
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 淺色主題變數 */
+        [data-theme="light"] {
+            --bg-gradient: radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.08) 0%, transparent 60%),
+                #f0f4f8;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 20px 40px -15px rgba(100, 116, 139, 0.2);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --item-bg: rgba(255, 255, 255, 0.7);
+            --item-border: rgba(226, 232, 240, 0.8);
+        }
+
+        /* === 全局重設 === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #0a0e17;
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        /* === 頂部控制列 (主題切換) === */
+        .top-bar {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+            gap: 12px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-purple);
+        }
+
+        /* === 主容器 (毛玻璃卡片) === */
+        .profile-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--card-shadow);
+            padding: 45px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* 裝飾光暈 */
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-red));
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-green));
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* === 頭像與標題區 === */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, var(--color-red), var(--color-orange), var(--color-green), var(--color-blue), var(--color-purple));
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0.7;
+            animation: rotateGlow 6s linear infinite;
+        }
+
+        .avatar-img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            background: #10b981;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 2px solid var(--card-bg);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* 主標題 (個人簡介) */
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        [data-theme="light"] .main-title {
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-tagline {
+            font-size: 1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* === 資訊網格區 (保留原樣資料，彩虹卡片質感昇華) === */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-card {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 彩虹卡片左側特色光條 */
+        .info-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-color);
+            border-radius: 4px 0 0 4px;
+        }
+
+        /* 圖標外框 */
+        .icon-box {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-content {
+            flex-grow: 1;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .info-value {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .info-value .editable-hint {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            cursor: pointer;
+            border-bottom: 1px dashed var(--text-muted);
+        }
+
+        .info-value .editable-hint:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* 原作者色彩對應 (CSS 變數分配) */
+        .card-name {
+            --accent-color: var(--color-red);
+        }
+
+        .card-zodiac {
+            --accent-color: var(--color-orange);
+        }
+
+        .card-edu {
+            --accent-color: var(--color-yellow);
+        }
+
+        .card-hobby {
+            --accent-color: var(--color-green);
+        }
+
+        .card-skill {
+            --accent-color: var(--color-blue);
+        }
+
+        .card-bio {
+            --accent-color: var(--color-purple);
+            grid-column: 1 / -1;
+        }
+
+        /* 自我介紹卡片特別加強 */
+        .card-bio .info-value {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bio-quote {
+            font-size: 1.5rem;
+            color: var(--color-purple);
+            opacity: 0.6;
+        }
+
+        /* === 學校連結區塊 (完整保留原程式碼的兩種連結) === */
+        .links-section {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .link-buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .tut-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        /* 主要連結按鈕 (新分頁開啟 target="_blank") */
+        .btn-primary-link {
+            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(17, 138, 178, 0.3);
+        }
+
+        .btn-primary-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(131, 56, 236, 0.4);
+            color: #ffffff;
+        }
+
+        /* 次要連結按鈕 (本頁開啟) */
+        .btn-secondary-link {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border-color: var(--item-border);
+        }
+
+        .btn-secondary-link:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            border-color: var(--color-yellow);
+        }
+
+        .link-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: normal;
+        }
+
+        /* === 互動塗鴉小畫板 (呼應原作者「興趣: 畫畫」「專長: 畫畫」) === */
+        .canvas-section {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .canvas-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .canvas-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .color-palette {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .color-dot:hover,
+        .color-dot.active {
+            transform: scale(1.2);
+            border-color: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .custom-color-input {
+            width: 26px;
+            height: 26px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .brush-size-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .brush-slider {
+            accent-color: var(--color-purple);
+            cursor: pointer;
+            width: 80px;
+        }
+
+        .canvas-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--item-border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .canvas-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+        }
+
+        .drawing-canvas {
+            width: 100%;
+            height: 240px;
+            background: #ffffff;
+            border-radius: var(--radius-sm);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+            cursor: crosshair;
+            display: block;
+            touch-action: none;
+        }
+
+        /* === 頁尾設計 === */
+        .profile-footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* === 動畫效果 === */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.85);
+            }
+        }
+
+        /* === 響應式優化 === */
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 25px 20px;
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .canvas-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .canvas-toolbar {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 頂部切換與工具列 -->
+    <div class="top-bar">
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="切換深色/淺色主題">
+            <i class="fa-solid fa-moon" id="themeIcon"></i>
+            <span id="themeText">切換淺色模式</span>
+        </button>
+    </div>
+
+    <!-- 主要個人簡介卡片 -->
+    <div class="profile-container">
+
+        <!-- 英雄區塊：頭像與主標題 -->
+        <div class="hero-section">
+            <div class="avatar-wrapper">
+                <div class="avatar-glow"></div>
+                <!-- 保留原 cat.jpeg 圖片 -->
+                <img src="cat.jpeg" alt="個人頭像" class="avatar-img" id="avatarImage" title="點擊我有小驚喜！">
+                <div class="status-badge">
+                    <span class="dot"></span>
+                    <span>創作靈感在線</span>
+                </div>
+            </div>
+
+            <!-- 主標題 (保留原 <h1>個人簡介</h1>) -->
+            <h1 class="main-title">個人簡介</h1>
+            <p class="sub-tagline">
+                <i class="fa-solid fa-graduation-cap" style="color: var(--color-yellow);"></i>
+                台南應用科技大學 ‧ 網頁程式設計
+            </p>
+        </div>
+
+        <!-- 資訊網格區 (保留原 6 個彩虹色彩項目：姓名、星座、學歷、興趣、專長、自我介紹) -->
+        <div class="info-grid">
+
+            <!-- 1. 姓名 (原 red) -->
+            <div class="info-card card-name">
+                <div class="icon-box">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>姓名</span>
+                        <i class="fa-solid fa-signature"></i>
+                    </div>
+                    <div class="info-value">
+                        <span id="nameDisplay" class="editable-hint" onclick="editInfo('姓名', 'nameDisplay')">點擊填寫姓名
+                            ✍️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 星座 (原 orange) -->
+            <div class="info-card card-zodiac">
+                <div class="icon-box">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>星座</span>
+                        <i class="fa-solid fa-meteor"></i>
+                    </div>
+                    <div class="info-value">
+                        <span id="zodiacDisplay" class="editable-hint" onclick="editInfo('星座', 'zodiacDisplay')">點擊填寫星座
+                            ✨</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 學歷 (原 yellow) -->
+            <div class="info-card card-edu">
+                <div class="icon-box">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>學歷</span>
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="info-value">台南應用科技大學</div>
+                </div>
+            </div>
+
+            <!-- 4. 興趣 (原 green) -->
+            <div class="info-card card-hobby">
+                <div class="icon-box">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>興趣</span>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="info-value">畫畫 🎨</div>
+                </div>
+            </div>
+
+            <!-- 5. 專長 (原 blue) -->
+            <div class="info-card card-skill">
+                <div class="icon-box">
+                    <i class="fa-solid fa-paintbrush"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>專長</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div class="info-value">畫畫 🖌️</div>
+                </div>
+            </div>
+
+            <!-- 6. 自我介紹 (原 purple) -->
+            <div class="info-card card-bio">
+                <div class="icon-box">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>自我介紹</span>
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <div class="info-value">
+                        <span class="bio-quote">“</span>
+                        <span>我喜歡畫畫</span>
+                        <span class="bio-quote">”</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 學校連結專區 (保留原程式碼中的兩種連結方式) -->
+        <div class="links-section">
+            <div class="section-header">
+                <i class="fa-solid fa-link" style="color: var(--color-blue);"></i>
+                <span>學校相關連結 (TUT)</span>
+            </div>
+            <div class="link-buttons-group">
+                <!-- 原程式碼第 1 個連結：原頁面開啟 -->
+                <a href="https://www.tut.edu.tw/" class="tut-link-btn btn-secondary-link" title="在當前頁面開啟">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>台南應用科技大學</span>
+                    <span class="link-badge">原分頁</span>
+                </a>
+
+                <!-- 原程式碼第 2 個連結：新分頁開啟 target="_blank" -->
+                <a href="https://www.tut.edu.tw/" target="_blank" rel="noopener noreferrer"
+                    class="tut-link-btn btn-primary-link" title="在新分頁開啟學校官網">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>台南應用科技大學</span>
+                    <span class="link-badge">新分頁 ↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 專屬彩蛋：互動畫畫塗鴉板 (呼應個人喜好與專長) -->
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <div class="canvas-title">
+                    <i class="fa-solid fa-pen-nib" style="color: var(--color-green);"></i>
+                    <span>隨手畫畫創作板 (歡迎留下你的塗鴉！)</span>
+                </div>
+                <div class="canvas-toolbar">
+                    <!-- 顏色選擇器 -->
+                    <div class="color-palette">
+                        <div class="color-dot active" style="background: #000000;" data-color="#000000"></div>
+                        <div class="color-dot" style="background: var(--color-red);" data-color="#ff4d6d"></div>
+                        <div class="color-dot" style="background: var(--color-orange);" data-color="#ff9e00"></div>
+                        <div class="color-dot" style="background: var(--color-green);" data-color="#06d6a0"></div>
+                        <div class="color-dot" style="background: var(--color-blue);" data-color="#118ab2"></div>
+                        <div class="color-dot" style="background: var(--color-purple);" data-color="#8338ec"></div>
+                        <input type="color" id="customColor" class="custom-color-input" title="自訂顏色" value="#8338ec">
+                    </div>
+
+                    <!-- 筆刷大小 -->
+                    <div class="brush-size-wrap">
+                        <i class="fa-solid fa-circle" style="font-size: 8px;"></i>
+                        <input type="range" id="brushSize" class="brush-slider" min="1" max="25" value="4" title="筆刷粗細">
+                    </div>
+
+                    <!-- 工具按鈕 -->
+                    <button class="canvas-btn" id="clearCanvasBtn" title="清空畫布">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <span>清空</span>
+                    </button>
+                    <button class="canvas-btn" id="saveCanvasBtn" title="儲存你的畫作">
+                        <i class="fa-solid fa-download"></i>
+                        <span>儲存</span>
+                    </button>
+                </div>
+            </div>
+            <!-- 繪圖畫布 -->
+            <canvas id="doodleCanvas" class="drawing-canvas"></canvas>
+        </div>
+
+        <!-- 頁尾 -->
+        <div class="profile-footer">
+            <p>© 2026 台南應用科技大學 ‧ 網頁程式設計課程作業</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">Crafted with Modern HTML5 & CSS3 Glassmorphism</p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // === 1. 深色 / 淺色主題切換功能 ===
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        // 讀取先前儲存的主題偏好
+        const savedTheme = localStorage.getItem('user-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.className = 'fa-solid fa-sun';
+            themeText.textContent = '切換深色模式';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('user-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-moon';
+                themeText.textContent = '切換淺色模式';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('user-theme', 'light');
+                themeIcon.className = 'fa-solid fa-sun';
+                themeText.textContent = '切換深色模式';
+            }
+        });
+
+        // === 2. 姓名與星座的點擊快速自訂功能 ===
+        function editInfo(label, elementId) {
+            const el = document.getElementById(elementId);
+            const currentVal = el.innerText.replace(/[✍️✨]/g, '').trim();
+            const newVal = prompt(`請輸入您的「${label}」：`, currentVal.includes('點擊填寫') ? '' : currentVal);
+            if (newVal !== null && newVal.trim() !== '') {
+                el.innerText = newVal.trim();
+                el.style.fontStyle = 'normal';
+                el.style.borderBottom = 'none';
+                localStorage.setItem(`profile-${elementId}`, newVal.trim());
+            }
+        }
+
+        // 讀取已保存的姓名與星座
+        ['nameDisplay', 'zodiacDisplay'].forEach(id => {
+            const saved = localStorage.getItem(`profile-${id}`);
+            if (saved) {
+                const el = document.getElementById(id);
+                el.innerText = saved;
+                el.style.fontStyle = 'normal';
+                el.style.borderBottom = 'none';
+            }
+        });
+
+        // === 3. 點擊貓咪頭像趣味音效與動畫 ===
+        const avatarImage = document.getElementById('avatarImage');
+        avatarImage.addEventListener('click', () => {
+            avatarImage.style.transform = 'scale(1.2) rotate(15deg)';
+            setTimeout(() => {
+                avatarImage.style.transform = '';
+            }, 300);
+        });
+
+        // === 4. 隨手畫畫創作板核心邏輯 ===
+        const canvas = document.getElementById('doodleCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentColor = '#000000';
+        let currentLineWidth = 4;
+
+        // 自適應畫布大小
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            // 保存當前畫布內容
+            const tempImage = ctx.getImageData(0, 0, canvas.width || 1, canvas.height || 1);
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            // 填滿白色底色
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, rect.width, rect.height);
+
+            // 畫布基礎筆刷樣式
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = currentColor;
+            ctx.lineWidth = currentLineWidth;
+        }
+
+        window.addEventListener('load', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas);
+
+        // 取得畫布相對座標
+        function getCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            e.preventDefault();
+            isDrawing = true;
+            const { x, y } = getCoords(e);
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const { x, y } = getCoords(e);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                ctx.closePath();
+                isDrawing = false;
+            }
+        }
+
+        // 滑鼠事件
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        window.addEventListener('mouseup', stopDrawing);
+
+        // 觸控螢幕事件 (手機/平板)
+        canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        window.addEventListener('touchend', stopDrawing);
+
+        // 顏色選擇器設定
+        const colorDots = document.querySelectorAll('.color-dot');
+        const customColor = document.getElementById('customColor');
+
+        colorDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                colorDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                currentColor = dot.getAttribute('data-color');
+                ctx.strokeStyle = currentColor;
+            });
+        });
+
+        customColor.addEventListener('input', (e) => {
+            colorDots.forEach(d => d.classList.remove('active'));
+            currentColor = e.target.value;
+            ctx.strokeStyle = currentColor;
+        });
+
+        // 筆刷粗細滑桿
+        const brushSize = document.getElementById('brushSize');
+        brushSize.addEventListener('input', (e) => {
+            currentLineWidth = e.target.value;
+            ctx.lineWidth = currentLineWidth;
+        });
+
+        // 清空畫布按鈕
+        document.getElementById('clearCanvasBtn').addEventListener('click', () => {
+            const rect = canvas.getBoundingClientRect();
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, rect.width, rect.height);
+        });
+
+        // 儲存畫作按鈕 (下載圖片)
+        document.getElementById('saveCanvasBtn').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = '我的畫畫創作.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+
+</html>
