@@ -1,0 +1,3988 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人簡介與作品集 | 臺南應用科技大學 多媒體動畫科系</title>
+    <!-- Google Fonts 引入現代字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;600;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome 圖標庫 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === 核心色彩變數與主題設計 === */
+        :root {
+            --bg-gradient: radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.12) 0%, transparent 60%),
+                #0a0e17;
+            --card-bg: rgba(22, 27, 46, 0.75);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --card-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.6);
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --item-bg: rgba(255, 255, 255, 0.04);
+            --item-border: rgba(255, 255, 255, 0.08);
+
+            /* 質感特色色彩 */
+            --color-red: #ff4d6d;
+            --color-orange: #ff9e00;
+            --color-yellow: #ffd166;
+            --color-green: #06d6a0;
+            --color-blue: #118ab2;
+            --color-purple: #8338ec;
+            --color-cyan: #00f0ff;
+
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 淺色主題變數 */
+        [data-theme="light"] {
+            --bg-gradient: radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.08) 0%, transparent 60%),
+                #f0f4f8;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-border: rgba(255, 255, 255, 0.85);
+            --card-shadow: 0 20px 40px -15px rgba(100, 116, 139, 0.22);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --item-bg: rgba(255, 255, 255, 0.75);
+            --item-border: rgba(226, 232, 240, 0.85);
+        }
+
+        /* === 全局重設 === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            background-color: #070a13;
+            min-height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        [data-theme="light"] html {
+            background-color: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            background-size: cover;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px 60px;
+            transition: var(--transition);
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ==========================================================================
+           === 頂級動態美學背景系統樣式 (Comprehensive Dynamic Background System) ===
+           ========================================================================== */
+        .bg-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        .bg-mode {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
+            will-change: opacity;
+        }
+
+        .bg-mode.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .bg-mode-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* --- 風格 1: 靈動流體極光 (Aurora Fluid Mesh) --- */
+        .bg-mode-aurora {
+            background: radial-gradient(circle at 50% 50%, rgba(131, 56, 236, 0.08) 0%, transparent 70%);
+        }
+
+        .aurora-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(85px);
+            opacity: 0.55;
+            mix-blend-mode: screen;
+            will-change: transform;
+        }
+
+        [data-theme="light"] .aurora-orb {
+            opacity: 0.4;
+            filter: blur(95px);
+            mix-blend-mode: multiply;
+        }
+
+        .orb-1 {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #8338ec 0%, rgba(131, 56, 236, 0) 70%);
+            top: -10%;
+            left: -10%;
+            animation: auroraFloat1 22s ease-in-out infinite alternate;
+        }
+
+        .orb-2 {
+            width: 620px;
+            height: 620px;
+            background: radial-gradient(circle, #ff4d6d 0%, rgba(255, 77, 109, 0) 70%);
+            bottom: -15%;
+            right: -10%;
+            animation: auroraFloat2 26s ease-in-out infinite alternate;
+        }
+
+        .orb-3 {
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, #00f0ff 0%, rgba(0, 240, 255, 0) 70%);
+            top: 35%;
+            left: 60%;
+            animation: auroraFloat3 18s ease-in-out infinite alternate;
+        }
+
+        .orb-4 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ff9e00 0%, rgba(255, 158, 0, 0) 70%);
+            bottom: 20%;
+            left: 10%;
+            animation: auroraFloat4 24s ease-in-out infinite alternate;
+        }
+
+        @keyframes auroraFloat1 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(120px, 80px) scale(1.15);
+            }
+
+            100% {
+                transform: translate(-60px, 140px) scale(0.9);
+            }
+        }
+
+        @keyframes auroraFloat2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-140px, -100px) scale(1.2);
+            }
+
+            100% {
+                transform: translate(80px, -60px) scale(0.95);
+            }
+        }
+
+        @keyframes auroraFloat3 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-100px, 120px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(110px, -70px) scale(0.85);
+            }
+        }
+
+        @keyframes auroraFloat4 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(90px, -110px) scale(1.18);
+            }
+
+            100% {
+                transform: translate(-110px, 60px) scale(0.92);
+            }
+        }
+
+        /* --- 風格 3: 賽博霓虹地平線網格 (Cyberpunk 3D Synthwave Grid) --- */
+        .bg-mode-cyber {
+            background: radial-gradient(circle at 50% 30%, #1a082e 0%, #080410 70%);
+            perspective: 700px;
+            perspective-origin: 50% 50%;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .bg-mode-cyber {
+            background: radial-gradient(circle at 50% 30%, #ede4f7 0%, #d8e2f0 70%);
+        }
+
+        .cyber-sun {
+            position: absolute;
+            top: 16%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #ffe600 0%, #ff007f 65%, #7928ca 100%);
+            box-shadow: 0 0 60px rgba(255, 0, 127, 0.65), 0 0 120px rgba(255, 230, 0, 0.4);
+            mask-image: linear-gradient(to bottom,
+                    black 0%, black 50%,
+                    transparent 50%, transparent 54%,
+                    black 54%, black 63%,
+                    transparent 63%, transparent 68%,
+                    black 68%, black 77%,
+                    transparent 77%, transparent 83%,
+                    black 83%, black 91%,
+                    transparent 91%, transparent 98%,
+                    black 98%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom,
+                    black 0%, black 50%,
+                    transparent 50%, transparent 54%,
+                    black 54%, black 63%,
+                    transparent 63%, transparent 68%,
+                    black 68%, black 77%,
+                    transparent 77%, transparent 83%,
+                    black 83%, black 91%,
+                    transparent 91%, transparent 98%,
+                    black 98%, black 100%);
+            animation: sunPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes sunPulse {
+            0% {
+                transform: translateX(-50%) scale(1);
+                filter: drop-shadow(0 0 25px rgba(255, 0, 127, 0.6));
+            }
+
+            100% {
+                transform: translateX(-50%) scale(1.05);
+                filter: drop-shadow(0 0 45px rgba(255, 0, 127, 0.85));
+            }
+        }
+
+        .cyber-horizon-beam {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent 0%, #00f0ff 25%, #ff007f 50%, #00f0ff 75%, transparent 100%);
+            box-shadow: 0 0 25px 4px #00f0ff, 0 0 50px 8px #ff007f;
+            z-index: 2;
+        }
+
+        .cyber-grid-plane {
+            position: absolute;
+            top: 50%;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            transform-origin: 50% 0%;
+            transform: rotateX(76deg);
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.45) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(255, 0, 127, 0.45) 1.5px, transparent 1.5px);
+            background-size: 50px 50px;
+            animation: cyberGridMove 1.6s linear infinite;
+            mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.9) 40%, transparent 90%);
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.9) 40%, transparent 90%);
+        }
+
+        [data-theme="light"] .cyber-grid-plane {
+            background-image:
+                linear-gradient(rgba(17, 138, 178, 0.35) 1.5px, transparent 1.5px),
+                linear-gradient(90deg, rgba(131, 56, 236, 0.35) 1.5px, transparent 1.5px);
+        }
+
+        @keyframes cyberGridMove {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 0 50px;
+            }
+        }
+
+        /* --- 風格 4: 現代立體懸浮幾何 (Floating 3D Glass Geometry) --- */
+        .bg-mode-geometry {
+            perspective: 1000px;
+            overflow: hidden;
+            background: radial-gradient(circle at 20% 80%, rgba(131, 56, 236, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.12) 0%, transparent 50%);
+        }
+
+        .geo-shape {
+            position: absolute;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        [data-theme="light"] .geo-shape {
+            background: rgba(255, 255, 255, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 15px 35px rgba(100, 116, 139, 0.15), inset 0 1px 1px #ffffff;
+        }
+
+        .geo-ring-1 {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 24px solid rgba(131, 56, 236, 0.3);
+            border-top-color: rgba(255, 77, 109, 0.6);
+            background: transparent;
+            top: 12%;
+            left: 8%;
+            animation: geoFloatRing 18s ease-in-out infinite alternate;
+        }
+
+        .geo-cube-1 {
+            width: 130px;
+            height: 130px;
+            top: 65%;
+            left: 12%;
+            background: linear-gradient(135deg, rgba(255, 158, 0, 0.25), rgba(255, 77, 109, 0.15));
+            border-color: rgba(255, 158, 0, 0.4);
+            animation: geoFloatCube 20s ease-in-out infinite alternate;
+        }
+
+        .geo-sphere-1 {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            top: 18%;
+            right: 10%;
+            background: radial-gradient(circle at 35% 35%, rgba(0, 240, 255, 0.45), rgba(17, 138, 178, 0.15) 70%, transparent 100%);
+            border: 1px solid rgba(0, 240, 255, 0.5);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.35);
+            animation: geoFloatSphere 16s ease-in-out infinite alternate;
+        }
+
+        .geo-triangle-1 {
+            width: 140px;
+            height: 140px;
+            top: 48%;
+            right: 14%;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            background: linear-gradient(135deg, rgba(6, 214, 160, 0.35), rgba(17, 138, 178, 0.15));
+            border: none;
+            animation: geoFloatTriangle 22s ease-in-out infinite alternate;
+        }
+
+        .geo-pill-1 {
+            width: 180px;
+            height: 80px;
+            border-radius: 50px;
+            bottom: 10%;
+            right: 25%;
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.28), rgba(0, 240, 255, 0.2));
+            border-color: rgba(131, 56, 236, 0.45);
+            animation: geoFloatPill 19s ease-in-out infinite alternate;
+        }
+
+        .geo-diamond-1 {
+            width: 110px;
+            height: 110px;
+            top: 40%;
+            left: 20%;
+            transform: rotate(45deg);
+            background: linear-gradient(135deg, rgba(255, 209, 102, 0.3), rgba(255, 117, 140, 0.2));
+            border-color: rgba(255, 209, 102, 0.5);
+            animation: geoFloatDiamond 17s ease-in-out infinite alternate;
+        }
+
+        @keyframes geoFloatRing {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+
+            100% {
+                transform: translateY(-40px) rotate(180deg) scale(1.08);
+            }
+        }
+
+        @keyframes geoFloatCube {
+            0% {
+                transform: rotateX(25deg) rotateY(20deg) translateY(0);
+            }
+
+            100% {
+                transform: rotateX(45deg) rotateY(60deg) translateY(-50px);
+            }
+        }
+
+        @keyframes geoFloatSphere {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(-45px) scale(1.1);
+            }
+        }
+
+        @keyframes geoFloatTriangle {
+            0% {
+                transform: rotate(0deg) translateY(0);
+            }
+
+            100% {
+                transform: rotate(35deg) translateY(-35px);
+            }
+        }
+
+        @keyframes geoFloatPill {
+            0% {
+                transform: rotate(-15deg) translateY(0);
+            }
+
+            100% {
+                transform: rotate(15deg) translateY(-40px);
+            }
+        }
+
+        @keyframes geoFloatDiamond {
+            0% {
+                transform: rotate(45deg) translateY(0);
+            }
+
+            100% {
+                transform: rotate(75deg) translateY(-30px);
+            }
+        }
+
+        /* --- 全局微暗角與氛圍層 --- */
+        .bg-vignette {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        [data-theme="light"] .bg-vignette {
+            background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(100, 116, 139, 0.12) 100%);
+        }
+
+
+        /* === 主容器 (毛玻璃卡片) === */
+        .profile-container {
+            width: 100%;
+            max-width: 960px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            box-shadow: var(--card-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            padding: 45px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* 背景流動裝飾光暈 */
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-red));
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.22;
+            pointer-events: none;
+        }
+
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            bottom: -120px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-green));
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.22;
+            pointer-events: none;
+        }
+
+        /* === 英雄區塊：頭像與主標題 === */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, var(--color-red), var(--color-orange), var(--color-green), var(--color-blue), var(--color-purple));
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0.75;
+            animation: rotateGlow 6s linear infinite;
+        }
+
+        .avatar-img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 6px;
+            right: 0;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 2px solid var(--card-bg);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .status-badge .dot {
+            width: 7px;
+            height: 7px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .main-title {
+            font-size: 2.7rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        [data-theme="light"] .main-title {
+            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-tagline {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .hero-tag {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* === 關於我 (About Me) 專區 === */
+        .about-me-section {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.12), rgba(17, 138, 178, 0.08));
+            border: 1px solid rgba(131, 56, 236, 0.3);
+            border-radius: var(--radius-md);
+            padding: 28px 30px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px -10px rgba(131, 56, 236, 0.15);
+        }
+
+        .about-me-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .about-me-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .about-me-badge {
+            background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .about-me-content {
+            font-size: 1.08rem;
+            line-height: 1.85;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid var(--color-purple);
+        }
+
+        .about-me-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px dashed var(--item-border);
+        }
+
+        .about-pill {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .about-pill i {
+            color: var(--color-purple);
+        }
+
+        /* === 資訊網格區 (四項重點資訊) === */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-card {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 22px -8px rgba(0, 0, 0, 0.35);
+        }
+
+        /* 特色光條 */
+        .info-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-color);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            color: var(--accent-color);
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-content {
+            flex-grow: 1;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .info-value {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            word-break: break-all;
+        }
+
+        .card-edu {
+            --accent-color: var(--color-yellow);
+        }
+
+        .card-hobby {
+            --accent-color: var(--color-green);
+        }
+
+        .card-skill {
+            --accent-color: var(--color-blue);
+        }
+
+        .card-contact {
+            --accent-color: var(--color-purple);
+        }
+
+        /* === 區塊共同樣式 === */
+        .section-block {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .block-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .block-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .block-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* === 專長技能區塊 (互動式軟體熟練度量表卡片網格) === */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .skill-bar-card {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 20px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-bar-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.35);
+            border-color: var(--skill-accent, var(--color-blue));
+        }
+
+        .skill-bar-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--skill-accent, var(--color-blue));
+            border-radius: 4px 0 0 4px;
+        }
+
+        .skill-card-procreate {
+            --skill-accent: #ec4899;
+        }
+
+        .skill-card-ai {
+            --skill-accent: #ff9a00;
+        }
+
+        .skill-card-ps {
+            --skill-accent: #31a8ff;
+        }
+
+        .skill-card-pr {
+            --skill-accent: #818cf8;
+        }
+
+        .skill-card-blender {
+            --skill-accent: #f97316;
+        }
+
+        .skill-card-maya {
+            --skill-accent: #00f0ff;
+        }
+
+        .skill-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .skill-name-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .skill-title-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .software-icon-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 15px;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .icon-procreate {
+            background: linear-gradient(135deg, #181818, #333333);
+            border: 1px solid #444;
+        }
+
+        .icon-ai {
+            background: #330000;
+            color: #ff9a00;
+            border: 1px solid #ff9a00;
+            font-family: monospace;
+        }
+
+        .icon-ps {
+            background: #001e36;
+            color: #31a8ff;
+            border: 1px solid #31a8ff;
+            font-family: monospace;
+        }
+
+        .icon-pr {
+            background: #00005b;
+            color: #9999ff;
+            border: 1px solid #9999ff;
+            font-family: monospace;
+        }
+
+        .icon-blender {
+            background: #ea7600;
+            color: #ffffff;
+        }
+
+        .icon-maya {
+            background: #00222a;
+            color: #00f0ff;
+            border: 1px solid #00f0ff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+        }
+
+        .skill-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .skill-level-number {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .progress-track {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            position: relative;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fill-procreate {
+            width: 80%;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+        }
+
+        .fill-ai {
+            width: 80%;
+            background: linear-gradient(90deg, #ff9e00, #ffd166);
+        }
+
+        .fill-ps {
+            width: 70%;
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+        }
+
+        .fill-pr {
+            width: 60%;
+            background: linear-gradient(90deg, #6366f1, #818cf8);
+        }
+
+        .fill-blender {
+            width: 50%;
+            background: linear-gradient(90deg, #ea580c, #f97316);
+        }
+
+        .fill-maya {
+            width: 50%;
+            background: linear-gradient(90deg, #0284c7, #00f0ff);
+        }
+
+        /* === 精選作品區塊 (多圖畫廊展示) === */
+        .gallery-filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-purple);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(131, 56, 236, 0.35);
+        }
+
+        .portfolio-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 22px;
+        }
+
+        .gallery-card {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-purple);
+            box-shadow: 0 16px 35px -10px rgba(131, 56, 236, 0.35);
+        }
+
+        .gallery-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+        }
+
+        .gallery-card:hover .gallery-img {
+            transform: scale(1.06);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 14, 23, 0.85) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            padding: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-zoom-badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: var(--transition);
+        }
+
+        .gallery-card:hover .gallery-zoom-badge {
+            transform: scale(1.1);
+            background: var(--color-purple);
+            border-color: var(--color-purple);
+        }
+
+        .gallery-content {
+            padding: 18px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-grow: 1;
+        }
+
+        .gallery-tag-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gallery-category-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: rgba(131, 56, 236, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(131, 56, 236, 0.3);
+            text-transform: uppercase;
+        }
+
+        .gallery-card-title {
+            font-size: 1.08rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .gallery-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .gallery-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
+        .gallery-chip {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--item-border);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        /* === 學習歷程區塊 === */
+        .timeline-card {
+            background: var(--item-bg);
+            border-left: 4px solid var(--color-yellow);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-dept {
+            font-size: 1.05rem;
+            color: var(--color-yellow);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .timeline-tag {
+            background: rgba(255, 209, 102, 0.15);
+            border: 1px solid rgba(255, 209, 102, 0.4);
+            color: var(--color-yellow);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* === 與我聯絡 (Contact Me) 專區 === */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .contact-card {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--card-accent, var(--color-purple));
+            box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-phone {
+            --card-accent: var(--color-green);
+        }
+
+        .contact-email {
+            --card-accent: var(--color-blue);
+        }
+
+        .contact-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--card-accent);
+            flex-shrink: 0;
+        }
+
+        .contact-info {
+            flex-grow: 1;
+        }
+
+        .contact-type {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .action-link-btn {
+            background: var(--card-accent);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-link-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .action-copy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--item-border);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: var(--card-accent);
+            color: var(--card-accent);
+        }
+
+        /* === 學校連結區塊 (完整保留兩種連結) === */
+        .links-section {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .link-buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .tut-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary-link {
+            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(17, 138, 178, 0.3);
+        }
+
+        .btn-primary-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(131, 56, 236, 0.4);
+            color: #ffffff;
+        }
+
+        .btn-secondary-link {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border-color: var(--item-border);
+        }
+
+        .btn-secondary-link:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            border-color: var(--color-yellow);
+        }
+
+        .link-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: normal;
+        }
+
+        /* === 互動塗鴉小畫板 === */
+        .canvas-section {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .canvas-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .canvas-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .color-palette {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .color-dot:hover,
+        .color-dot.active {
+            transform: scale(1.2);
+            border-color: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .custom-color-input {
+            width: 26px;
+            height: 26px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .brush-size-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .brush-slider {
+            accent-color: var(--color-purple);
+            cursor: pointer;
+            width: 80px;
+        }
+
+        .canvas-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--item-border);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .canvas-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+        }
+
+        .drawing-canvas {
+            width: 100%;
+            height: 240px;
+            background: #ffffff;
+            border-radius: var(--radius-sm);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
+            cursor: crosshair;
+            display: block;
+            touch-action: none;
+        }
+
+        /* === 頁尾設計 === */
+        .profile-footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 15px;
+        }
+
+        /* === 圖片燈箱 Modal (精選作品查看用) === */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(16px);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10002;
+        }
+
+        .lightbox-close-btn:hover {
+            background: var(--color-red);
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #ffffff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: var(--transition);
+            z-index: 10001;
+        }
+
+        .lightbox-nav-btn:hover {
+            background: var(--color-purple);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: 24px;
+        }
+
+        .next-btn {
+            right: 24px;
+        }
+
+        .lightbox-image-container {
+            max-width: 90vw;
+            max-height: 84vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .lightbox-caption-box {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .lightbox-caption-title {
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .lightbox-caption-desc {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        /* === 複製成功 Toast 提示 === */
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(50px);
+            background: rgba(16, 185, 129, 0.95);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10000;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* === 動畫效果 === */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.85);
+            }
+        }
+
+        /* === 響應式優化 === */
+        @media (max-width: 820px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-container {
+                padding: 28px 20px;
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-me-section {
+                padding: 20px;
+            }
+
+            .section-block {
+                padding: 20px;
+            }
+
+            .canvas-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .canvas-toolbar {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .quick-nav {
+                justify-content: center;
+            }
+
+            .theme-toggle-btn {
+                margin: 0 auto;
+            }
+
+            .lightbox-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .prev-btn {
+                left: 10px;
+            }
+
+            .next-btn {
+                right: 10px;
+            }
+        }
+
+        /* ==========================================================================
+           === 頂部背景排版展台 (Redesigned Background Style Dock Layout) ===
+           ========================================================================== */
+        .top-bar {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .quick-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-chip {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-chip:hover {
+            color: var(--text-main);
+            border-color: var(--color-purple);
+            transform: translateY(-2px);
+            background: rgba(131, 56, 236, 0.15);
+        }
+
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-purple);
+            box-shadow: 0 8px 20px -6px rgba(131, 56, 236, 0.35);
+        }
+
+        /* 專屬背景風格視覺排版展台 (Segmented Background Style Dock) */
+        .bg-style-dock {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            padding: 8px 18px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+            transition: var(--transition);
+        }
+
+        .bg-dock-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+
+        .bg-dock-label i {
+            color: var(--color-yellow);
+            font-size: 14px;
+            animation: pulse 2s infinite;
+        }
+
+        .bg-dock-pills {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
+
+        .bg-dock-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border-radius: 50px;
+            border: 1px solid var(--card-border);
+            background: var(--item-bg);
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-dock-pill:hover {
+            color: var(--text-main);
+            border-color: var(--color-cyan);
+            transform: translateY(-2px);
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        .bg-dock-pill.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.8), rgba(255, 77, 109, 0.8));
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 6px 18px -4px rgba(131, 56, 236, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+        }
+
+        [data-theme="light"] .bg-dock-pill.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, #8338ec, #ff4d6d);
+            box-shadow: 0 6px 16px -4px rgba(131, 56, 236, 0.35);
+        }
+
+        .pill-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .pill-text {
+            line-height: 1;
+        }
+
+        /* ==========================================================================
+           === 隨手畫畫創作板 (Interactive Creative Doodle Studio) ===
+           ========================================================================== */
+        .canvas-section {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .canvas-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .canvas-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+        }
+
+        .canvas-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .canvas-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: rgba(6, 214, 160, 0.15);
+            border: 1px solid rgba(6, 214, 160, 0.3);
+            color: var(--color-green);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .canvas-status-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-green);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* 繪圖工具箱：雙列排版設計 */
+        .doodle-studio-toolbar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(16px);
+        }
+
+        .toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        /* 筆刷工具群組 */
+        .tool-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            color: var(--text-muted);
+            padding: 7px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .tool-btn:hover {
+            color: var(--text-main);
+            border-color: var(--color-purple);
+            background: rgba(131, 56, 236, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .tool-btn.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
+            border-color: transparent;
+            box-shadow: 0 4px 12px -2px rgba(131, 56, 236, 0.45);
+        }
+
+        /* 趣味印章工具群組 */
+        .stamps-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 3px 8px;
+            border-radius: 50px;
+            border: 1px solid var(--item-border);
+        }
+
+        .stamps-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-right: 2px;
+        }
+
+        .stamp-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            background: transparent;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .stamp-btn:hover {
+            background: var(--item-bg);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .stamp-btn.active {
+            background: rgba(255, 77, 109, 0.2);
+            border-color: var(--color-red);
+            transform: scale(1.15);
+            box-shadow: 0 0 10px rgba(255, 77, 109, 0.4);
+        }
+
+        /* 顏色盤與自訂取色器 */
+        .color-palette-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-dot {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .color-dot:hover,
+        .color-dot.active {
+            transform: scale(1.22);
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.75);
+        }
+
+        [data-theme="light"] .color-dot.active {
+            border-color: #0f172a;
+            box-shadow: 0 0 10px rgba(15, 23, 42, 0.45);
+        }
+
+        .custom-color-input {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--item-border);
+            padding: 0;
+            cursor: pointer;
+            background: transparent;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .custom-color-input:hover {
+            transform: scale(1.15);
+            border-color: var(--color-cyan);
+        }
+
+        /* 粗細滑桿與數值預覽 */
+        .brush-control-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            padding: 5px 12px;
+            border-radius: 50px;
+        }
+
+        .brush-slider {
+            accent-color: var(--color-purple);
+            cursor: pointer;
+            width: 90px;
+        }
+
+        .brush-preview-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-main);
+            transition: width 0.2s, height 0.2s;
+        }
+
+        .brush-val-text {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            min-width: 22px;
+        }
+
+        /* 動作按鈕群 (復原、清除、儲存) */
+        .canvas-action-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .canvas-action-btn {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            color: var(--text-main);
+            padding: 7px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .canvas-action-btn:hover {
+            background: rgba(255, 255, 255, 0.16);
+            transform: translateY(-1px);
+        }
+
+        .canvas-action-btn.btn-save {
+            background: linear-gradient(135deg, var(--color-green), #059669);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px -2px rgba(6, 214, 160, 0.4);
+        }
+
+        .canvas-action-btn.btn-save:hover {
+            box-shadow: 0 6px 16px -2px rgba(6, 214, 160, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* 畫布外層容器與微格線畫紙感 */
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 2px solid var(--item-border);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.25), 0 10px 25px -10px rgba(0, 0, 0, 0.4);
+            background: #ffffff;
+            transition: border-color 0.3s;
+        }
+
+        .canvas-wrapper:hover {
+            border-color: var(--color-purple);
+        }
+
+        .drawing-canvas {
+            width: 100%;
+            height: 320px;
+            background: #ffffff;
+            cursor: crosshair;
+            display: block;
+            touch-action: none;
+        }
+
+        /* 畫布引導歡迎浮水印 */
+        .canvas-guide-prompt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(148, 163, 184, 0.45);
+            font-size: 14px;
+            font-weight: 700;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            user-select: none;
+        }
+
+        .canvas-guide-prompt i {
+            font-size: 28px;
+        }
+
+        .canvas-guide-prompt.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .bg-style-dock {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .bg-dock-pills {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                flex-wrap: nowrap;
+            }
+
+            .bg-dock-pill {
+                white-space: nowrap;
+            }
+
+            .toolbar-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .canvas-action-group {
+                margin-left: 0;
+                justify-content: flex-end;
+            }
+
+            .drawing-canvas {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         === 頂級動態美學背景系統容器 ===
+         ========================================== -->
+    <div id="bgSystem" class="bg-system" aria-hidden="true">
+        <!-- 風格 1: 靈動流體極光 (Aurora Fluid Mesh - 預設) -->
+        <div class="bg-mode bg-mode-aurora active" id="bgModeAurora">
+            <div class="aurora-orb orb-1"></div>
+            <div class="aurora-orb orb-2"></div>
+            <div class="aurora-orb orb-3"></div>
+            <div class="aurora-orb orb-4"></div>
+        </div>
+
+        <!-- 風格 2: 互動星空粒子網 (Interactive Cosmic Stars - Canvas) -->
+        <canvas class="bg-mode bg-mode-canvas" id="bgStarsCanvas"></canvas>
+
+        <!-- 風格 3: 賽博霓虹地平線網格 (Cyberpunk 3D Synthwave Grid) -->
+        <div class="bg-mode bg-mode-cyber" id="bgModeCyber">
+            <div class="cyber-sun"></div>
+            <div class="cyber-horizon-beam"></div>
+            <div class="cyber-grid-plane"></div>
+        </div>
+
+        <!-- 風格 4: 現代立體懸浮幾何 (Floating 3D Glass Geometry) -->
+        <div class="bg-mode bg-mode-geometry" id="bgModeGeometry">
+            <div class="geo-shape geo-ring-1"></div>
+            <div class="geo-shape geo-cube-1"></div>
+            <div class="geo-shape geo-sphere-1"></div>
+            <div class="geo-shape geo-triangle-1"></div>
+            <div class="geo-shape geo-pill-1"></div>
+            <div class="geo-shape geo-diamond-1"></div>
+        </div>
+
+        <!-- 風格 5: 夢幻落櫻流光 (Falling Sakura & Anime Embers - Canvas) -->
+        <canvas class="bg-mode bg-mode-canvas" id="bgSakuraCanvas"></canvas>
+
+        <!-- 全局柔和暗角微顆粒層 -->
+        <div class="bg-vignette"></div>
+    </div>
+
+
+    <!-- 頂部快速導航與主題風格視覺排版列 -->
+    <div class="top-bar">
+        <div class="top-nav-row">
+            <nav class="quick-nav">
+                <a href="#about" class="nav-chip"><i class="fa-solid fa-user"></i> 關於我</a>
+                <a href="#skills" class="nav-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> 專長技能</a>
+                <a href="#portfolio" class="nav-chip"><i class="fa-solid fa-palette"></i> 精選作品</a>
+                <a href="#education" class="nav-chip"><i class="fa-solid fa-graduation-cap"></i> 學習歷程</a>
+                <a href="#contact" class="nav-chip"><i class="fa-solid fa-envelope"></i> 與我聯絡</a>
+                <a href="#canvas" class="nav-chip"><i class="fa-solid fa-pen-nib"></i> 塗鴉創作</a>
+            </nav>
+
+            <!-- 深色/淺色主題切換按鈕 -->
+            <button class="theme-toggle-btn" id="themeToggleBtn" title="切換深色/淺色主題">
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+                <span id="themeText">切換淺色模式</span>
+            </button>
+        </div>
+
+        <!-- 專屬背景風格視覺排版展台 (一鍵即時切換) -->
+        <div class="bg-style-dock" id="bgStyleDock">
+            <div class="bg-dock-label">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>背景氛圍：</span>
+            </div>
+            <div class="bg-dock-pills">
+                <button class="bg-dock-pill active" data-bg="aurora" title="靈動流體極光 (柔和光球漂浮)">
+                    <span class="pill-badge" style="background: linear-gradient(135deg, #8338ec, #ff4d6d);">🌌</span>
+                    <span class="pill-text">靈動極光</span>
+                </button>
+                <button class="bg-dock-pill" data-bg="stars" title="互動星空粒子 (隨游標互動連線)">
+                    <span class="pill-badge" style="background: linear-gradient(135deg, #00f0ff, #118ab2);">✨</span>
+                    <span class="pill-text">互動星空</span>
+                </button>
+                <button class="bg-dock-pill" data-bg="cyber" title="賽博霓虹網格 (3D透視地平線)">
+                    <span class="pill-badge" style="background: linear-gradient(135deg, #ff007f, #7928ca);">⚡</span>
+                    <span class="pill-text">賽博霓虹</span>
+                </button>
+                <button class="bg-dock-pill" data-bg="geometry" title="現代立體幾何 (懸浮毛玻璃晶體)">
+                    <span class="pill-badge" style="background: linear-gradient(135deg, #ffd166, #ff9e00);">🔮</span>
+                    <span class="pill-text">立體幾何</span>
+                </button>
+                <button class="bg-dock-pill" data-bg="sakura" title="唯美落櫻流光 (動漫風落櫻飄舞)">
+                    <span class="pill-badge" style="background: linear-gradient(135deg, #ff758c, #ff7eb3);">🌸</span>
+                    <span class="pill-text">落櫻動漫</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-container">
+
+        <!-- 英雄區塊：頭像與主標題 -->
+        <div class="hero-section">
+            <div class="avatar-wrapper">
+                <div class="avatar-glow"></div>
+                <!-- 保留原 cat.jpeg 圖片 -->
+                <img src="cat.jpeg" alt="個人頭像" class="avatar-img" id="avatarImage" title="點擊我有小驚喜！">
+                <div class="status-badge">
+                    <span class="dot"></span>
+                    <span>創作靈感在線中</span>
+                </div>
+            </div>
+
+            <h1 class="main-title">個人簡介 ‧ 作品集</h1>
+            <p class="sub-tagline">
+                <i class="fa-solid fa-graduation-cap" style="color: var(--color-yellow);"></i>
+                臺南應用科技大學 ‧ 多媒體動畫科系
+            </p>
+
+            <div class="hero-tags">
+                <span class="hero-tag"><i class="fa-solid fa-paint-brush" style="color: var(--color-red);"></i>
+                    電腦繪圖</span>
+                <span class="hero-tag"><i class="fa-solid fa-film" style="color: var(--color-orange);"></i> 動畫製作</span>
+                <span class="hero-tag"><i class="fa-solid fa-user-astronaut" style="color: var(--color-yellow);"></i>
+                    角色設計</span>
+                <span class="hero-tag"><i class="fa-solid fa-gamepad" style="color: var(--color-green);"></i>
+                    遊戲美術</span>
+            </div>
+        </div>
+
+        <!-- 1. 關於我 (About Me) 專屬特色區塊 -->
+        <div class="about-me-section" id="about">
+            <div class="about-me-header">
+                <div class="about-me-title">
+                    <i class="fa-solid fa-quote-left" style="color: var(--color-purple);"></i>
+                    <span>關於我 ‧ About Me</span>
+                </div>
+                <span class="about-me-badge">CREATIVE PROFILE</span>
+            </div>
+            <div class="about-me-content">
+                我對電腦繪圖和動畫製作非常有興趣，平常會用空閒時間練習角色設計與操作不同軟體。雖然目前經驗還不多，但我很享受每次學習的過程，也希望未來能將興趣變成工作，朝動畫或遊戲設計相關產業邁進。
+            </div>
+            <div class="about-me-pills">
+                <div class="about-pill">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>未來展望：邁向動畫與遊戲產業</span>
+                </div>
+                <div class="about-pill">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>核心熱忱：享受每一次學習與突破</span>
+                </div>
+                <div class="about-pill">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span>日常練習：探索不同創作軟體與角色設計</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 基礎資訊網格區 (整理為 4 項核心資訊) -->
+        <div class="info-grid">
+
+            <!-- 1. 學習歷程 (yellow) -->
+            <div class="info-card card-edu">
+                <div class="icon-box">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>學習歷程</span>
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="info-value">臺南應用科技大學 多媒體動畫科系</div>
+                </div>
+            </div>
+
+            <!-- 2. 興趣領域 (green) -->
+            <div class="info-card card-hobby">
+                <div class="icon-box">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>興趣領域</span>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="info-value">電腦繪圖 ‧ 動畫製作 🎨</div>
+                </div>
+            </div>
+
+            <!-- 3. 專長技能 (blue) -->
+            <div class="info-card card-skill">
+                <div class="icon-box">
+                    <i class="fa-solid fa-paintbrush"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>專長技能</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div class="info-value">角色設計 ‧ 繪圖軟體應用 🖌️</div>
+                </div>
+            </div>
+
+            <!-- 4. 與我聯絡 (purple) -->
+            <div class="info-card card-contact">
+                <div class="icon-box">
+                    <i class="fa-solid fa-address-book"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-label">
+                        <span>與我聯絡</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <div class="info-value" style="font-size: 0.95rem;">
+                        <span>0987-654-321</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. 專長技能區塊 (現代化互動軟體熟練度量表，包含 Maya 50%) -->
+        <div class="section-block" id="skills">
+            <div class="block-header">
+                <div class="block-title-group">
+                    <div class="block-title">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--color-blue);"></i>
+                        <span>專長技能 ‧ Skills & Software</span>
+                    </div>
+                    <p class="block-subtitle">熟練各項手繪插畫、向量視覺、影像後製、剪輯與3D/動畫軟體工具</p>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <!-- 1. Procreate -->
+                <div class="skill-bar-card skill-card-procreate">
+                    <div class="skill-info">
+                        <div class="skill-name-group">
+                            <div class="software-icon-badge icon-procreate">
+                                <i class="fa-solid fa-paintbrush" style="color: #ec4899;"></i>
+                            </div>
+                            <div>
+                                <div class="skill-title-text">Procreate</div>
+                                <div class="skill-desc">數位手繪 ‧ 角色草稿概念繪製</div>
+                            </div>
+                        </div>
+                        <span class="skill-level-number">熟練 (80%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-procreate"></div>
+                    </div>
+                </div>
+
+                <!-- 2. Adobe Illustrator -->
+                <div class="skill-bar-card skill-card-ai">
+                    <div class="skill-info">
+                        <div class="skill-name-group">
+                            <div class="software-icon-badge icon-ai">Ai</div>
+                            <div>
+                                <div class="skill-title-text">Adobe Illustrator</div>
+                                <div class="skill-desc">向量造形 ‧ 角色設定線稿繪製</div>
+                            </div>
+                        </div>
+                        <span class="skill-level-number">熟練 (80%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-ai"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Adobe Photoshop -->
+                <div class="skill-bar-card skill-card-ps">
+                    <div class="skill-info">
+                        <div class="skill-name-group">
+                            <div class="software-icon-badge icon-ps">Ps</div>
+                            <div>
+                                <div class="skill-title-text">Adobe Photoshop</div>
+                                <div class="skill-desc">光影上色 ‧ 材質紋理與後期微調</div>
+                            </div>
+                        </div>
+                        <span class="skill-level-number">進階 (70%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-ps"></div>
+                    </div>
+                </div>
+
+                <!-- 4. Adobe Premiere Pro -->
+                <div class="skill-bar-card skill-card-pr">
+                    <div class="skill-info">
+                        <div class="skill-name-group">
+                            <div class="software-icon-badge icon-pr">Pr</div>
+                            <div>
+                                <div class="skill-title-text">Adobe Premiere</div>
+                                <div class="skill-desc">動畫剪輯 ‧ 視訊合成與動態整合</div>
+                            </div>
+                        </div>
+                        <span class="skill-level-number">良好 (60%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-pr"></div>
+                    </div>
+                </div>
+
+                <!-- 5. Blender -->
+                <div class="skill-bar-card skill-card-blender">
+                    <div class="skill-info">
+                        <div class="skill-name-group">
+                            <div class="software-icon-badge icon-blender">
+                                <i class="fa-solid fa-cube"></i>
+                            </div>
+                            <div>
+                                <div class="skill-title-text">Blender</div>
+                                <div class="skill-desc">3D 基礎建模 ‧ 空間鏡頭與運鏡概念</div>
+                            </div>
+                        </div>
+                        <span class="skill-level-number">基礎 (50%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-blender"></div>
+                    </div>
+                </div>
+
+                <!-- 6. Autodesk Maya (新增) -->
+                <div class="skill-bar-card skill-card-maya">
+                    <div class="skill-info">
+                        <div class="skill-name-group">
+                            <div class="software-icon-badge icon-maya">M</div>
+                            <div>
+                                <div class="skill-title-text">Autodesk Maya</div>
+                                <div class="skill-desc">3D 基礎建模 ‧ 角色骨架與動畫製作</div>
+                            </div>
+                        </div>
+                        <span class="skill-level-number">基礎 (50%)</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill fill-maya"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 精選作品區塊 (改為精選作品畫廊展示) -->
+        <div class="section-block" id="portfolio">
+            <div class="block-header">
+                <div class="block-title-group">
+                    <div class="block-title">
+                        <i class="fa-solid fa-palette" style="color: var(--color-purple);"></i>
+                        <span>精選作品 ‧ Featured Artworks</span>
+                    </div>
+                    <p class="block-subtitle">角色概念設計 ‧ 正背雙向三視圖 ‧ 宮廷歐風立繪 ‧ 奇幻場景氛圍 (點擊作品查看高畫質細節)</p>
+                </div>
+            </div>
+
+            <!-- 分類篩選按鈕 -->
+            <div class="gallery-filter-bar">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fa-solid fa-border-all"></i> 全部作品 (5)
+                </button>
+                <button class="filter-btn" data-filter="character">
+                    <i class="fa-solid fa-user-astronaut"></i> 角色設定 (2)
+                </button>
+                <button class="filter-btn" data-filter="illustration">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> 氛圍插畫 (2)
+                </button>
+                <button class="filter-btn" data-filter="portrait">
+                    <i class="fa-solid fa-crown"></i> 角色立繪 (1)
+                </button>
+            </div>
+
+            <!-- 作品畫廊網格 -->
+            <div class="portfolio-gallery-grid">
+                <!-- 作品 1：水光人像插畫 -->
+                <div class="gallery-card" data-category="illustration" onclick="openLightboxByIndex(0)">
+                    <div class="gallery-img-wrap">
+                        <img src="work1.jpg" alt="水光氛圍人像插畫" class="gallery-img" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-zoom-badge" title="放大檢視">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <div class="gallery-tag-row">
+                            <span class="gallery-category-pill">氛圍插畫</span>
+                            <i class="fa-solid fa-water" style="color: var(--color-blue); font-size: 0.9rem;"></i>
+                        </div>
+                        <h4 class="gallery-card-title">水光氛圍人像插畫</h4>
+                        <p class="gallery-card-desc">柔和水感光澤、髮絲流動感與周圍漂浮氣泡的折射光影呈現。</p>
+                        <div class="gallery-chips">
+                            <span class="gallery-chip">水光光影</span>
+                            <span class="gallery-chip">角色肖像</span>
+                            <span class="gallery-chip">色彩光感</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品 2：黑袍金邊角色設計雙視圖 -->
+                <div class="gallery-card" data-category="character" onclick="openLightboxByIndex(1)">
+                    <div class="gallery-img-wrap">
+                        <img src="work2.png" alt="角色概念設定 ‧ 黑袍金邊少年" class="gallery-img" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-zoom-badge" title="放大檢視">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <div class="gallery-tag-row">
+                            <span class="gallery-category-pill">角色設定</span>
+                            <i class="fa-solid fa-shirt" style="color: var(--color-orange); font-size: 0.9rem;"></i>
+                        </div>
+                        <h4 class="gallery-card-title">角色設定 ‧ 黑袍金邊少年</h4>
+                        <p class="gallery-card-desc">正背雙視圖完整設定，拆解黑金斗篷長袍、俐落剪裁長褲與細緻飾品。</p>
+                        <div class="gallery-chips">
+                            <span class="gallery-chip">雙視圖設定</span>
+                            <span class="gallery-chip">角色服裝</span>
+                            <span class="gallery-chip">配色規劃</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品 3：藍斗篷冒險者雙視圖 -->
+                <div class="gallery-card" data-category="character" onclick="openLightboxByIndex(2)">
+                    <div class="gallery-img-wrap">
+                        <img src="work3.png" alt="角色概念設定 ‧ 藍斗篷馬尾少女" class="gallery-img" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-zoom-badge" title="放大檢視">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <div class="gallery-tag-row">
+                            <span class="gallery-category-pill">角色設定</span>
+                            <i class="fa-solid fa-person-dress"
+                                style="color: var(--color-cyan); font-size: 0.9rem;"></i>
+                        </div>
+                        <h4 class="gallery-card-title">角色設定 ‧ 藍斗篷少女</h4>
+                        <p class="gallery-card-desc">金黃馬尾搭配深藍斗篷短袍、綁帶長靴，呈現靈動活潑的冒險者風格。</p>
+                        <div class="gallery-chips">
+                            <span class="gallery-chip">冒險者設定</span>
+                            <span class="gallery-chip">正背面視圖</span>
+                            <span class="gallery-chip">服飾細節</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品 4：時空裂縫之門奇幻概念插畫 -->
+                <div class="gallery-card" data-category="illustration" onclick="openLightboxByIndex(3)">
+                    <div class="gallery-img-wrap">
+                        <img src="work4.jpg" alt="奇幻概念插畫 ‧ 時空裂縫之門" class="gallery-img" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-zoom-badge" title="放大檢視">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <div class="gallery-tag-row">
+                            <span class="gallery-category-pill">氛圍插畫</span>
+                            <i class="fa-solid fa-meteor" style="color: var(--color-purple); font-size: 0.9rem;"></i>
+                        </div>
+                        <h4 class="gallery-card-title">概念插畫 ‧ 時空裂縫之門</h4>
+                        <p class="gallery-card-desc">透視動態構圖，少女伸展身姿穿越次元渦流，觸碰映照記憶的破裂晶石。</p>
+                        <div class="gallery-chips">
+                            <span class="gallery-chip">透視構圖</span>
+                            <span class="gallery-chip">星空銀河</span>
+                            <span class="gallery-chip">世界觀概念</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品 5：歐式宮廷貴族角色立繪 -->
+                <div class="gallery-card" data-category="portrait" onclick="openLightboxByIndex(4)">
+                    <div class="gallery-img-wrap">
+                        <img src="work5.png" alt="歐式宮廷貴族角色立繪" class="gallery-img" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-zoom-badge" title="放大檢視">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <div class="gallery-tag-row">
+                            <span class="gallery-category-pill">角色立繪</span>
+                            <i class="fa-solid fa-crown" style="color: var(--color-yellow); font-size: 0.9rem;"></i>
+                        </div>
+                        <h4 class="gallery-card-title">歐式宮廷貴族立繪</h4>
+                        <p class="gallery-card-desc">巴洛克緹花紋理燕尾服、精美藍底金絲背心與紳士手杖的全身精緻立繪。</p>
+                        <div class="gallery-chips">
+                            <span class="gallery-chip">宮廷貴族</span>
+                            <span class="gallery-chip">服裝質感</span>
+                            <span class="gallery-chip">全身立繪</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. 學習歷程 (Education) 專屬區塊 -->
+        <div class="section-block" id="education">
+            <div class="block-header">
+                <div class="block-title-group">
+                    <div class="block-title">
+                        <i class="fa-solid fa-graduation-cap" style="color: var(--color-yellow);"></i>
+                        <span>學習歷程 ‧ Education & Journey</span>
+                    </div>
+                    <p class="block-subtitle">專業學術養成與多媒體動畫創作歷程</p>
+                </div>
+            </div>
+
+            <div class="timeline-card">
+                <div class="timeline-content">
+                    <h3>
+                        <i class="fa-solid fa-university" style="color: var(--color-yellow);"></i>
+                        <span>臺南應用科技大學</span>
+                    </h3>
+                    <div class="timeline-dept">多媒體動畫科系</div>
+                    <p class="timeline-desc">
+                        專攻 2D/3D 動畫製作、角色造型設定、動態分鏡腳本與視覺特效。在學期間積極利用課餘時間進行個人創作練習，深化各項繪圖軟體技能，朝向動畫及遊戲產業專業邁進。
+                    </p>
+                </div>
+                <div class="timeline-tag">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <span>積極研習中</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. 與我聯絡 (Contact Me) 專屬區塊 -->
+        <div class="section-block" id="contact">
+            <div class="block-header">
+                <div class="block-title-group">
+                    <div class="block-title">
+                        <i class="fa-solid fa-envelope-open-text" style="color: var(--color-green);"></i>
+                        <span>與我聯絡 ‧ Contact Me</span>
+                    </div>
+                    <p class="block-subtitle">歡迎動畫製作、角色設計、插畫委託或學術交流！</p>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <!-- 電話聯絡卡片 -->
+                <div class="contact-card contact-phone">
+                    <div class="contact-icon-box">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-type">聯絡電話</div>
+                        <div class="contact-value" id="phoneText">0987-654-321</div>
+                        <div class="contact-actions">
+                            <a href="tel:0987654321" class="action-link-btn" title="立即撥打電話">
+                                <i class="fa-solid fa-phone-volume"></i> 撥打電話
+                            </a>
+                            <button class="action-copy-btn" onclick="copyContact('0987-654-321', '電話號碼')"
+                                title="複製號碼到剪貼簿">
+                                <i class="fa-regular fa-copy"></i> 複製號碼
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 電子信箱聯絡卡片 -->
+                <div class="contact-card contact-email">
+                    <div class="contact-icon-box">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-type">電子郵件</div>
+                        <div class="contact-value" id="emailText">abcdefgh@gmail.com</div>
+                        <div class="contact-actions">
+                            <a href="mailto:abcdefgh@gmail.com" class="action-link-btn" title="發送 Email">
+                                <i class="fa-solid fa-paper-plane"></i> 發送郵件
+                            </a>
+                            <button class="action-copy-btn" onclick="copyContact('abcdefgh@gmail.com', '電子信箱')"
+                                title="複製信箱到剪貼簿">
+                                <i class="fa-regular fa-copy"></i> 複製信箱
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 學校連結專區 (完整保留兩種連結) -->
+        <div class="links-section">
+            <div class="section-header">
+                <i class="fa-solid fa-link" style="color: var(--color-blue);"></i>
+                <span>學校相關連結 (TUT)</span>
+            </div>
+            <div class="link-buttons-group">
+                <!-- 原程式碼第 1 個連結：原頁面開啟 -->
+                <a href="https://www.tut.edu.tw/" class="tut-link-btn btn-secondary-link" title="在當前頁面開啟">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>台南應用科技大學</span>
+                    <span class="link-badge">原分頁</span>
+                </a>
+
+                <!-- 原程式碼第 2 個連結：新分頁開啟 target="_blank" -->
+                <a href="https://www.tut.edu.tw/" target="_blank" rel="noopener noreferrer"
+                    class="tut-link-btn btn-primary-link" title="在新分頁開啟學校官網">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>台南應用科技大學</span>
+                    <span class="link-badge">新分頁 ↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 7. 隨手畫畫創作板 (互動創作小工坊) -->
+        <div class="canvas-section" id="canvas">
+            <div class="canvas-header">
+                <div class="canvas-title-group">
+                    <div class="canvas-title">
+                        <i class="fa-solid fa-palette" style="color: var(--color-cyan);"></i>
+                        <span>隨手畫畫創作板</span>
+                    </div>
+                    <span class="canvas-subtitle">支援滑鼠、觸控與繪圖筆！歡迎隨心繪製專屬塗鴉或留下簽名 🐾</span>
+                </div>
+                <div class="canvas-status-badge">
+                    <span class="dot"></span>
+                    <span>創作模式在線</span>
+                </div>
+            </div>
+
+            <!-- 專業繪圖工具箱 -->
+            <div class="doodle-studio-toolbar">
+                <!-- 第一列：筆刷模式與趣味印章 -->
+                <div class="toolbar-row">
+                    <div class="tool-btn-group">
+                        <button class="tool-btn active" id="toolPencil" data-tool="pencil" title="一般筆刷">
+                            <i class="fa-solid fa-pen"></i>
+                            <span>畫筆</span>
+                        </button>
+                        <button class="tool-btn" id="toolNeon" data-tool="neon" title="霓虹發光筆 (具備科幻酷炫光暈)">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--color-yellow);"></i>
+                            <span>霓虹光</span>
+                        </button>
+                        <button class="tool-btn" id="toolRainbow" data-tool="rainbow" title="彩虹魔法筆 (動態色彩漸變)">
+                            <i class="fa-solid fa-rainbow" style="color: var(--color-red);"></i>
+                            <span>彩虹筆</span>
+                        </button>
+                        <button class="tool-btn" id="toolEraser" data-tool="eraser" title="橡皮擦">
+                            <i class="fa-solid fa-eraser"></i>
+                            <span>橡皮擦</span>
+                        </button>
+                    </div>
+
+                    <!-- 趣味印章小工具 (點擊畫布即刻蓋章) -->
+                    <div class="stamps-group">
+                        <span class="stamps-label">印章：</span>
+                        <button class="stamp-btn" data-stamp="🐾" title="貓爪肉球">🐾</button>
+                        <button class="stamp-btn" data-stamp="⭐" title="閃耀星星">⭐</button>
+                        <button class="stamp-btn" data-stamp="💖" title="愛心">💖</button>
+                        <button class="stamp-btn" data-stamp="🎨" title="調色盤">🎨</button>
+                        <button class="stamp-btn" data-stamp="✨" title="靈感火花">✨</button>
+                    </div>
+                </div>
+
+                <!-- 第二列：調色盤、筆刷粗細與操作按鈕 -->
+                <div class="toolbar-row">
+                    <!-- 快速調色盤 -->
+                    <div class="color-palette-wrap">
+                        <div class="color-dot active" style="background: #0f172a;" data-color="#0f172a" title="墨黑">
+                        </div>
+                        <div class="color-dot" style="background: #ffffff; border: 1px solid #cbd5e1;"
+                            data-color="#ffffff" title="純白"></div>
+                        <div class="color-dot" style="background: #ff4d6d;" data-color="#ff4d6d" title="珊瑚紅"></div>
+                        <div class="color-dot" style="background: #ff9e00;" data-color="#ff9e00" title="活力橙"></div>
+                        <div class="color-dot" style="background: #ffd166;" data-color="#ffd166" title="耀眼黃"></div>
+                        <div class="color-dot" style="background: #06d6a0;" data-color="#06d6a0" title="薄荷綠"></div>
+                        <div class="color-dot" style="background: #00f0ff;" data-color="#00f0ff" title="霓虹青"></div>
+                        <div class="color-dot" style="background: #8338ec;" data-color="#8338ec" title="夢幻紫"></div>
+                        <input type="color" id="customColor" class="custom-color-input" title="自選色盤" value="#8338ec">
+                    </div>
+
+                    <!-- 筆刷大小與即時預覽 -->
+                    <div class="brush-control-wrap">
+                        <span class="brush-preview-dot" id="brushPreviewDot"></span>
+                        <input type="range" id="brushSize" class="brush-slider" min="2" max="36" value="5"
+                            title="調整筆刷粗細">
+                        <span class="brush-val-text" id="brushValText">5px</span>
+                    </div>
+
+                    <!-- 復原、清空、下載 -->
+                    <div class="canvas-action-group">
+                        <button class="canvas-action-btn" id="undoCanvasBtn" title="復原上一步 (Ctrl+Z)">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span>復原</span>
+                        </button>
+                        <button class="canvas-action-btn" id="clearCanvasBtn" title="清空畫布">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>清空</span>
+                        </button>
+                        <button class="canvas-action-btn btn-save" id="saveCanvasBtn" title="下載畫作 PNG">
+                            <i class="fa-solid fa-download"></i>
+                            <span>下載作品</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 繪圖畫布外層 (帶有繪圖引導提示) -->
+            <div class="canvas-wrapper">
+                <canvas id="doodleCanvas" class="drawing-canvas"></canvas>
+                <div class="canvas-guide-prompt" id="canvasGuidePrompt">
+                    <i class="fa-solid fa-pen-ruler"></i>
+                    <span>點擊或拖曳即可開始繪圖創作 ✨</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-footer">
+            <p>© 2026 臺南應用科技大學 ‧ 多媒體動畫科系 ‧ 個人簡介與作品集</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">Crafted with Modern HTML5, CSS3 Glassmorphism & Responsive
+                Design</p>
+        </div>
+
+    </div>
+
+    <!-- 圖片放大燈箱 (Lightbox Modal，支援前後張切換) -->
+    <div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox(event)">
+        <button class="lightbox-close-btn" onclick="closeLightbox(event)" title="關閉預覽 (Esc)">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="lightbox-nav-btn prev-btn" onclick="prevLightbox(event)" title="上一張 (方向鍵左)">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav-btn next-btn" onclick="nextLightbox(event)" title="下一張 (方向鍵右)">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-image-container">
+            <img src="" alt="放大預覽" class="lightbox-img" id="lightboxImg">
+            <div class="lightbox-caption-box">
+                <div class="lightbox-caption-title" id="lightboxCaptionTitle"></div>
+                <div class="lightbox-caption-desc" id="lightboxCaptionDesc"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 複製成功提示 Toast -->
+    <div class="toast-notification" id="toastNotification">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastText">已成功複製到剪貼簿！</span>
+    </div>
+
+    <!-- JavaScript 互動功能 -->
+    <script>
+        // === 1. 深色 / 淺色主題切換功能 ===
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        const savedTheme = localStorage.getItem('user-theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.className = 'fa-solid fa-sun';
+            themeText.textContent = '切換深色模式';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('user-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-moon';
+                themeText.textContent = '切換淺色模式';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('user-theme', 'light');
+                themeIcon.className = 'fa-solid fa-sun';
+                themeText.textContent = '切換深色模式';
+            }
+        });
+
+        // === 2. 點擊貓咪頭像趣味動畫 ===
+        const avatarImage = document.getElementById('avatarImage');
+        avatarImage.addEventListener('click', () => {
+            avatarImage.style.transform = 'scale(1.2) rotate(15deg)';
+            setTimeout(() => {
+                avatarImage.style.transform = '';
+            }, 300);
+        });
+
+        // === 3. 複製聯絡資訊功能與 Toast 提示 ===
+        function copyContact(text, label) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`已成功複製${label}：${text}`);
+                }).catch(() => {
+                    fallbackCopy(text, label);
+                });
+            } else {
+                fallbackCopy(text, label);
+            }
+        }
+
+        function fallbackCopy(text, label) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast(`已成功複製${label}：${text}`);
+            } catch (err) {
+                alert(`請手動複製${label}：${text}`);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastText = document.getElementById('toastText');
+            toastText.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        // === 4. 精選作品分類篩選與圖片燈箱功能 ===
+        const galleryItems = [
+            {
+                src: 'work1.jpg',
+                title: '水光氛圍人像插畫',
+                desc: '柔和水感光澤、髮絲流動感與周圍漂浮氣泡的折射光影呈現。'
+            },
+            {
+                src: 'work2.png',
+                title: '角色概念設定 ‧ 黑袍金邊少年',
+                desc: '正背雙視圖完整設定，拆解黑金斗篷長袍、俐落剪裁長褲與細緻飾品。'
+            },
+            {
+                src: 'work3.png',
+                title: '角色概念設定 ‧ 藍斗篷馬尾少女',
+                desc: '金黃馬尾搭配深藍斗篷短袍、綁帶長靴，呈現靈動活潑的冒險者風格。'
+            },
+            {
+                src: 'work4.jpg',
+                title: '概念插畫 ‧ 時空裂縫之門',
+                desc: '透視動態構圖，少女伸展身姿穿越次元渦流，觸碰映照記憶的破裂晶石。'
+            },
+            {
+                src: 'work5.png',
+                title: '歐式宮廷貴族角色立繪',
+                desc: '巴洛克緹花紋理燕尾服、精美藍底金絲背心與紳士手杖的全身精緻立繪。'
+            }
+        ];
+
+        let currentLightboxIndex = 0;
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaptionTitle = document.getElementById('lightboxCaptionTitle');
+        const lightboxCaptionDesc = document.getElementById('lightboxCaptionDesc');
+
+        function updateLightboxView() {
+            const item = galleryItems[currentLightboxIndex];
+            if (!item) return;
+            lightboxImg.src = item.src;
+            lightboxCaptionTitle.textContent = item.title;
+            lightboxCaptionDesc.textContent = item.desc;
+        }
+
+        function openLightboxByIndex(index) {
+            currentLightboxIndex = index;
+            updateLightboxView();
+            lightboxModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(e) {
+            if (e.target === lightboxModal || e.target.closest('.lightbox-close-btn')) {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function prevLightbox(e) {
+            if (e) e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex - 1 + galleryItems.length) % galleryItems.length;
+            updateLightboxView();
+        }
+
+        function nextLightbox(e) {
+            if (e) e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex + 1) % galleryItems.length;
+            updateLightboxView();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightboxModal.classList.contains('active')) return;
+            if (e.key === 'Escape') {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = '';
+            } else if (e.key === 'ArrowLeft') {
+                prevLightbox();
+            } else if (e.key === 'ArrowRight') {
+                nextLightbox();
+            }
+        });
+
+        // 分類過濾功能
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cardElements = document.querySelectorAll('.gallery-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+
+                cardElements.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                        card.style.animation = 'fadeIn 0.4s ease-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // ==========================================================================
+        // === 5. 超互動隨手畫畫創作板引擎 (Interactive Doodle Studio Engine) ===
+        // ==========================================================================
+        (function () {
+            const canvas = document.getElementById('doodleCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const guidePrompt = document.getElementById('canvasGuidePrompt');
+
+            let isDrawing = false;
+            let currentTool = 'pencil'; // pencil, neon, rainbow, eraser, stamp
+            let currentColor = '#0f172a';
+            let currentLineWidth = 5;
+            let currentStamp = '🐾';
+            let rainbowHue = 0;
+            let lastX = 0;
+            let lastY = 0;
+
+            // 歷史紀錄堆疊 (支援復原 Undo)
+            const historyStack = [];
+            const maxHistory = 25;
+
+            function saveHistory() {
+                if (historyStack.length >= maxHistory) {
+                    historyStack.shift();
+                }
+                historyStack.push(canvas.toDataURL('image/png'));
+            }
+
+            function undo() {
+                if (historyStack.length === 0) {
+                    showToast('目前沒有可復原的步驟');
+                    return;
+                }
+                const prevData = historyStack.pop();
+                const img = new Image();
+                img.onload = () => {
+                    const rect = canvas.getBoundingClientRect();
+                    ctx.clearRect(0, 0, rect.width, rect.height);
+                    ctx.drawImage(img, 0, 0, rect.width, rect.height);
+                };
+                img.src = prevData;
+                showToast('已復原上一步驟');
+            }
+
+            // 初始化畫布尺寸與 High-DPI 適配
+            function initDoodleSize() {
+                const rect = canvas.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) return;
+
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = canvas.width;
+                tempCanvas.height = canvas.height;
+                const tempCtx = tempCanvas.getContext('2d');
+                if (canvas.width > 0 && canvas.height > 0) {
+                    tempCtx.drawImage(canvas, 0, 0);
+                }
+
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+
+                // 填入乾淨底色
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, rect.width, rect.height);
+
+                if (tempCanvas.width > 0 && tempCanvas.height > 0) {
+                    ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+                }
+
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+            }
+
+            // 立即執行與監聽縮放
+            initDoodleSize();
+            window.addEventListener('resize', () => {
+                setTimeout(initDoodleSize, 100);
+            });
+
+            // 座標計算 (支援跨設備滑鼠、觸控與觸控筆)
+            function getCanvasCoords(e) {
+                const rect = canvas.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
+
+            // 隱藏歡迎引導提示
+            function hideGuidePrompt() {
+                if (guidePrompt && !guidePrompt.classList.contains('hidden')) {
+                    guidePrompt.classList.add('hidden');
+                }
+            }
+
+            // 開始繪圖 / 蓋章
+            function handlePointerDown(e) {
+                e.preventDefault();
+                canvas.setPointerCapture(e.pointerId);
+                hideGuidePrompt();
+                saveHistory();
+
+                const { x, y } = getCanvasCoords(e);
+                lastX = x;
+                lastY = y;
+
+                // 若為印章模式：點擊即刻在座標蓋章
+                if (currentTool === 'stamp') {
+                    stampAt(x, y, currentStamp);
+                    return;
+                }
+
+                isDrawing = true;
+                applyBrushStyle();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+
+                // 單次點擊也能留下圓點
+                ctx.lineTo(x + 0.1, y + 0.1);
+                ctx.stroke();
+            }
+
+            // 繪製路徑
+            function handlePointerMove(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const { x, y } = getCanvasCoords(e);
+
+                if (currentTool === 'rainbow') {
+                    rainbowHue = (rainbowHue + 4) % 360;
+                    ctx.strokeStyle = `hsl(${rainbowHue}, 90%, 55%)`;
+                }
+
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+
+                lastX = x;
+                lastY = y;
+            }
+
+            // 結束繪圖
+            function handlePointerUp(e) {
+                if (isDrawing) {
+                    ctx.closePath();
+                    isDrawing = false;
+                }
+                try {
+                    canvas.releasePointerCapture(e.pointerId);
+                } catch (err) { }
+            }
+
+            // 設定當前筆刷樣式
+            function applyBrushStyle() {
+                ctx.lineWidth = currentLineWidth;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                if (currentTool === 'eraser') {
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.shadowBlur = 0;
+                    ctx.shadowColor = 'transparent';
+                } else if (currentTool === 'neon') {
+                    ctx.strokeStyle = currentColor;
+                    ctx.shadowBlur = Math.max(8, currentLineWidth * 2.2);
+                    ctx.shadowColor = currentColor;
+                } else if (currentTool === 'rainbow') {
+                    ctx.strokeStyle = `hsl(${rainbowHue}, 90%, 55%)`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `hsl(${rainbowHue}, 90%, 55%)`;
+                } else {
+                    // 一般畫筆
+                    ctx.strokeStyle = currentColor;
+                    ctx.shadowBlur = 0;
+                    ctx.shadowColor = 'transparent';
+                }
+            }
+
+            // 繪製趣味印章
+            function stampAt(x, y, emoji) {
+                ctx.save();
+                ctx.shadowBlur = 0;
+                ctx.font = `${Math.max(24, currentLineWidth * 4)}px -apple-system, BlinkMacSystemFont, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(emoji, x, y);
+                ctx.restore();
+            }
+
+            // 綁定現代 Pointer Events
+            canvas.addEventListener('pointerdown', handlePointerDown);
+            canvas.addEventListener('pointermove', handlePointerMove);
+            canvas.addEventListener('pointerup', handlePointerUp);
+            canvas.addEventListener('pointercancel', handlePointerUp);
+
+            // --- 工具按鈕切換邏輯 ---
+            const toolButtons = document.querySelectorAll('.tool-btn');
+            const stampButtons = document.querySelectorAll('.stamp-btn');
+
+            toolButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toolButtons.forEach(b => b.classList.remove('active'));
+                    stampButtons.forEach(s => s.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentTool = btn.getAttribute('data-tool');
+                    canvas.style.cursor = currentTool === 'eraser' ? 'cell' : 'crosshair';
+                });
+            });
+
+            stampButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toolButtons.forEach(b => b.classList.remove('active'));
+                    stampButtons.forEach(s => s.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentTool = 'stamp';
+                    currentStamp = btn.getAttribute('data-stamp');
+                    canvas.style.cursor = 'pointer';
+                    showToast(`已選取印章「${currentStamp}」，點擊畫布即可蓋上！`);
+                });
+            });
+
+            // --- 調色盤選擇 ---
+            const colorDots = document.querySelectorAll('.color-dot');
+            const customColor = document.getElementById('customColor');
+
+            colorDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    colorDots.forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                    currentColor = dot.getAttribute('data-color');
+
+                    // 若當前在橡皮擦或印章模式，點選顏色自動切換回畫筆模式
+                    if (currentTool === 'eraser' || currentTool === 'stamp') {
+                        const pencilBtn = document.getElementById('toolPencil');
+                        if (pencilBtn) pencilBtn.click();
+                    }
+                    updateBrushPreview();
+                });
+            });
+
+            if (customColor) {
+                customColor.addEventListener('input', (e) => {
+                    colorDots.forEach(d => d.classList.remove('active'));
+                    currentColor = e.target.value;
+                    if (currentTool === 'eraser' || currentTool === 'stamp') {
+                        const pencilBtn = document.getElementById('toolPencil');
+                        if (pencilBtn) pencilBtn.click();
+                    }
+                    updateBrushPreview();
+                });
+            }
+
+            // --- 筆刷大小調整與即時預覽 ---
+            const brushSize = document.getElementById('brushSize');
+            const brushValText = document.getElementById('brushValText');
+            const brushPreviewDot = document.getElementById('brushPreviewDot');
+
+            function updateBrushPreview() {
+                if (brushValText) brushValText.textContent = `${currentLineWidth}px`;
+                if (brushPreviewDot) {
+                    const previewSize = Math.max(4, Math.min(22, currentLineWidth));
+                    brushPreviewDot.style.width = `${previewSize}px`;
+                    brushPreviewDot.style.height = `${previewSize}px`;
+                    brushPreviewDot.style.background = currentColor;
+                }
+            }
+
+            if (brushSize) {
+                brushSize.addEventListener('input', (e) => {
+                    currentLineWidth = parseInt(e.target.value, 10);
+                    updateBrushPreview();
+                });
+                updateBrushPreview();
+            }
+
+            // --- 動作：復原 (Undo) ---
+            const undoBtn = document.getElementById('undoCanvasBtn');
+            if (undoBtn) {
+                undoBtn.addEventListener('click', undo);
+            }
+
+            // 鍵盤 Ctrl+Z 復原快捷鍵
+            window.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z')) {
+                    if (document.activeElement.tagName !== 'INPUT') {
+                        e.preventDefault();
+                        undo();
+                    }
+                }
+            });
+
+            // --- 動作：清空 (Clear) ---
+            const clearBtn = document.getElementById('clearCanvasBtn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    saveHistory();
+                    const rect = canvas.getBoundingClientRect();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, rect.width, rect.height);
+                    if (guidePrompt) guidePrompt.classList.remove('hidden');
+                    showToast('畫布已清空');
+                });
+            }
+
+            // --- 動作：儲存畫作 (Save PNG) ---
+            const saveBtn = document.getElementById('saveCanvasBtn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.download = `我的畫畫創作_${new Date().toISOString().slice(0, 10)}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    showToast('畫作已成功下載！');
+                });
+            }
+        })();
+
+        // ==========================================================================
+        // === 6. 背景視覺風格排版控制器 (Segmented Dock Background Controller) ===
+        // ==========================================================================
+        (function () {
+            const dockPills = document.querySelectorAll('.bg-dock-pill');
+            const bgModes = {
+                aurora: document.getElementById('bgModeAurora'),
+                stars: document.getElementById('bgStarsCanvas'),
+                cyber: document.getElementById('bgModeCyber'),
+                geometry: document.getElementById('bgModeGeometry'),
+                sakura: document.getElementById('bgSakuraCanvas')
+            };
+
+            const bgNames = {
+                aurora: '靈動流體極光',
+                stars: '互動星空粒子',
+                cyber: '賽博霓虹網格',
+                geometry: '現代立體幾何',
+                sakura: '唯美落櫻流光'
+            };
+
+            let currentBgStyle = localStorage.getItem('user-bg-style') || 'aurora';
+            let starsAnimationId = null;
+            let sakuraAnimationId = null;
+
+            function applyBgStyle(styleKey) {
+                if (!bgModes[styleKey]) styleKey = 'aurora';
+                currentBgStyle = styleKey;
+                localStorage.setItem('user-bg-style', styleKey);
+
+                // 更新排版列 Pills 的 active 樣式
+                dockPills.forEach(pill => {
+                    const bg = pill.getAttribute('data-bg');
+                    pill.classList.toggle('active', bg === styleKey);
+                });
+
+                // 更新背景層 active
+                Object.keys(bgModes).forEach(key => {
+                    if (bgModes[key]) {
+                        if (key === styleKey) {
+                            bgModes[key].classList.add('active');
+                        } else {
+                            bgModes[key].classList.remove('active');
+                        }
+                    }
+                });
+
+                // 啟動或關閉 Canvas 循環以省電省效能
+                if (styleKey === 'stars') {
+                    startStarsEngine();
+                } else {
+                    stopStarsEngine();
+                }
+
+                if (styleKey === 'sakura') {
+                    startSakuraEngine();
+                } else {
+                    stopSakuraEngine();
+                }
+            }
+
+            dockPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const styleKey = pill.getAttribute('data-bg');
+                    applyBgStyle(styleKey);
+                    showToast(`背景已切換為「${bgNames[styleKey]}」`);
+                });
+            });
+
+            // --- Canvas 引擎 1: 互動星空粒子 ---
+            const starsCanvas = document.getElementById('bgStarsCanvas');
+            let starsCtx = starsCanvas ? starsCanvas.getContext('2d') : null;
+            let starsParticles = [];
+            let starsMouse = { x: -9999, y: -9999, radius: 160 };
+
+            function initStars() {
+                if (!starsCanvas) return;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                starsCanvas.width = width * dpr;
+                starsCanvas.height = height * dpr;
+                starsCanvas.style.width = width + 'px';
+                starsCanvas.style.height = height + 'px';
+                starsCtx = starsCanvas.getContext('2d');
+                starsCtx.scale(dpr, dpr);
+
+                const count = Math.min(Math.floor((width * height) / 11000), 100);
+                starsParticles = [];
+
+                for (let i = 0; i < count; i++) {
+                    starsParticles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.7,
+                        vy: (Math.random() - 0.5) * 0.7,
+                        radius: Math.random() * 2 + 0.8,
+                        alpha: Math.random() * 0.6 + 0.3,
+                        twinkleSpeed: Math.random() * 0.03 + 0.01,
+                        twinklePhase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            function drawStars() {
+                if (!starsCtx) return;
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                starsCtx.clearRect(0, 0, width, height);
+
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                const particleColor = isLight ? 'rgba(99, 102, 241, ' : 'rgba(0, 240, 255, ';
+                const lineColor = isLight ? 'rgba(99, 102, 241, ' : 'rgba(131, 56, 236, ';
+
+                for (let i = 0; i < starsParticles.length; i++) {
+                    const p = starsParticles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    p.twinklePhase += p.twinkleSpeed;
+                    const dynamicAlpha = Math.max(0.1, p.alpha + Math.sin(p.twinklePhase) * 0.25);
+
+                    starsCtx.beginPath();
+                    starsCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    starsCtx.fillStyle = particleColor + dynamicAlpha + ')';
+                    starsCtx.fill();
+
+                    for (let j = i + 1; j < starsParticles.length; j++) {
+                        const p2 = starsParticles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+                            const lineAlpha = (1 - dist / 120) * 0.35;
+                            starsCtx.beginPath();
+                            starsCtx.moveTo(p.x, p.y);
+                            starsCtx.lineTo(p2.x, p2.y);
+                            starsCtx.strokeStyle = lineColor + lineAlpha + ')';
+                            starsCtx.lineWidth = 0.8;
+                            starsCtx.stroke();
+                        }
+                    }
+
+                    // 滑鼠互動連線
+                    const mouseDx = p.x - starsMouse.x;
+                    const mouseDy = p.y - starsMouse.y;
+                    const mouseDist = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+
+                    if (mouseDist < starsMouse.radius) {
+                        const mouseLineAlpha = (1 - mouseDist / starsMouse.radius) * 0.7;
+                        starsCtx.beginPath();
+                        starsCtx.moveTo(p.x, p.y);
+                        starsCtx.lineTo(starsMouse.x, starsMouse.y);
+                        starsCtx.strokeStyle = (isLight ? 'rgba(255, 77, 109, ' : 'rgba(0, 240, 255, ') + mouseLineAlpha + ')';
+                        starsCtx.lineWidth = 1.3;
+                        starsCtx.stroke();
+                    }
+                }
+
+                starsAnimationId = requestAnimationFrame(drawStars);
+            }
+
+            function startStarsEngine() {
+                if (!starsAnimationId) {
+                    initStars();
+                    drawStars();
+                }
+            }
+
+            function stopStarsEngine() {
+                if (starsAnimationId) {
+                    cancelAnimationFrame(starsAnimationId);
+                    starsAnimationId = null;
+                }
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                starsMouse.x = e.clientX;
+                starsMouse.y = e.clientY;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                starsMouse.x = -9999;
+                starsMouse.y = -9999;
+            });
+
+            // --- Canvas 引擎 2: 唯美落櫻流光 ---
+            const sakuraCanvas = document.getElementById('bgSakuraCanvas');
+            let sakuraCtx = sakuraCanvas ? sakuraCanvas.getContext('2d') : null;
+            let sakuraPetals = [];
+
+            function initSakura() {
+                if (!sakuraCanvas) return;
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                sakuraCanvas.width = width * dpr;
+                sakuraCanvas.height = height * dpr;
+                sakuraCanvas.style.width = width + 'px';
+                sakuraCanvas.style.height = height + 'px';
+                sakuraCtx = sakuraCanvas.getContext('2d');
+                sakuraCtx.scale(dpr, dpr);
+
+                const count = Math.min(Math.floor((width * height) / 22000), 50);
+                sakuraPetals = [];
+
+                for (let i = 0; i < count; i++) {
+                    sakuraPetals.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        size: Math.random() * 9 + 8,
+                        vx: Math.random() * 1.5 + 0.8,
+                        vy: Math.random() * 1.2 + 0.8,
+                        rotation: Math.random() * 360,
+                        rotSpeed: (Math.random() - 0.5) * 2,
+                        flip: Math.random() * Math.PI,
+                        flipSpeed: Math.random() * 0.03 + 0.01,
+                        alpha: Math.random() * 0.45 + 0.45,
+                        color: Math.random() > 0.3 ? '#ffb7c5' : '#ff758c'
+                    });
+                }
+
+                for (let i = 0; i < 25; i++) {
+                    sakuraPetals.push({
+                        isEmber: true,
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        radius: Math.random() * 2 + 1,
+                        vx: Math.random() * 0.8 + 0.2,
+                        vy: Math.random() * 0.6 + 0.3,
+                        alpha: Math.random() * 0.6 + 0.2,
+                        pulse: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            function drawSakura() {
+                if (!sakuraCtx) return;
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                sakuraCtx.clearRect(0, 0, width, height);
+
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
+                sakuraPetals.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.isEmber) {
+                        p.pulse += 0.04;
+                        const pulseAlpha = Math.max(0.1, p.alpha + Math.sin(p.pulse) * 0.25);
+                        sakuraCtx.beginPath();
+                        sakuraCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        sakuraCtx.fillStyle = isLight ? `rgba(255, 158, 0, ${pulseAlpha * 0.8})` : `rgba(255, 209, 102, ${pulseAlpha})`;
+                        sakuraCtx.fill();
+                    } else {
+                        p.rotation += p.rotSpeed;
+                        p.flip += p.flipSpeed;
+
+                        sakuraCtx.save();
+                        sakuraCtx.translate(p.x, p.y);
+                        sakuraCtx.rotate((p.rotation * Math.PI) / 180);
+                        sakuraCtx.scale(1, Math.cos(p.flip));
+
+                        sakuraCtx.beginPath();
+                        sakuraCtx.moveTo(0, 0);
+                        sakuraCtx.bezierCurveTo(p.size / 2, -p.size / 2, p.size, 0, 0, p.size * 1.3);
+                        sakuraCtx.bezierCurveTo(-p.size, 0, -p.size / 2, -p.size / 2, 0, 0);
+
+                        sakuraCtx.fillStyle = p.color;
+                        sakuraCtx.globalAlpha = p.alpha;
+                        sakuraCtx.shadowColor = 'rgba(255, 117, 140, 0.4)';
+                        sakuraCtx.shadowBlur = 8;
+                        sakuraCtx.fill();
+                        sakuraCtx.restore();
+                    }
+
+                    if (p.y > height + 20) {
+                        p.y = -20;
+                        p.x = Math.random() * width;
+                    }
+                    if (p.x > width + 20) {
+                        p.x = -20;
+                    }
+                });
+
+                sakuraAnimationId = requestAnimationFrame(drawSakura);
+            }
+
+            function startSakuraEngine() {
+                if (!sakuraAnimationId) {
+                    initSakura();
+                    drawSakura();
+                }
+            }
+
+            function stopSakuraEngine() {
+                if (sakuraAnimationId) {
+                    cancelAnimationFrame(sakuraAnimationId);
+                    sakuraAnimationId = null;
+                }
+            }
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (currentBgStyle === 'stars') initStars();
+                    if (currentBgStyle === 'sakura') initSakura();
+                }, 100);
+            });
+
+            const themeObserver = new MutationObserver(() => {
+                if (currentBgStyle === 'stars') initStars();
+                if (currentBgStyle === 'sakura') initSakura();
+            });
+            themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+            applyBgStyle(currentBgStyle);
+        })();
+    </script>
+</body>
+
+</html>

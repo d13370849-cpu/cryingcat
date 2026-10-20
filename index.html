@@ -4,1025 +4,3437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>個人簡介 | 台南應用科技大學</title>
-    <!-- Google Fonts 引入現代字體 -->
+    <title>像素冒險 ‧ 個人簡介與作品集 | 臺南應用科技大學 多媒體動畫科系</title>
+    <!-- Google Fonts: 復古像素與現代排版字型 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;600;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@400;600;800;900&display=swap"
         rel="stylesheet">
     <!-- Font Awesome 圖標庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* === 核心色彩變數與主題設計 === */
+        /* ==========================================================================
+           === 像素遊戲風格核心色彩、排版與變數系統 ===
+           ========================================================================== */
         :root {
-            --bg-gradient: radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.1) 0%, transparent 60%),
-                #0a0e17;
-            --card-bg: rgba(22, 27, 46, 0.7);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-            --text-main: #f1f5f9;
+            /* 復古街機 / 8-Bit 像素調色盤 */
+            --pixel-bg-dark: #0a0b14;
+            --pixel-bg-deep: #05050a;
+            --pixel-gold: #ffd166;
+            --pixel-gold-glow: #ffe600;
+            --pixel-red: #ff3366;
+            --pixel-crimson: #e60049;
+            --pixel-cyan: #00f0ff;
+            --pixel-blue: #0088ff;
+            --pixel-purple: #9b5de5;
+            --pixel-magenta: #f15bb5;
+            --pixel-green: #06d6a0;
+            --pixel-orange: #ff9e00;
+            --pixel-dark-card: #121324;
+            --pixel-border-color: #2b2d42;
+            --pixel-card-border: #4a4e69;
+
+            /* 經典像素立體框陰影 (無模糊、階梯式硬陰影) */
+            --pixel-shadow-gold: 4px 4px 0px #b78a02, -2px -2px 0px #fff494;
+            --pixel-shadow-cyan: 4px 4px 0px #00808a, -2px -2px 0px #a1ffff;
+            --pixel-shadow-card: 4px 4px 0px #000000, -2px -2px 0px #323554, inset 2px 2px 0px rgba(255, 255, 255, 0.15);
+            --pixel-box-border: 4px solid #1a1b2f;
+
+            /* 字型定義 */
+            --font-pixel-title: 'Press Start 2P', monospace;
+            --font-pixel-sub: 'Silkscreen', 'VT323', monospace;
+            --font-pixel-terminal: 'VT323', monospace;
+            --font-main-content: 'Noto Sans TC', 'Outfit', sans-serif;
+
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --item-bg: rgba(255, 255, 255, 0.04);
-            --item-border: rgba(255, 255, 255, 0.08);
+            --text-highlight: #ffd166;
 
-            /* 保留原本的彩虹色彩概念並全面升級質感 */
-            --color-red: #ff4d6d;
-            --color-orange: #ff9e00;
-            --color-yellow: #ffd166;
-            --color-green: #06d6a0;
-            --color-blue: #118ab2;
-            --color-purple: #8338ec;
-
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 10px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-pixel: all 0.15s steps(3, end);
         }
 
-        /* 淺色主題變數 */
+        /* 淺色像素主題支援 */
         [data-theme="light"] {
-            --bg-gradient: radial-gradient(circle at 10% 20%, rgba(255, 77, 109, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(17, 138, 178, 0.08) 0%, transparent 60%),
-                #f0f4f8;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(255, 255, 255, 0.8);
-            --card-shadow: 0 20px 40px -15px rgba(100, 116, 139, 0.2);
+            --pixel-bg-dark: #f0f4f8;
+            --pixel-bg-deep: #e2e8f0;
+            --pixel-dark-card: #ffffff;
+            --pixel-border-color: #cbd5e1;
+            --pixel-card-border: #94a3b8;
             --text-main: #0f172a;
-            --text-muted: #64748b;
-            --item-bg: rgba(255, 255, 255, 0.7);
-            --item-border: rgba(226, 232, 240, 0.8);
+            --text-muted: #475569;
+            --pixel-shadow-card: 4px 4px 0px #64748b, -2px -2px 0px #ffffff, inset 2px 2px 0px rgba(0, 0, 0, 0.05);
+            --pixel-box-border: 4px solid #94a3b8;
         }
 
-        /* === 全局重設 === */
+        /* 全域樣式重設 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            image-rendering: pixelated;
+        }
+
+        html {
+            background-color: var(--pixel-bg-dark);
+            min-height: 100%;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Outfit', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #0a0e17;
-            background-image: var(--bg-gradient);
-            background-attachment: fixed;
-            background-size: cover;
+            font-family: var(--font-main-content);
+            background: var(--pixel-bg-dark);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
-            transition: var(--transition);
             overflow-x: hidden;
-        }
-
-        /* === 頂部控制列 (主題切換) === */
-        .top-bar {
-            width: 100%;
-            max-width: 900px;
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 24px;
-            gap: 12px;
-        }
-
-        .theme-toggle-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-main);
-            padding: 10px 18px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(12px);
-            box-shadow: var(--card-shadow);
-            transition: var(--transition);
-        }
-
-        .theme-toggle-btn:hover {
-            transform: translateY(-2px);
-            border-color: var(--color-purple);
-        }
-
-        /* === 主容器 (毛玻璃卡片) === */
-        .profile-container {
-            width: 100%;
-            max-width: 900px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            backdrop-filter: blur(20px);
-            box-shadow: var(--card-shadow);
-            padding: 45px;
             position: relative;
-            overflow: hidden;
-            animation: fadeIn 0.8s ease-out;
+            cursor: none;
+            /* 使用專屬高畫質動態像素鼠標 */
         }
 
-        /* 裝飾光暈 */
-        .profile-container::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, var(--color-purple), var(--color-red));
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.25;
+        /* 讓所有互動元素同樣隱藏原生游標 */
+        a,
+        button,
+        input,
+        select,
+        textarea,
+        [role="button"],
+        .interactive {
+            cursor: none !important;
+        }
+
+        /* ==========================================================================
+           === 1. 復古 CRT 螢幕掃描線與街機螢幕微凸特效 (CRT Overlay) ===
+           ========================================================================== */
+        .crt-scanlines {
+            position: fixed;
+            inset: 0;
             pointer-events: none;
+            z-index: 99998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%),
+                radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.5) 100%);
+            background-size: 100% 4px, 100% 100%;
         }
 
-        .profile-container::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 250px;
-            height: 250px;
-            background: linear-gradient(135deg, var(--color-blue), var(--color-green));
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.25;
+        .crt-scanlines.active {
+            opacity: 1;
+            animation: crtFlicker 0.15s infinite alternate;
+        }
+
+        @keyframes crtFlicker {
+            0% {
+                opacity: 0.96;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* ==========================================================================
+           === 2. 全螢幕畫布粒子移動軌跡特效 (Canvas Mouse Movement Trail) ===
+           ========================================================================== */
+        #pixelTrailCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
+            z-index: 99999;
+            image-rendering: pixelated;
         }
 
-        /* === 頭像與標題區 === */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
+        /* ==========================================================================
+           === 3. 專屬客製化像素鼠標系統 (Custom Animated Pixel Cursor) ===
+           ========================================================================== */
+        #customPixelCursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 42px;
+            height: 42px;
+            pointer-events: none;
+            z-index: 100000;
+            transform: translate(-100px, -100px);
+            transition: transform 0.02s linear;
+            will-change: transform;
+            filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.7));
         }
 
-        .avatar-wrapper {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            margin-bottom: 20px;
-        }
-
-        .avatar-glow {
-            position: absolute;
-            inset: -4px;
-            background: linear-gradient(45deg, var(--color-red), var(--color-orange), var(--color-green), var(--color-blue), var(--color-purple));
-            border-radius: 50%;
-            filter: blur(8px);
-            opacity: 0.7;
-            animation: rotateGlow 6s linear infinite;
-        }
-
-        .avatar-img {
-            position: relative;
+        .cursor-inner {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--card-bg);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .avatar-img:hover {
-            transform: scale(1.05) rotate(3deg);
-        }
-
-        .status-badge {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            background: #10b981;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            border: 2px solid var(--card-bg);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .status-badge .dot {
-            width: 6px;
-            height: 6px;
-            background: #ffffff;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
-
-        /* 主標題 (個人簡介) */
-        .main-title {
-            font-size: 2.8rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-        }
-
-        [data-theme="light"] .main-title {
-            background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .sub-tagline {
-            font-size: 1rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* === 資訊網格區 (保留原樣資料，彩虹卡片質感昇華) === */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 18px;
-            margin-bottom: 35px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .info-card {
-            background: var(--item-bg);
-            border: 1px solid var(--item-border);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* 彩虹卡片左側特色光條 */
-        .info-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--accent-color);
-            border-radius: 4px 0 0 4px;
-        }
-
-        /* 圖標外框 */
-        .icon-box {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: var(--accent-color);
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .info-content {
-            flex-grow: 1;
-        }
-
-        .info-label {
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            font-weight: 700;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .info-value {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-
-        .info-value .editable-hint {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-style: italic;
-            cursor: pointer;
-            border-bottom: 1px dashed var(--text-muted);
-        }
-
-        .info-value .editable-hint:hover {
-            color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        /* 原作者色彩對應 (CSS 變數分配) */
-        .card-name {
-            --accent-color: var(--color-red);
-        }
-
-        .card-zodiac {
-            --accent-color: var(--color-orange);
-        }
-
-        .card-edu {
-            --accent-color: var(--color-yellow);
-        }
-
-        .card-hobby {
-            --accent-color: var(--color-green);
-        }
-
-        .card-skill {
-            --accent-color: var(--color-blue);
-        }
-
-        .card-bio {
-            --accent-color: var(--color-purple);
-            grid-column: 1 / -1;
-        }
-
-        /* 自我介紹卡片特別加強 */
-        .card-bio .info-value {
-            font-size: 1.25rem;
-            line-height: 1.6;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .bio-quote {
-            font-size: 1.5rem;
-            color: var(--color-purple);
-            opacity: 0.6;
-        }
-
-        /* === 學校連結區塊 (完整保留原程式碼的兩種連結) === */
-        .links-section {
-            background: var(--item-bg);
-            border: 1px solid var(--item-border);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            margin-bottom: 35px;
             position: relative;
-            z-index: 1;
+            transform-origin: 20% 20%;
+            transition: transform 0.12s steps(4);
         }
 
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 18px;
-            color: var(--text-main);
-            font-size: 1.1rem;
-            font-weight: 700;
+        /* 鼠標揮擊 / 點擊動畫 */
+        .cursor-inner.slashing {
+            animation: swordSlashAnim 0.18s steps(4) forwards;
         }
 
-        .link-buttons-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .tut-link-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 24px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-
-        /* 主要連結按鈕 (新分頁開啟 target="_blank") */
-        .btn-primary-link {
-            background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(17, 138, 178, 0.3);
-        }
-
-        .btn-primary-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(131, 56, 236, 0.4);
-            color: #ffffff;
-        }
-
-        /* 次要連結按鈕 (本頁開啟) */
-        .btn-secondary-link {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border-color: var(--item-border);
-        }
-
-        .btn-secondary-link:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
-            border-color: var(--color-yellow);
-        }
-
-        .link-badge {
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.2);
-            font-weight: normal;
-        }
-
-        /* === 互動塗鴉小畫板 (呼應原作者「興趣: 畫畫」「專長: 畫畫」) === */
-        .canvas-section {
-            background: var(--item-bg);
-            border: 1px solid var(--item-border);
-            border-radius: var(--radius-md);
-            padding: 25px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .canvas-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .canvas-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .canvas-toolbar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .color-palette {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .color-dot {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .color-dot:hover,
-        .color-dot.active {
-            transform: scale(1.2);
-            border-color: #ffffff;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-        }
-
-        .custom-color-input {
-            width: 26px;
-            height: 26px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            background: transparent;
-        }
-
-        .brush-size-wrap {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .brush-slider {
-            accent-color: var(--color-purple);
-            cursor: pointer;
-            width: 80px;
-        }
-
-        .canvas-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid var(--item-border);
-            color: var(--text-main);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-
-        .canvas-btn:hover {
-            background: rgba(255, 255, 255, 0.16);
-            transform: translateY(-1px);
-        }
-
-        .drawing-canvas {
-            width: 100%;
-            height: 240px;
-            background: #ffffff;
-            border-radius: var(--radius-sm);
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.15);
-            cursor: crosshair;
-            display: block;
-            touch-action: none;
-        }
-
-        /* === 頁尾設計 === */
-        .profile-footer {
-            margin-top: 30px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        /* === 動畫效果 === */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes rotateGlow {
+        @keyframes swordSlashAnim {
             0% {
-                transform: rotate(0deg);
+                transform: rotate(0deg) scale(1);
+            }
+
+            40% {
+                transform: rotate(-35deg) scale(1.2);
+            }
+
+            70% {
+                transform: rotate(45deg) scale(1.1);
             }
 
             100% {
-                transform: rotate(360deg);
+                transform: rotate(0deg) scale(1);
             }
         }
 
-        @keyframes pulse {
+        .cursor-inner.casting {
+            animation: wandCastAnim 0.2s steps(4) forwards;
+        }
+
+        @keyframes wandCastAnim {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.3) rotate(25deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .cursor-inner.scratching {
+            animation: catScratchAnim 0.2s steps(4) forwards;
+        }
+
+        @keyframes catScratchAnim {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(6px) scale(1.25);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 鼠標懸停發光光環 */
+        .cursor-glow-aura {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 209, 102, 0.5) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        body.cursor-hovering .cursor-glow-aura {
+            opacity: 1;
+            animation: auraPulse 0.8s infinite alternate;
+        }
+
+        @keyframes auraPulse {
+            0% {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0.9;
+            }
+        }
+
+        /* 點擊戰鬥數值浮空冒出特效 (RPG Damage Numbers) */
+        .pixel-damage-popup {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100001;
+            font-family: var(--font-pixel-title);
+            font-size: 0.75rem;
+            color: #ffd166;
+            text-shadow: 2px 2px 0px #000, -1px -1px 0px #ff007f;
+            user-select: none;
+            white-space: nowrap;
+            animation: damageFloat 0.75s steps(8) forwards;
+        }
+
+        @keyframes damageFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1.2);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translate(12px, -32px) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(20px, -55px) scale(0.8);
+            }
+        }
+
+        /* ==========================================================================
+           === 4. 像素遊戲開始介面 (Pixel Game Start Screen / Title Menu) ===
+           ========================================================================== */
+        .pixel-start-screen {
+            position: relative;
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            background: radial-gradient(circle at 50% 30%, #1a1635 0%, #080614 70%);
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        [data-theme="light"] .pixel-start-screen {
+            background: radial-gradient(circle at 50% 30%, #e2e8f0 0%, #cbd5e1 70%);
+        }
+
+        /* 背景畫布：像素星空與浮雲 */
+        #pixelBgCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 復古街機頂部計分欄 */
+        .arcade-hud-top {
+            position: absolute;
+            top: 24px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+            font-family: var(--font-pixel-title);
+            font-size: 0.85rem;
+            color: #ffd166;
+            text-shadow: 2px 2px 0px #000;
+            z-index: 2;
+            letter-spacing: 1px;
+        }
+
+        .hud-score-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .hud-flash-credit {
+            animation: blinkCredit 1s infinite steps(2);
+            color: #00f0ff;
+        }
+
+        @keyframes blinkCredit {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 標題與選單容器 */
+        .start-screen-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 960px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* 標題上方裝飾徽章 */
+        .title-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: #2b1055;
+            border: 3px solid #ffd166;
+            box-shadow: 4px 4px 0px #000;
+            font-family: var(--font-pixel-title);
+            font-size: 0.7rem;
+            color: #ffd166;
+            margin-bottom: 24px;
+            animation: bounceBadge 2s infinite ease-in-out;
+        }
+
+        @keyframes bounceBadge {
 
             0%,
             100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* 巨幅 3D 像素遊戲標題 */
+        .pixel-game-logo {
+            margin-bottom: 16px;
+        }
+
+        .pixel-game-title {
+            font-family: var(--font-pixel-title);
+            font-size: clamp(1.8rem, 4.5vw, 3.4rem);
+            color: #ffd166;
+            line-height: 1.3;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 0px #ff007f, -3px -3px 0px #00f0ff, 6px 6px 0px #000000;
+            position: relative;
+            animation: titlePulse 2.5s infinite steps(4);
+        }
+
+        @keyframes titlePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .pixel-game-subtitle {
+            font-family: var(--font-pixel-sub);
+            font-size: clamp(0.9rem, 2vw, 1.25rem);
+            color: #00f0ff;
+            margin-top: 14px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .pixel-game-department {
+            font-family: var(--font-main-content);
+            font-weight: 700;
+            font-size: 1rem;
+            color: #f1f5f9;
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 18px;
+            border: 2px dashed #9b5de5;
+            display: inline-block;
+        }
+
+        /* 像素貓咪坐騎展示區塊 */
+        .pixel-mascot-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 28px 0;
+            background: rgba(18, 19, 36, 0.85);
+            border: 4px solid #ffd166;
+            box-shadow: 6px 6px 0px #000;
+            padding: 14px 24px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+
+        .mascot-avatar-wrap {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            flex-shrink: 0;
+            border: 3px solid #ff3366;
+            box-shadow: 3px 3px 0px #000;
+            overflow: hidden;
+            background: #000;
+            animation: mascotWiggle 3s infinite steps(2);
+        }
+
+        @keyframes mascotWiggle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px) rotate(2deg);
+            }
+        }
+
+        .mascot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .mascot-dialogue {
+            text-align: left;
+            font-family: var(--font-pixel-terminal);
+            font-size: 1.25rem;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .mascot-dialogue .typing-highlight {
+            color: #06d6a0;
+            font-weight: bold;
+        }
+
+        /* 閃爍開始提示 (PRESS START) */
+        .press-start-prompt {
+            font-family: var(--font-pixel-title);
+            font-size: clamp(0.9rem, 2.2vw, 1.25rem);
+            color: #ff3366;
+            margin: 20px 0 26px;
+            text-shadow: 3px 3px 0px #000;
+            letter-spacing: 2px;
+            animation: pressStartBlink 0.9s infinite steps(2);
+        }
+
+        @keyframes pressStartBlink {
+            0% {
                 opacity: 1;
                 transform: scale(1);
             }
 
             50% {
-                opacity: 0.5;
-                transform: scale(0.85);
+                opacity: 0.15;
+                transform: scale(0.98);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
             }
         }
 
-        /* === 響應式優化 === */
+        /* 像素指令選單 (Retro RPG Command Menu) */
+        .pixel-menu-box {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .pixel-menu-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+            padding: 16px 24px;
+            background: #18192e;
+            border: 4px solid #3d406b;
+            color: #f8fafc;
+            font-family: var(--font-pixel-title);
+            font-size: 0.85rem;
+            text-decoration: none;
+            box-shadow: 4px 4px 0px #000, inset 2px 2px 0px rgba(255, 255, 255, 0.15);
+            transition: var(--transition-pixel);
+            user-select: none;
+        }
+
+        .pixel-menu-btn .btn-selector {
+            color: transparent;
+            font-size: 1rem;
+            transition: color 0.1s steps(2);
+        }
+
+        .pixel-menu-btn .btn-text {
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            text-align: left;
+        }
+
+        .pixel-menu-btn .btn-badge {
+            font-family: var(--font-pixel-terminal);
+            font-size: 1rem;
+            padding: 2px 8px;
+            background: #2b2d42;
+            color: #ffd166;
+            border: 1px solid #ffd166;
+        }
+
+        /* 選單按鈕懸停與選中效果 */
+        .pixel-menu-btn:hover,
+        .pixel-menu-btn.active-focus {
+            background: #ffd166;
+            color: #000;
+            border-color: #ffffff;
+            box-shadow: 6px 6px 0px #ff007f, inset 2px 2px 0px #ffffff;
+            transform: translate(-3px, -3px);
+        }
+
+        .pixel-menu-btn:hover .btn-selector,
+        .pixel-menu-btn.active-focus .btn-selector {
+            color: #e60049;
+            animation: arrowWiggle 0.4s infinite steps(2) alternate;
+        }
+
+        @keyframes arrowWiggle {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(4px);
+            }
+        }
+
+        .pixel-menu-btn:hover .btn-badge,
+        .pixel-menu-btn.active-focus .btn-badge {
+            background: #000;
+            color: #ffd166;
+            border-color: #000;
+        }
+
+        .pixel-menu-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #000;
+        }
+
+        /* 快捷鍵操作指引提示 */
+        .keyboard-controls-hint {
+            margin-top: 24px;
+            font-family: var(--font-pixel-terminal);
+            font-size: 1.1rem;
+            color: #94a3b8;
+            letter-spacing: 1px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .key-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #1e2038;
+            border: 2px solid #555982;
+            color: #ffd166;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        /* ==========================================================================
+           === 5. 頂部固定像素 HUD 狀態導覽列 (Retro Game Sticky HUD) ===
+           ========================================================================== */
+        .retro-sticky-hud {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 11, 20, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 4px solid #ffd166;
+            box-shadow: 0 4px 0 #000000;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 24px;
+            font-family: var(--font-pixel-title);
+            font-size: 0.75rem;
+            color: #f8fafc;
+            transition: transform 0.3s ease;
+        }
+
+        [data-theme="light"] .retro-sticky-hud {
+            background: rgba(240, 244, 248, 0.96);
+            border-bottom-color: #e60049;
+            color: #0f172a;
+        }
+
+        .hud-player-stats {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hud-stat-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #18192e;
+            padding: 6px 12px;
+            border: 2px solid #4a4e69;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        [data-theme="light"] .hud-stat-badge {
+            background: #ffffff;
+            border-color: #cbd5e1;
+        }
+
+        .hp-bar-mini,
+        .mp-bar-mini {
+            width: 70px;
+            height: 10px;
+            background: #2b2d42;
+            border: 1px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hp-fill {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #ff007f, #06d6a0);
+            animation: hpPulse 2s infinite ease-in-out;
+        }
+
+        .mp-fill {
+            width: 90%;
+            height: 100%;
+            background: linear-gradient(to right, #0088ff, #00f0ff);
+        }
+
+        /* 導覽按鈕群組 */
+        .hud-nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .hud-nav-btn {
+            background: #18192e;
+            border: 2px solid #555982;
+            color: #ffd166;
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            padding: 8px 12px;
+            text-decoration: none;
+            box-shadow: 2px 2px 0px #000;
+            transition: var(--transition-pixel);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hud-nav-btn:hover {
+            background: #ffd166;
+            color: #000;
+            border-color: #fff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #ff007f;
+        }
+
+        /* HUD 右側控制功能群 */
+        .hud-quick-tools {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .hud-tool-btn {
+            background: #242540;
+            border: 2px solid #555982;
+            color: #fff;
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            padding: 7px 10px;
+            box-shadow: 2px 2px 0px #000;
+            transition: var(--transition-pixel);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hud-tool-btn:hover {
+            background: #00f0ff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .hud-tool-btn.active {
+            background: #06d6a0;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* ==========================================================================
+           === 6. 冒險主內容區塊 (Pixel RPG Main Adventure Container) ===
+           ========================================================================== */
+        .adventure-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 20px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            z-index: 5;
+        }
+
+        /* 像素方塊通用樣式 */
+        .pixel-card {
+            background: var(--pixel-dark-card);
+            border: 4px solid var(--pixel-card-border);
+            box-shadow: var(--pixel-shadow-card);
+            padding: 32px 28px;
+            position: relative;
+            transition: var(--transition-pixel);
+        }
+
+        .pixel-card:hover {
+            border-color: var(--pixel-gold);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000000, -2px -2px 0px var(--pixel-gold);
+        }
+
+        .pixel-card-corner {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--pixel-gold);
+        }
+
+        .corner-tl {
+            top: -2px;
+            left: -2px;
+        }
+
+        .corner-tr {
+            top: -2px;
+            right: -2px;
+        }
+
+        .corner-bl {
+            bottom: -2px;
+            left: -2px;
+        }
+
+        .corner-br {
+            bottom: -2px;
+            right: -2px;
+        }
+
+        /* 區塊標題 */
+        .pixel-section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 3px dashed var(--pixel-card-border);
+        }
+
+        .pixel-section-icon {
+            width: 44px;
+            height: 44px;
+            background: #2b1055;
+            border: 3px solid var(--pixel-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--pixel-gold);
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .pixel-section-title {
+            font-family: var(--font-pixel-title);
+            font-size: 1.15rem;
+            color: var(--pixel-gold);
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .pixel-section-subtitle {
+            font-family: var(--font-pixel-terminal);
+            font-size: 1.25rem;
+            color: var(--pixel-cyan);
+            margin-left: auto;
+        }
+
+        /* 英雄狀態卡片 (PLAYER 1 STATUS) */
+        .hero-character-card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
         @media (max-width: 768px) {
-            .profile-container {
-                padding: 25px 20px;
-            }
-
-            .main-title {
-                font-size: 2.2rem;
-            }
-
-            .info-grid {
+            .hero-character-card {
                 grid-template-columns: 1fr;
+                text-align: center;
             }
+        }
 
-            .canvas-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        .character-portrait-box {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border: 4px solid var(--pixel-gold);
+            box-shadow: 6px 6px 0px #000;
+            background: #000;
+            margin: 0 auto;
+        }
 
-            .canvas-toolbar {
-                width: 100%;
-                justify-content: space-between;
-            }
+        .character-portrait-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .character-level-badge {
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff007f;
+            color: #fff;
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            border: 2px solid #fff;
+            box-shadow: 2px 2px 0px #000;
+            white-space: nowrap;
+        }
+
+        .character-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .character-name-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .character-name {
+            font-family: var(--font-pixel-title);
+            font-size: 1.4rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 0px #ff007f;
+        }
+
+        .character-class-tag {
+            font-family: var(--font-pixel-terminal);
+            font-size: 1.3rem;
+            color: #00f0ff;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid #00f0ff;
+            padding: 2px 10px;
+        }
+
+        .character-school {
+            font-family: var(--font-main-content);
+            font-weight: 700;
+            color: var(--pixel-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+
+        .character-tags-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .character-tag-pill {
+            background: #1e2038;
+            border: 2px solid #4a4e69;
+            color: #e2e8f0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        /* 關於我：冒險者傳記 (About Me Log) */
+        .adventurer-log-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            background: rgba(0, 0, 0, 0.25);
+            padding: 20px 24px;
+            border-left: 5px solid var(--pixel-purple);
+            margin-bottom: 20px;
+        }
+
+        .quest-goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .quest-goal-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--pixel-card-border);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .quest-goal-icon {
+            font-size: 1.4rem;
+            color: var(--pixel-gold);
+        }
+
+        .quest-goal-content {
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* 基礎資訊四格網格 (RPG Attribute Matrix) */
+        .rpg-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .rpg-stat-card {
+            background: rgba(18, 19, 36, 0.9);
+            border: 3px solid var(--pixel-card-border);
+            padding: 18px 20px;
+            box-shadow: 4px 4px 0px #000;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition-pixel);
+        }
+
+        .rpg-stat-card:hover {
+            border-color: var(--pixel-cyan);
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 0px var(--pixel-cyan);
+        }
+
+        .rpg-stat-icon-wrap {
+            width: 48px;
+            height: 48px;
+            background: #232542;
+            border: 2px solid var(--pixel-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--pixel-gold);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .rpg-stat-label {
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            color: var(--pixel-gold);
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .rpg-stat-val {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #ffffff;
+        }
+
+        /* ==========================================================================
+           === 7. 技能天賦樹與軟體熟練度 (RPG Skill Tree & Software Gauges) ===
+           ========================================================================== */
+        .skills-rpg-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-rpg-card {
+            background: rgba(18, 19, 36, 0.9);
+            border: 3px solid var(--pixel-card-border);
+            padding: 16px 20px;
+            box-shadow: 3px 3px 0px #000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: var(--transition-pixel);
+        }
+
+        .skill-rpg-card:hover {
+            border-color: var(--pixel-gold);
+            background: rgba(28, 30, 56, 0.95);
+        }
+
+        .skill-rpg-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-software-name {
+            font-family: var(--font-pixel-title);
+            font-size: 0.8rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-rank-badge {
+            font-family: var(--font-pixel-terminal);
+            font-size: 1.15rem;
+            color: var(--pixel-gold);
+            background: #000;
+            padding: 2px 8px;
+            border: 1px solid var(--pixel-gold);
+        }
+
+        .skill-rpg-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .skill-gauge-track {
+            width: 100%;
+            height: 16px;
+            background: #0a0b14;
+            border: 2px solid #555982;
+            padding: 2px;
+            box-shadow: inset 1px 1px 0px #000;
+        }
+
+        .skill-gauge-fill {
+            height: 100%;
+            background: repeating-linear-gradient(90deg,
+                    var(--gauge-color, #ffd166) 0px,
+                    var(--gauge-color, #ffd166) 8px,
+                    #000000 8px,
+                    #000000 10px);
+            transition: width 1s steps(10);
+        }
+
+        /* ==========================================================================
+           === 8. 精選作品裝備圖鑑 (Featured Works: Quest Loot Showcase) ===
+           ========================================================================== */
+        .loot-filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .loot-filter-btn {
+            background: #18192e;
+            border: 2px solid #555982;
+            color: #cbd5e1;
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            padding: 10px 14px;
+            box-shadow: 3px 3px 0px #000;
+            transition: var(--transition-pixel);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .loot-filter-btn:hover,
+        .loot-filter-btn.active {
+            background: var(--pixel-gold);
+            color: #000;
+            border-color: #fff;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #ff007f;
+        }
+
+        .loot-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 24px;
+        }
+
+        .loot-item-card {
+            background: #141629;
+            border: 4px solid #3d406b;
+            box-shadow: 5px 5px 0px #000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: var(--transition-pixel);
+            position: relative;
+        }
+
+        .loot-item-card:hover {
+            border-color: var(--pixel-gold);
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px #ff007f;
+        }
+
+        .loot-rarity-ribbon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #000;
+            border: 2px solid var(--rarity-color, #ffd166);
+            color: var(--rarity-color, #ffd166);
+            font-family: var(--font-pixel-title);
+            font-size: 0.6rem;
+            padding: 4px 8px;
+            z-index: 2;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .loot-img-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: #000;
+            overflow: hidden;
+            border-bottom: 3px solid #3d406b;
+        }
+
+        .loot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s steps(6);
+        }
+
+        .loot-item-card:hover .loot-img {
+            transform: scale(1.08);
+        }
+
+        .loot-inspect-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .loot-item-card:hover .loot-inspect-overlay {
+            opacity: 1;
+        }
+
+        .loot-inspect-badge {
+            font-family: var(--font-pixel-title);
+            font-size: 0.75rem;
+            color: #ffd166;
+            background: #2b1055;
+            border: 2px solid #ffd166;
+            padding: 8px 14px;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .loot-info-box {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .loot-title {
+            font-family: var(--font-pixel-title);
+            font-size: 0.85rem;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .loot-desc {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .loot-chips-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
+        .loot-chip {
+            font-family: var(--font-pixel-terminal);
+            font-size: 0.95rem;
+            background: #1e2038;
+            color: #00f0ff;
+            padding: 2px 8px;
+            border: 1px solid #4a4e69;
+        }
+
+        /* ==========================================================================
+           === 9. 學校傳送門與外部連結 (TUT Portal Warp Gateways) ===
+           ========================================================================== */
+        .portal-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .portal-warp-btn {
+            background: #1a1635;
+            border: 3px solid #9b5de5;
+            color: #ffffff;
+            padding: 18px 24px;
+            font-family: var(--font-pixel-title);
+            font-size: 0.8rem;
+            text-decoration: none;
+            box-shadow: 4px 4px 0px #000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition-pixel);
+        }
+
+        .portal-warp-btn:hover {
+            background: #9b5de5;
+            color: #ffffff;
+            border-color: #ffd166;
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0px var(--pixel-gold);
+        }
+
+        /* ==========================================================================
+           === 10. 魔法符文塗鴉工坊 (Interactive Doodle Spell Studio) ===
+           ========================================================================== */
+        .doodle-studio-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .doodle-controls-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            background: #0a0b14;
+            padding: 14px 18px;
+            border: 3px solid #4a4e69;
+        }
+
+        .doodle-btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .doodle-tool-btn {
+            background: #18192e;
+            border: 2px solid #555982;
+            color: #fff;
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            padding: 8px 12px;
+            box-shadow: 2px 2px 0px #000;
+            transition: var(--transition-pixel);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .doodle-tool-btn:hover,
+        .doodle-tool-btn.active {
+            background: var(--pixel-gold);
+            color: #000;
+            border-color: #fff;
+        }
+
+        .doodle-stamp-btn {
+            background: #1e2038;
+            border: 2px solid #4a4e69;
+            font-size: 1.1rem;
+            padding: 4px 8px;
+            box-shadow: 2px 2px 0px #000;
+            transition: var(--transition-pixel);
+        }
+
+        .doodle-stamp-btn:hover,
+        .doodle-stamp-btn.active {
+            background: #ffd166;
+            border-color: #fff;
+            transform: scale(1.15);
+        }
+
+        .doodle-canvas-wrap {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            background: #ffffff;
+            border: 4px solid var(--pixel-card-border);
+            box-shadow: 5px 5px 0px #000;
+            overflow: hidden;
+        }
+
+        #doodleCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: none;
+        }
+
+        .doodle-hint-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-pixel-title);
+            font-size: 0.8rem;
+            color: #94a3b8;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.3s ease;
+        }
+
+        .doodle-hint-overlay.hidden {
+            opacity: 0;
+        }
+
+        /* 底部頁尾 */
+        .adventure-footer {
+            text-align: center;
+            font-family: var(--font-pixel-terminal);
+            font-size: 1.2rem;
+            color: #64748b;
+            padding: 40px 0 20px;
+            border-top: 3px dashed #3d406b;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* ==========================================================================
+           === 11. 遊戲設定彈出視窗 (Pixel Settings Modal) ===
+           ========================================================================== */
+        .pixel-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 100010;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s steps(4);
+        }
+
+        .pixel-modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .pixel-modal-box {
+            background: #141629;
+            border: 4px solid var(--pixel-gold);
+            box-shadow: 8px 8px 0px #000;
+            max-width: 580px;
+            width: 100%;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        .modal-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #3d406b;
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-family: var(--font-pixel-title);
+            font-size: 1rem;
+            color: var(--pixel-gold);
+        }
+
+        .modal-close-btn {
+            background: #ff007f;
+            border: 2px solid #fff;
+            color: #fff;
+            font-family: var(--font-pixel-title);
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .modal-close-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .setting-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #282a4a;
+        }
+
+        .setting-label {
+            font-family: var(--font-pixel-title);
+            font-size: 0.75rem;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .setting-options-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .setting-pill-btn {
+            background: #232542;
+            border: 2px solid #555982;
+            color: #f1f5f9;
+            font-family: var(--font-pixel-title);
+            font-size: 0.65rem;
+            padding: 6px 10px;
+            box-shadow: 2px 2px 0px #000;
+            transition: var(--transition-pixel);
+        }
+
+        .setting-pill-btn:hover,
+        .setting-pill-btn.active {
+            background: var(--pixel-gold);
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* 圖片燈箱 Modal */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 100020;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s steps(4);
+            padding: 20px;
+        }
+
+        .lightbox-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-container {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            background: #141629;
+            border: 4px solid var(--pixel-gold);
+            box-shadow: 8px 8px 0px #000;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lightbox-img {
+            max-height: 65vh;
+            max-width: 100%;
+            object-fit: contain;
+            border: 2px solid #3d406b;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2b1055;
+            border: 3px solid var(--pixel-gold);
+            color: var(--pixel-gold);
+            font-size: 1.2rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        .lightbox-prev {
+            left: -22px;
+        }
+
+        .lightbox-next {
+            right: -22px;
+        }
+
+        .lightbox-info {
+            text-align: center;
+        }
+
+        .lightbox-title {
+            font-family: var(--font-pixel-title);
+            font-size: 0.95rem;
+            color: #ffd166;
+            margin-bottom: 6px;
+        }
+
+        .lightbox-desc {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+
+        /* 輕量級提示 Toast */
+        .pixel-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #000000;
+            border: 3px solid #ffd166;
+            color: #ffd166;
+            font-family: var(--font-pixel-title);
+            font-size: 0.75rem;
+            padding: 12px 24px;
+            box-shadow: 4px 4px 0px #ff007f;
+            z-index: 100030;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s steps(4), opacity 0.2s steps(4);
+        }
+
+        .pixel-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- 頂部切換與工具列 -->
-    <div class="top-bar">
-        <button class="theme-toggle-btn" id="themeToggleBtn" title="切換深色/淺色主題">
-            <i class="fa-solid fa-moon" id="themeIcon"></i>
-            <span id="themeText">切換淺色模式</span>
-        </button>
+    <!-- ==========================================================================
+         === 1. 復古 CRT 螢幕掃描線濾鏡層 ===
+         ========================================================================== -->
+    <div class="crt-scanlines active" id="crtOverlay"></div>
+
+    <!-- ==========================================================================
+         === 2. 全螢幕鼠標粒子移動軌跡畫布 (Particle Trails Canvas) ===
+         ========================================================================== -->
+    <canvas id="pixelTrailCanvas"></canvas>
+
+    <!-- ==========================================================================
+         === 3. 專屬客製化高畫質動態像素鼠標 (Animated Pixel Cursor) ===
+         ========================================================================== -->
+    <div id="customPixelCursor">
+        <div class="cursor-glow-aura"></div>
+        <div class="cursor-inner" id="cursorGraphicWrap">
+            <!-- 預設劍形像素鼠標 SVG -->
+            <svg id="cursorSvg" width="38" height="38" viewBox="0 0 32 32" fill="none"
+                xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+                <!-- 像素劍刀刃外框 -->
+                <path
+                    d="M26 2H30V6H28V8H26V10H24V12H22V14H20V16H18V18H16V20H14V22H12V24H8V28H4V30H2V28H4V24H8V20H10V18H12V16H14V14H16V12H18V10H20V8H22V6H24V4H26V2Z"
+                    fill="#0d1117" />
+                <!-- 刀身銀光 -->
+                <path
+                    d="M26 4H28V6H26V8H24V10H22V12H20V14H18V16H16V18H14V20H12V22H10V20H12V18H14V16H16V14H18V12H20V10H22V8H24V6H26V4Z"
+                    fill="#00f0ff" />
+                <!-- 刀背亮白光澤 -->
+                <path
+                    d="M28 4H26V6H24V8H22V10H20V12H18V14H16V16H14V18H12V20H14V18H16V16H18V14H20V12H22V10H24V8H26V6H28V4Z"
+                    fill="#ffffff" />
+                <!-- 劍格黃金護手 -->
+                <path d="M10 20H14V22H16V24H14V26H10V24H8V22H10V20Z" fill="#ffd166" />
+                <path d="M12 22H14V24H12V22Z" fill="#ff007f" />
+                <!-- 劍柄與劍柄末端寶石 -->
+                <path d="M8 24H10V26H8V28H6V26H8V24Z" fill="#8b5a2b" />
+                <path d="M4 26H6V28H4V30H2V28H4V26Z" fill="#ffd166" />
+            </svg>
+        </div>
     </div>
 
-    <!-- 主要個人簡介卡片 -->
-    <div class="profile-container">
+    <!-- ==========================================================================
+         === 4. 像素遊戲開始介面 (Pixel Game Start Title Screen) ===
+         ========================================================================== -->
+    <header class="pixel-start-screen" id="startScreen">
+        <!-- 背景像素星空與雲層 -->
+        <canvas id="pixelBgCanvas"></canvas>
 
-        <!-- 英雄區塊：頭像與主標題 -->
-        <div class="hero-section">
-            <div class="avatar-wrapper">
-                <div class="avatar-glow"></div>
-                <!-- 保留原 cat.jpeg 圖片 -->
-                <img src="cat.jpeg" alt="個人頭像" class="avatar-img" id="avatarImage" title="點擊我有小驚喜！">
-                <div class="status-badge">
-                    <span class="dot"></span>
-                    <span>創作靈感在線</span>
-                </div>
+        <!-- 街機頂部 HUD 計分儀表 -->
+        <div class="arcade-hud-top">
+            <div class="hud-score-item">
+                <span>1P SCORE</span>
+                <span style="color: #ffffff;">099990</span>
             </div>
-
-            <!-- 主標題 (保留原 <h1>個人簡介</h1>) -->
-            <h1 class="main-title">個人簡介</h1>
-            <p class="sub-tagline">
-                <i class="fa-solid fa-graduation-cap" style="color: var(--color-yellow);"></i>
-                台南應用科技大學 ‧ 網頁程式設計
-            </p>
+            <div class="hud-score-item">
+                <span>HI-SCORE</span>
+                <span style="color: #06d6a0;">999990</span>
+            </div>
+            <div class="hud-score-item hud-flash-credit">
+                <span>CREDIT 02</span>
+            </div>
         </div>
 
-        <!-- 資訊網格區 (保留原 6 個彩虹色彩項目：姓名、星座、學歷、興趣、專長、自我介紹) -->
-        <div class="info-grid">
+        <div class="start-screen-content">
+            <!-- 標題徽章 -->
+            <div class="title-badge-top">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>LEVEL 99 ‧ MULTIMEDIA ANIMATOR QUEST</span>
+            </div>
 
-            <!-- 1. 姓名 (原 red) -->
-            <div class="info-card card-name">
-                <div class="icon-box">
-                    <i class="fa-solid fa-user"></i>
+            <!-- 主標題 -->
+            <div class="pixel-game-logo">
+                <h1 class="pixel-game-title">PIXEL QUEST</h1>
+                <div class="pixel-game-subtitle">★ 冒險者傳奇 ‧ 動畫師之境 ★</div>
+                <div class="pixel-game-department">臺南應用科技大學 ‧ 多媒體動畫科系 個人簡介與作品集</div>
+            </div>
+
+            <!-- 像素坐騎 / 夥伴寵物 (cat.jpeg) -->
+            <div class="pixel-mascot-box">
+                <div class="mascot-avatar-wrap">
+                    <img src="cat.jpeg" alt="冒險貓咪夥伴" class="mascot-img" id="mascotAvatar">
                 </div>
-                <div class="info-content">
-                    <div class="info-label">
-                        <span>姓名</span>
-                        <i class="fa-solid fa-signature"></i>
-                    </div>
-                    <div class="info-value">
-                        <span id="nameDisplay" class="editable-hint" onclick="editInfo('姓名', 'nameDisplay')">點擊填寫姓名
-                            ✍️</span>
-                    </div>
+                <div class="mascot-dialogue">
+                    <span class="typing-highlight">「喵！勇者您好！」</span>
+                    準備好探索我的電腦繪圖、動畫製作與精選冒險戰利品了嗎？
                 </div>
             </div>
 
-            <!-- 2. 星座 (原 orange) -->
-            <div class="info-card card-zodiac">
-                <div class="icon-box">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <div class="info-content">
-                    <div class="info-label">
-                        <span>星座</span>
-                        <i class="fa-solid fa-meteor"></i>
-                    </div>
-                    <div class="info-value">
-                        <span id="zodiacDisplay" class="editable-hint" onclick="editInfo('星座', 'zodiacDisplay')">點擊填寫星座
-                            ✨</span>
-                    </div>
-                </div>
+            <!-- 閃爍開始提示 -->
+            <div class="press-start-prompt" id="pressStartPrompt">
+                ▶ PRESS ENTER OR CLICK TO START ◀
             </div>
 
-            <!-- 3. 學歷 (原 yellow) -->
-            <div class="info-card card-edu">
-                <div class="icon-box">
-                    <i class="fa-solid fa-school"></i>
-                </div>
-                <div class="info-content">
-                    <div class="info-label">
-                        <span>學歷</span>
-                        <i class="fa-solid fa-award"></i>
-                    </div>
-                    <div class="info-value">台南應用科技大學</div>
-                </div>
-            </div>
+            <!-- 經典像素 RPG 選單 -->
+            <nav class="pixel-menu-box" id="pixelMenu">
+                <a href="#about" class="pixel-menu-btn active-focus" data-sound="select">
+                    <span class="btn-selector">▶</span>
+                    <span class="btn-text">
+                        <i class="fa-solid fa-play" style="color: #06d6a0;"></i>
+                        <span>START GAME ‧ 開始冒險</span>
+                    </span>
+                    <span class="btn-badge">NEW</span>
+                </a>
 
-            <!-- 4. 興趣 (原 green) -->
-            <div class="info-card card-hobby">
-                <div class="icon-box">
-                    <i class="fa-solid fa-palette"></i>
-                </div>
-                <div class="info-content">
-                    <div class="info-label">
-                        <span>興趣</span>
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
-                    <div class="info-value">畫畫 🎨</div>
-                </div>
-            </div>
+                <a href="#skills" class="pixel-menu-btn" data-sound="select">
+                    <span class="btn-selector">▶</span>
+                    <span class="btn-text">
+                        <i class="fa-solid fa-bolt" style="color: #ffd166;"></i>
+                        <span>STATUS & SKILLS ‧ 角色能力值</span>
+                    </span>
+                    <span class="btn-badge">LV.99</span>
+                </a>
 
-            <!-- 5. 專長 (原 blue) -->
-            <div class="info-card card-skill">
-                <div class="icon-box">
-                    <i class="fa-solid fa-paintbrush"></i>
-                </div>
-                <div class="info-content">
-                    <div class="info-label">
-                        <span>專長</span>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <div class="info-value">畫畫 🖌️</div>
-                </div>
-            </div>
+                <a href="#portfolio" class="pixel-menu-btn" data-sound="select">
+                    <span class="btn-selector">▶</span>
+                    <span class="btn-text">
+                        <i class="fa-solid fa-gem" style="color: #ff007f;"></i>
+                        <span>QUEST GALLERY ‧ 裝備戰利品</span>
+                    </span>
+                    <span class="btn-badge">5 ITEMS</span>
+                </a>
 
-            <!-- 6. 自我介紹 (原 purple) -->
-            <div class="info-card card-bio">
-                <div class="icon-box">
-                    <i class="fa-solid fa-quote-left"></i>
-                </div>
-                <div class="info-content">
-                    <div class="info-label">
-                        <span>自我介紹</span>
-                        <i class="fa-solid fa-sparkles"></i>
-                    </div>
-                    <div class="info-value">
-                        <span class="bio-quote">“</span>
-                        <span>我喜歡畫畫</span>
-                        <span class="bio-quote">”</span>
-                    </div>
-                </div>
-            </div>
+                <a href="#doodleStudio" class="pixel-menu-btn" data-sound="select">
+                    <span class="btn-selector">▶</span>
+                    <span class="btn-text">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="color: #00f0ff;"></i>
+                        <span>SPELL WORKSHOP ‧ 塗鴉工坊</span>
+                    </span>
+                    <span class="btn-badge">DRAW</span>
+                </a>
 
+                <button class="pixel-menu-btn" id="openSettingsBtn" data-sound="select">
+                    <span class="btn-selector">▶</span>
+                    <span class="btn-text">
+                        <i class="fa-solid fa-gear" style="color: #9b5de5;"></i>
+                        <span>CONFIG ‧ 遊戲設定與特效</span>
+                    </span>
+                    <span class="btn-badge">OPT</span>
+                </button>
+            </nav>
+
+            <!-- 操作指引 -->
+            <div class="keyboard-controls-hint">
+                <span>[ <span class="key-badge">↑</span> <span class="key-badge">↓</span> 移動選單 ]</span>
+                <span>[ <span class="key-badge">ENTER</span> 選擇 ]</span>
+                <span>[ <span class="key-badge">SPACE</span> 揮劍攻擊 ]</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         === 5. 頂部固定像素 HUD 狀態列 (Sticky HUD) ===
+         ========================================================================== -->
+    <div class="retro-sticky-hud" id="retroHud">
+        <div class="hud-player-stats">
+            <div class="hud-stat-badge">
+                <i class="fa-solid fa-shield-halved" style="color: #ffd166;"></i>
+                <span>LV.99 冒險者</span>
+            </div>
+            <div class="hud-stat-badge" title="生命值">
+                <span style="color: #ff007f;">HP</span>
+                <div class="hp-bar-mini">
+                    <div class="hp-fill"></div>
+                </div>
+                <span>999/999</span>
+            </div>
+            <div class="hud-stat-badge" title="法力靈感值">
+                <span style="color: #00f0ff;">MP</span>
+                <div class="mp-bar-mini">
+                    <div class="mp-fill"></div>
+                </div>
+                <span>888/888</span>
+            </div>
         </div>
 
-        <!-- 學校連結專區 (保留原程式碼中的兩種連結方式) -->
-        <div class="links-section">
-            <div class="section-header">
-                <i class="fa-solid fa-link" style="color: var(--color-blue);"></i>
-                <span>學校相關連結 (TUT)</span>
+        <div class="hud-nav-links">
+            <a href="#startScreen" class="hud-nav-btn"><i class="fa-solid fa-house"></i> 標題</a>
+            <a href="#about" class="hud-nav-btn"><i class="fa-solid fa-user"></i> 狀態</a>
+            <a href="#skills" class="hud-nav-btn"><i class="fa-solid fa-sparkles"></i> 技能</a>
+            <a href="#portfolio" class="hud-nav-btn"><i class="fa-solid fa-image"></i> 作品</a>
+            <a href="#doodleStudio" class="hud-nav-btn"><i class="fa-solid fa-pen"></i> 塗鴉</a>
+        </div>
+
+        <div class="hud-quick-tools">
+            <button class="hud-tool-btn" id="hudSoundToggle" title="音效開關">
+                <i class="fa-solid fa-volume-high"></i>
+                <span id="soundText">音效 ON</span>
+            </button>
+            <button class="hud-tool-btn active" id="hudCrtToggle" title="復古 CRT 掃描線濾鏡">
+                <i class="fa-solid fa-tv"></i>
+                <span>CRT</span>
+            </button>
+            <button class="hud-tool-btn" id="hudCursorStyleBtn" title="切換鼠標造型">
+                <i class="fa-solid fa-hand-pointer"></i>
+                <span id="cursorModeName">劍聖</span>
+            </button>
+            <button class="hud-tool-btn" id="hudTrailStyleBtn" title="切換移動軌跡特效">
+                <i class="fa-solid fa-wand-magic"></i>
+                <span id="trailModeName">星塵</span>
+            </button>
+            <button class="hud-tool-btn" id="hudThemeToggle" title="切換深/淺主題">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         === 6. 冒險主內容區塊 (Adventurer Portfolio Quest) ===
+         ========================================================================== -->
+    <main class="adventure-container">
+
+        <!-- 區塊 1: 玩家主角個人狀態卡片 (PLAYER 1 STATUS) -->
+        <section class="pixel-card" id="about">
+            <div class="pixel-card-corner corner-tl"></div>
+            <div class="pixel-card-corner corner-tr"></div>
+            <div class="pixel-card-corner corner-bl"></div>
+            <div class="pixel-card-corner corner-br"></div>
+
+            <div class="pixel-section-header">
+                <div class="pixel-section-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div>
+                    <h2 class="pixel-section-title">PLAYER STATUS ‧ 角色檔案</h2>
+                </div>
+                <div class="pixel-section-subtitle">QUEST LOG #01</div>
             </div>
-            <div class="link-buttons-group">
+
+            <div class="hero-character-card">
+                <div class="character-portrait-box">
+                    <img src="cat.jpeg" alt="冒險者頭像" class="character-portrait-img">
+                    <div class="character-level-badge">LEVEL 99</div>
+                </div>
+
+                <div class="character-details">
+                    <div class="character-name-row">
+                        <span class="character-name">多媒體動畫冒險者</span>
+                        <span class="character-class-tag">CLASS: CONCEPT ARTIST</span>
+                    </div>
+
+                    <div class="character-school">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>臺南應用科技大學 ‧ 多媒體動畫科系</span>
+                    </div>
+
+                    <div class="character-tags-row">
+                        <span class="character-tag-pill"><i class="fa-solid fa-palette" style="color: #ff007f;"></i>
+                            電腦繪圖</span>
+                        <span class="character-tag-pill"><i class="fa-solid fa-film" style="color: #ff9e00;"></i>
+                            動畫製作</span>
+                        <span class="character-tag-pill"><i class="fa-solid fa-user-astronaut"
+                                style="color: #ffd166;"></i> 角色設計</span>
+                        <span class="character-tag-pill"><i class="fa-solid fa-gamepad" style="color: #06d6a0;"></i>
+                            遊戲美術</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 冒險者自述與熱忱 -->
+            <div style="margin-top: 24px;">
+                <div class="adventurer-log-text">
+                    我對電腦繪圖和動畫製作非常有興趣，平常會用空閒時間練習角色設計與操作不同軟體。雖然目前經驗還不多，但我很享受每次學習的過程，也希望未來能將興趣變成工作，朝動畫或遊戲設計相關產業邁進。
+                </div>
+
+                <div class="quest-goals-grid">
+                    <div class="quest-goal-item">
+                        <i class="fa-solid fa-compass quest-goal-icon"></i>
+                        <div class="quest-goal-content">未來展望：邁向動畫與遊戲產業</div>
+                    </div>
+                    <div class="quest-goal-item">
+                        <i class="fa-solid fa-heart quest-goal-icon" style="color: #ff007f;"></i>
+                        <div class="quest-goal-content">核心熱忱：享受每一次學習與突破</div>
+                    </div>
+                    <div class="quest-goal-item">
+                        <i class="fa-solid fa-laptop-code quest-goal-icon" style="color: #00f0ff;"></i>
+                        <div class="quest-goal-content">日常修行：探索繪圖軟體與角色設計</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 基礎資訊 4 格矩陣 (學校、興趣、專長、聯絡) -->
+            <div class="rpg-stats-grid" style="margin-top: 24px;">
+                <div class="rpg-stat-card">
+                    <div class="rpg-stat-icon-wrap"><i class="fa-solid fa-school"></i></div>
+                    <div>
+                        <div class="rpg-stat-label">學習歷程 [EDU]</div>
+                        <div class="rpg-stat-val">臺南應用科大多媒體動畫科系</div>
+                    </div>
+                </div>
+
+                <div class="rpg-stat-card">
+                    <div class="rpg-stat-icon-wrap"><i class="fa-solid fa-heart"></i></div>
+                    <div>
+                        <div class="rpg-stat-label">興趣領域 [HOBBY]</div>
+                        <div class="rpg-stat-val">電腦繪圖 ‧ 動畫製作 🎨</div>
+                    </div>
+                </div>
+
+                <div class="rpg-stat-card">
+                    <div class="rpg-stat-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div>
+                        <div class="rpg-stat-label">專長技能 [SKILL]</div>
+                        <div class="rpg-stat-val">角色設計 ‧ 軟體應用 🖌️</div>
+                    </div>
+                </div>
+
+                <div class="rpg-stat-card interactive" onclick="copyContactText('0987-654-321', '電話號碼')">
+                    <div class="rpg-stat-icon-wrap"><i class="fa-solid fa-phone"></i></div>
+                    <div>
+                        <div class="rpg-stat-label">與我聯絡 [CONTACT] (點擊複製)</div>
+                        <div class="rpg-stat-val" style="color: #00f0ff;">0987-654-321 📋</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 2: 技能樹與軟體熟練度量表 (SKILL TREE & SOFTWARE MASTERY) -->
+        <section class="pixel-card" id="skills">
+            <div class="pixel-card-corner corner-tl"></div>
+            <div class="pixel-card-corner corner-tr"></div>
+            <div class="pixel-card-corner corner-bl"></div>
+            <div class="pixel-card-corner corner-br"></div>
+
+            <div class="pixel-section-header">
+                <div class="pixel-section-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div>
+                    <h2 class="pixel-section-title">SKILL TREE ‧ 軟體熟練度量表</h2>
+                </div>
+                <div class="pixel-section-subtitle">ATTRIBUTES (6)</div>
+            </div>
+
+            <div class="skills-rpg-container">
+                <!-- 1. Procreate -->
+                <div class="skill-rpg-card">
+                    <div class="skill-rpg-top">
+                        <span class="skill-software-name"><i class="fa-solid fa-paintbrush" style="color: #ec4899;"></i>
+                            Procreate</span>
+                        <span class="skill-rank-badge">熟練 80%</span>
+                    </div>
+                    <div class="skill-rpg-desc">數位手繪 ‧ 角色草稿概念繪製</div>
+                    <div class="skill-gauge-track">
+                        <div class="skill-gauge-fill" style="width: 80%; --gauge-color: #ec4899;"></div>
+                    </div>
+                </div>
+
+                <!-- 2. Adobe Illustrator -->
+                <div class="skill-rpg-card">
+                    <div class="skill-rpg-top">
+                        <span class="skill-software-name"><i class="fa-solid fa-bezier-curve"
+                                style="color: #ff9e00;"></i> Illustrator (Ai)</span>
+                        <span class="skill-rank-badge">熟練 80%</span>
+                    </div>
+                    <div class="skill-rpg-desc">向量造形 ‧ 角色設定線稿繪製</div>
+                    <div class="skill-gauge-track">
+                        <div class="skill-gauge-fill" style="width: 80%; --gauge-color: #ff9e00;"></div>
+                    </div>
+                </div>
+
+                <!-- 3. Adobe Photoshop -->
+                <div class="skill-rpg-card">
+                    <div class="skill-rpg-top">
+                        <span class="skill-software-name"><i class="fa-solid fa-image" style="color: #0088ff;"></i>
+                            Photoshop (Ps)</span>
+                        <span class="skill-rank-badge">進階 70%</span>
+                    </div>
+                    <div class="skill-rpg-desc">光影上色 ‧ 材質紋理與後期微調</div>
+                    <div class="skill-gauge-track">
+                        <div class="skill-gauge-fill" style="width: 70%; --gauge-color: #0088ff;"></div>
+                    </div>
+                </div>
+
+                <!-- 4. Adobe Premiere Pro -->
+                <div class="skill-rpg-card">
+                    <div class="skill-rpg-top">
+                        <span class="skill-software-name"><i class="fa-solid fa-film" style="color: #9b5de5;"></i>
+                            Premiere Pro (Pr)</span>
+                        <span class="skill-rank-badge">良好 60%</span>
+                    </div>
+                    <div class="skill-rpg-desc">動畫剪輯 ‧ 視訊合成與動態整合</div>
+                    <div class="skill-gauge-track">
+                        <div class="skill-gauge-fill" style="width: 60%; --gauge-color: #9b5de5;"></div>
+                    </div>
+                </div>
+
+                <!-- 5. Blender -->
+                <div class="skill-rpg-card">
+                    <div class="skill-rpg-top">
+                        <span class="skill-software-name"><i class="fa-solid fa-cube" style="color: #ff5722;"></i>
+                            Blender</span>
+                        <span class="skill-rank-badge">基礎 50%</span>
+                    </div>
+                    <div class="skill-rpg-desc">3D 基礎建模 ‧ 空間鏡頭與運鏡概念</div>
+                    <div class="skill-gauge-track">
+                        <div class="skill-gauge-fill" style="width: 50%; --gauge-color: #ff5722;"></div>
+                    </div>
+                </div>
+
+                <!-- 6. Autodesk Maya -->
+                <div class="skill-rpg-card">
+                    <div class="skill-rpg-top">
+                        <span class="skill-software-name"><i class="fa-solid fa-cubes" style="color: #00f0ff;"></i>
+                            Autodesk Maya</span>
+                        <span class="skill-rank-badge">基礎 50%</span>
+                    </div>
+                    <div class="skill-rpg-desc">3D 基礎建模 ‧ 角色骨架與動畫製作</div>
+                    <div class="skill-gauge-track">
+                        <div class="skill-gauge-fill" style="width: 50%; --gauge-color: #00f0ff;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊 3: 冒險裝備戰利品圖鑑 (QUEST LOOT / FEATURED ARTWORKS) -->
+        <section class="pixel-card" id="portfolio">
+            <div class="pixel-card-corner corner-tl"></div>
+            <div class="pixel-card-corner corner-tr"></div>
+            <div class="pixel-card-corner corner-bl"></div>
+            <div class="pixel-card-corner corner-br"></div>
+
+            <div class="pixel-section-header">
+                <div class="pixel-section-icon"><i class="fa-solid fa-gem"></i></div>
+                <div>
+                    <h2 class="pixel-section-title">QUEST LOOT ‧ 精選作品戰利品</h2>
+                </div>
+                <div class="pixel-section-subtitle">GALLERY (5)</div>
+            </div>
+
+            <!-- 分類篩選按鈕 -->
+            <div class="loot-filter-bar">
+                <button class="loot-filter-btn active" data-filter="all">
+                    <i class="fa-solid fa-border-all"></i> 全部圖鑑 (5)
+                </button>
+                <button class="loot-filter-btn" data-filter="character">
+                    <i class="fa-solid fa-user-ninja"></i> 角色設定 (2)
+                </button>
+                <button class="loot-filter-btn" data-filter="illustration">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> 氛圍插畫 (2)
+                </button>
+                <button class="loot-filter-btn" data-filter="portrait">
+                    <i class="fa-solid fa-crown"></i> 角色立繪 (1)
+                </button>
+            </div>
+
+            <!-- 戰利品圖鑑網格 -->
+            <div class="loot-gallery-grid">
+
+                <!-- 作品 1: 水光氛圍人像插畫 -->
+                <article class="loot-item-card" data-category="illustration" onclick="openLightbox(0)">
+                    <div class="loot-rarity-ribbon" style="--rarity-color: #00f0ff;">★ SSR 傳說</div>
+                    <div class="loot-img-container">
+                        <img src="work1.jpg" alt="水光氛圍人像插畫" class="loot-img" loading="lazy">
+                        <div class="loot-inspect-overlay">
+                            <span class="loot-inspect-badge">🔍 點擊檢視原圖</span>
+                        </div>
+                    </div>
+                    <div class="loot-info-box">
+                        <h3 class="loot-title">水光氛圍人像插畫</h3>
+                        <p class="loot-desc">柔和水感光澤、髮絲流動感與周圍漂浮氣泡的折射光影呈現。</p>
+                        <div class="loot-chips-row">
+                            <span class="loot-chip">水光光影</span>
+                            <span class="loot-chip">角色肖像</span>
+                            <span class="loot-chip">色彩光感</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 作品 2: 角色概念設定 ‧ 黑袍金邊少年 -->
+                <article class="loot-item-card" data-category="character" onclick="openLightbox(1)">
+                    <div class="loot-rarity-ribbon" style="--rarity-color: #ffd166;">★ SR 史詩</div>
+                    <div class="loot-img-container">
+                        <img src="work2.png" alt="角色概念設定 ‧ 黑袍金邊少年" class="loot-img" loading="lazy">
+                        <div class="loot-inspect-overlay">
+                            <span class="loot-inspect-badge">🔍 點擊檢視原圖</span>
+                        </div>
+                    </div>
+                    <div class="loot-info-box">
+                        <h3 class="loot-title">角色設定 ‧ 黑袍金邊少年</h3>
+                        <p class="loot-desc">正背雙視圖完整設定，拆解黑金斗篷長袍、俐落剪裁長褲與細緻飾品。</p>
+                        <div class="loot-chips-row">
+                            <span class="loot-chip">雙視圖設定</span>
+                            <span class="loot-chip">角色服裝</span>
+                            <span class="loot-chip">配色規劃</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 作品 3: 角色概念設定 ‧ 藍斗篷馬尾少女 -->
+                <article class="loot-item-card" data-category="character" onclick="openLightbox(2)">
+                    <div class="loot-rarity-ribbon" style="--rarity-color: #ffd166;">★ SR 史詩</div>
+                    <div class="loot-img-container">
+                        <img src="work3.png" alt="角色概念設定 ‧ 藍斗篷馬尾少女" class="loot-img" loading="lazy">
+                        <div class="loot-inspect-overlay">
+                            <span class="loot-inspect-badge">🔍 點擊檢視原圖</span>
+                        </div>
+                    </div>
+                    <div class="loot-info-box">
+                        <h3 class="loot-title">角色設定 ‧ 藍斗篷馬尾少女</h3>
+                        <p class="loot-desc">金黃馬尾搭配深藍斗篷短袍、綁帶長靴，呈現靈動活潑的冒險者風格。</p>
+                        <div class="loot-chips-row">
+                            <span class="loot-chip">正背雙視圖</span>
+                            <span class="loot-chip">動態線稿</span>
+                            <span class="loot-chip">配飾細節</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 作品 4: 概念插畫 ‧ 時空裂縫之門 -->
+                <article class="loot-item-card" data-category="illustration" onclick="openLightbox(3)">
+                    <div class="loot-rarity-ribbon" style="--rarity-color: #ff007f;">★ SSR 傳說</div>
+                    <div class="loot-img-container">
+                        <img src="work4.jpg" alt="概念插畫 ‧ 時空裂縫之門" class="loot-img" loading="lazy">
+                        <div class="loot-inspect-overlay">
+                            <span class="loot-inspect-badge">🔍 點擊檢視原圖</span>
+                        </div>
+                    </div>
+                    <div class="loot-info-box">
+                        <h3 class="loot-title">概念插畫 ‧ 時空裂縫之門</h3>
+                        <p class="loot-desc">透視動態構圖，少女伸展身姿穿越次元渦流，觸碰映照記憶的破裂晶石。</p>
+                        <div class="loot-chips-row">
+                            <span class="loot-chip">奇幻氛圍</span>
+                            <span class="loot-chip">透視構圖</span>
+                            <span class="loot-chip">裂縫光暈</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 作品 5: 歐式宮廷貴族角色立繪 -->
+                <article class="loot-item-card" data-category="portrait" onclick="openLightbox(4)">
+                    <div class="loot-rarity-ribbon" style="--rarity-color: #ffd166;">★ SR 史詩</div>
+                    <div class="loot-img-container">
+                        <img src="work5.png" alt="歐式宮廷貴族角色立繪" class="loot-img" loading="lazy">
+                        <div class="loot-inspect-overlay">
+                            <span class="loot-inspect-badge">🔍 點擊檢視原圖</span>
+                        </div>
+                    </div>
+                    <div class="loot-info-box">
+                        <h3 class="loot-title">歐式宮廷貴族角色立繪</h3>
+                        <p class="loot-desc">巴洛克緹花紋理燕尾服、精美藍底金絲背心與紳士手杖的全身精緻立繪。</p>
+                        <div class="loot-chips-row">
+                            <span class="loot-chip">宮廷服飾</span>
+                            <span class="loot-chip">紋理刻畫</span>
+                            <span class="loot-chip">紳士立繪</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 區塊 4: 學校傳送門 (TUT PORTAL WARP GATES) -->
+        <section class="pixel-card">
+            <div class="pixel-card-corner corner-tl"></div>
+            <div class="pixel-card-corner corner-tr"></div>
+            <div class="pixel-card-corner corner-bl"></div>
+            <div class="pixel-card-corner corner-br"></div>
+
+            <div class="pixel-section-header">
+                <div class="pixel-section-icon"><i class="fa-solid fa-door-open"></i></div>
+                <div>
+                    <h2 class="pixel-section-title">PORTAL GATES ‧ 學校傳送門</h2>
+                </div>
+                <div class="pixel-section-subtitle">WARP ZONES</div>
+            </div>
+
+            <div class="portal-links-grid">
                 <!-- 原程式碼第 1 個連結：原頁面開啟 -->
-                <a href="https://www.tut.edu.tw/" class="tut-link-btn btn-secondary-link" title="在當前頁面開啟">
-                    <i class="fa-solid fa-arrow-right"></i>
-                    <span>台南應用科技大學</span>
-                    <span class="link-badge">原分頁</span>
+                <a href="https://www.tut.edu.tw/" class="portal-warp-btn">
+                    <span><i class="fa-solid fa-arrow-right"></i> 台南應用科技大學</span>
+                    <span style="font-size: 0.65rem; color: #ffd166;">[原分頁開啟]</span>
                 </a>
 
-                <!-- 原程式碼第 2 個連結：新分頁開啟 target="_blank" -->
-                <a href="https://www.tut.edu.tw/" target="_blank" rel="noopener noreferrer"
-                    class="tut-link-btn btn-primary-link" title="在新分頁開啟學校官網">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    <span>台南應用科技大學</span>
-                    <span class="link-badge">新分頁 ↗</span>
+                <!-- 原程式碼第 2 個連結：新分頁開啟 -->
+                <a href="https://www.tut.edu.tw/" target="_blank" rel="noopener noreferrer" class="portal-warp-btn">
+                    <span><i class="fa-solid fa-arrow-up-right-from-square"></i> 台南應用科技大學</span>
+                    <span style="font-size: 0.65rem; color: #00f0ff;">[新分頁 ↗]</span>
                 </a>
             </div>
-        </div>
+        </section>
 
-        <!-- 專屬彩蛋：互動畫畫塗鴉板 (呼應個人喜好與專長) -->
-        <div class="canvas-section">
-            <div class="canvas-header">
-                <div class="canvas-title">
-                    <i class="fa-solid fa-pen-nib" style="color: var(--color-green);"></i>
-                    <span>隨手畫畫創作板 (歡迎留下你的塗鴉！)</span>
+        <!-- 區塊 5: 魔法符文塗鴉工坊 (INTERACTIVE DOODLE STUDIO) -->
+        <section class="pixel-card" id="doodleStudio">
+            <div class="pixel-card-corner corner-tl"></div>
+            <div class="pixel-card-corner corner-tr"></div>
+            <div class="pixel-card-corner corner-bl"></div>
+            <div class="pixel-card-corner corner-br"></div>
+
+            <div class="pixel-section-header">
+                <div class="pixel-section-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <div>
+                    <h2 class="pixel-section-title">SPELL WORKSHOP ‧ 隨手畫畫創作板</h2>
                 </div>
-                <div class="canvas-toolbar">
-                    <!-- 顏色選擇器 -->
-                    <div class="color-palette">
-                        <div class="color-dot active" style="background: #000000;" data-color="#000000"></div>
-                        <div class="color-dot" style="background: var(--color-red);" data-color="#ff4d6d"></div>
-                        <div class="color-dot" style="background: var(--color-orange);" data-color="#ff9e00"></div>
-                        <div class="color-dot" style="background: var(--color-green);" data-color="#06d6a0"></div>
-                        <div class="color-dot" style="background: var(--color-blue);" data-color="#118ab2"></div>
-                        <div class="color-dot" style="background: var(--color-purple);" data-color="#8338ec"></div>
-                        <input type="color" id="customColor" class="custom-color-input" title="自訂顏色" value="#8338ec">
+                <div class="pixel-section-subtitle">CANVAS WORKSHOP</div>
+            </div>
+
+            <div class="doodle-studio-card">
+                <!-- 塗鴉工具列 -->
+                <div class="doodle-controls-row">
+                    <div class="doodle-btn-group">
+                        <button class="doodle-tool-btn active" id="toolPencil" data-tool="pencil"><i
+                                class="fa-solid fa-pen"></i> 畫筆</button>
+                        <button class="doodle-tool-btn" id="toolNeon" data-tool="neon"><i
+                                class="fa-solid fa-wand-magic-sparkles"></i> 霓虹光</button>
+                        <button class="doodle-tool-btn" id="toolRainbow" data-tool="rainbow"><i
+                                class="fa-solid fa-rainbow"></i> 彩虹筆</button>
+                        <button class="doodle-tool-btn" id="toolEraser" data-tool="eraser"><i
+                                class="fa-solid fa-eraser"></i> 橡皮擦</button>
                     </div>
 
-                    <!-- 筆刷大小 -->
-                    <div class="brush-size-wrap">
-                        <i class="fa-solid fa-circle" style="font-size: 8px;"></i>
-                        <input type="range" id="brushSize" class="brush-slider" min="1" max="25" value="4" title="筆刷粗細">
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <span
+                            style="font-family: var(--font-pixel-title); font-size: 0.65rem; color: #ffd166;">印章:</span>
+                        <button class="doodle-stamp-btn" data-stamp="🐾" title="貓爪">🐾</button>
+                        <button class="doodle-stamp-btn" data-stamp="⭐" title="星星">⭐</button>
+                        <button class="doodle-stamp-btn" data-stamp="💖" title="愛心">💖</button>
+                        <button class="doodle-stamp-btn" data-stamp="🎨" title="畫板">🎨</button>
+                        <button class="doodle-stamp-btn" data-stamp="✨" title="閃光">✨</button>
                     </div>
 
-                    <!-- 工具按鈕 -->
-                    <button class="canvas-btn" id="clearCanvasBtn" title="清空畫布">
-                        <i class="fa-solid fa-trash-can"></i>
-                        <span>清空</span>
-                    </button>
-                    <button class="canvas-btn" id="saveCanvasBtn" title="儲存你的畫作">
-                        <i class="fa-solid fa-download"></i>
-                        <span>儲存</span>
-                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="doodle-tool-btn" id="undoCanvasBtn"><i class="fa-solid fa-rotate-left"></i>
+                            復原</button>
+                        <button class="doodle-tool-btn" id="clearCanvasBtn"><i class="fa-solid fa-trash"></i>
+                            清空</button>
+                        <button class="doodle-tool-btn" id="saveCanvasBtn" style="background: #06d6a0; color: #000;"><i
+                                class="fa-solid fa-download"></i> 下載 PNG</button>
+                    </div>
+                </div>
+
+                <!-- 畫布區塊 -->
+                <div class="doodle-canvas-wrap">
+                    <canvas id="doodleCanvas"></canvas>
+                    <div class="doodle-hint-overlay" id="doodleGuideHint">
+                        <i class="fa-solid fa-paintbrush"></i>
+                        <span>點擊或拖曳即可施展符文畫畫創作 ✨</span>
+                    </div>
                 </div>
             </div>
-            <!-- 繪圖畫布 -->
-            <canvas id="doodleCanvas" class="drawing-canvas"></canvas>
-        </div>
+        </section>
 
         <!-- 頁尾 -->
-        <div class="profile-footer">
-            <p>© 2026 台南應用科技大學 ‧ 網頁程式設計課程作業</p>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Crafted with Modern HTML5 & CSS3 Glassmorphism</p>
-        </div>
+        <footer class="adventure-footer">
+            <div>© 2026 臺南應用科技大學 ‧ 多媒體動畫科系 ‧ 冒險者個人簡歷與作品集</div>
+            <div style="color: #ffd166;">RETRO 8-BIT / 16-BIT PIXEL GAME EXPERIENCE ‧ POWERED BY WEB AUDIO & CANVAS
+                ENGINE</div>
+        </footer>
 
+    </main>
+
+    <!-- ==========================================================================
+         === 11. 遊戲設定彈出視窗 (Pixel Settings Modal) ===
+         ========================================================================== -->
+    <div class="pixel-modal-backdrop" id="settingsModal">
+        <div class="pixel-modal-box">
+            <div class="modal-header-row">
+                <div class="modal-title">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>SYSTEM CONFIG ‧ 像素遊戲設定</span>
+                </div>
+                <button class="modal-close-btn" id="closeSettingsBtn">✕</button>
+            </div>
+
+            <!-- 1. 鼠標外觀設定 -->
+            <div class="setting-item-row">
+                <div class="setting-label">
+                    <i class="fa-solid fa-hand-pointer" style="color: #00f0ff;"></i>
+                    <span>鼠標圖案造型 (Cursor Graphic)</span>
+                </div>
+                <div class="setting-options-group">
+                    <button class="setting-pill-btn active" data-cursor="sword">🗡️ 勇者聖劍</button>
+                    <button class="setting-pill-btn" data-cursor="wand">🪄 星塵法杖</button>
+                    <button class="setting-pill-btn" data-cursor="paw">🐾 像素貓爪</button>
+                    <button class="setting-pill-btn" data-cursor="glove">🏹 街機手套</button>
+                </div>
+            </div>
+
+            <!-- 2. 移動軌跡圖案動畫設定 -->
+            <div class="setting-item-row">
+                <div class="setting-label">
+                    <i class="fa-solid fa-wand-magic-sparkles" style="color: #ff007f;"></i>
+                    <span>移動軌跡圖案 (Trail Particle)</span>
+                </div>
+                <div class="setting-options-group">
+                    <button class="setting-pill-btn active" data-trail="mix">🌟 彩虹混合</button>
+                    <button class="setting-pill-btn" data-trail="stars">★ 像素星塵</button>
+                    <button class="setting-pill-btn" data-trail="hearts">♥ 愛心經驗</button>
+                    <button class="setting-pill-btn" data-trail="flame">🔥 8-Bit 烈焰</button>
+                    <button class="setting-pill-btn" data-trail="paw">🐾 貓咪足印</button>
+                    <button class="setting-pill-btn" data-trail="cyber">⚡ 賽博矩陣</button>
+                </div>
+            </div>
+
+            <!-- 3. 復古音效設定 -->
+            <div class="setting-item-row">
+                <div class="setting-label">
+                    <i class="fa-solid fa-volume-high" style="color: #ffd166;"></i>
+                    <span>8-Bit 復古合成音效 (Audio Synthesizer)</span>
+                </div>
+                <div class="setting-options-group">
+                    <button class="setting-pill-btn active" id="settingSoundOn">🔊 開啟 ON</button>
+                    <button class="setting-pill-btn" id="settingSoundOff">🔇 靜音 OFF</button>
+                </div>
+            </div>
+
+            <!-- 4. CRT 掃描線濾鏡 -->
+            <div class="setting-item-row">
+                <div class="setting-label">
+                    <i class="fa-solid fa-tv" style="color: #06d6a0;"></i>
+                    <span>復古街機 CRT 掃描線濾鏡</span>
+                </div>
+                <div class="setting-options-group">
+                    <button class="setting-pill-btn active" id="settingCrtOn">📺 開啟</button>
+                    <button class="setting-pill-btn" id="settingCrtOff">關閉</button>
+                </div>
+            </div>
+
+            <!-- 5. 8-Bit 復古背景旋律 (Chiptune BGM) -->
+            <div class="setting-item-row">
+                <div class="setting-label">
+                    <i class="fa-solid fa-music" style="color: #9b5de5;"></i>
+                    <span>冒險進行曲 BGM (Chiptune Loop)</span>
+                </div>
+                <div class="setting-options-group">
+                    <button class="setting-pill-btn" id="settingBgmToggle">🎵 播放 BGM</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- JavaScript 互動功能 -->
+    <!-- ==========================================================================
+         === 12. 作品放大預覽燈箱 (Lightbox Modal) ===
+         ========================================================================== -->
+    <div class="lightbox-modal" id="lightboxModal" onclick="closeLightboxOnBackdrop(event)">
+        <div class="lightbox-container">
+            <button class="lightbox-nav-btn lightbox-prev" onclick="changeLightbox(-1)">◀</button>
+            <button class="lightbox-nav-btn lightbox-next" onclick="changeLightbox(1)">▶</button>
+            <img src="" alt="作品放大預覽" class="lightbox-img" id="lightboxImg">
+            <div class="lightbox-info">
+                <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                <p class="lightbox-desc" id="lightboxDesc"></p>
+            </div>
+            <button class="modal-close-btn" style="position: absolute; top: -14px; right: -14px;"
+                onclick="closeLightboxModal()">✕</button>
+        </div>
+    </div>
+
+    <!-- 提示通知 Toast -->
+    <div class="pixel-toast" id="pixelToast">已複製資訊！</div>
+
+    <!-- ==========================================================================
+         === 13. JavaScript 核心引擎與像素遊戲互動邏輯 ===
+         ========================================================================== -->
     <script>
-        // === 1. 深色 / 淺色主題切換功能 ===
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
+        // ==========================================================================
+        // === A. 復古 8-Bit Web Audio API 合成音效引擎 (Zero Dependencies!) ===
+        // ==========================================================================
+        let audioCtx = null;
+        let soundEnabled = true;
+        let isBgmPlaying = false;
+        let bgmTimer = null;
 
-        // 讀取先前儲存的主題偏好
-        const savedTheme = localStorage.getItem('user-theme') || 'dark';
-        if (savedTheme === 'light') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeIcon.className = 'fa-solid fa-sun';
-            themeText.textContent = '切換深色模式';
+        function initAudioContext() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
         }
 
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'light') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('user-theme', 'dark');
-                themeIcon.className = 'fa-solid fa-moon';
-                themeText.textContent = '切換淺色模式';
+        // 8-Bit 懸停短嗶聲 (Hover Blip)
+        function playHoverSound() {
+            if (!soundEnabled) return;
+            initAudioContext();
+            if (!audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'square';
+                const now = audioCtx.currentTime;
+                osc.frequency.setValueAtTime(520, now);
+                osc.frequency.exponentialRampToValueAtTime(780, now + 0.04);
+                gain.gain.setValueAtTime(0.06, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.04);
+            } catch (e) { }
+        }
+
+        // 8-Bit 選單點擊金幣聲 (Coin Select Chime)
+        function playSelectSound() {
+            if (!soundEnabled) return;
+            initAudioContext();
+            if (!audioCtx) return;
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(587.33, now); // D5
+                osc.frequency.setValueAtTime(880, now + 0.06); // A5
+                osc.frequency.setValueAtTime(1174.66, now + 0.12); // D6
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.22);
+            } catch (e) { }
+        }
+
+        // 8-Bit 揮劍攻擊劈砍音效 (Sword Slash Sound)
+        function playSlashSound() {
+            if (!soundEnabled) return;
+            initAudioContext();
+            if (!audioCtx) return;
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(650, now);
+                osc.frequency.exponentialRampToValueAtTime(70, now + 0.1);
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.1);
+            } catch (e) { }
+        }
+
+        // 8-Bit 開始冒險號角曲 (Game Start Fanfare)
+        function playStartFanfare() {
+            if (!soundEnabled) return;
+            initAudioContext();
+            if (!audioCtx) return;
+            try {
+                const notes = [
+                    { f: 523.25, d: 0.08, t: 0 },    // C5
+                    { f: 659.25, d: 0.08, t: 0.08 }, // E5
+                    { f: 783.99, d: 0.08, t: 0.16 }, // G5
+                    { f: 1046.50, d: 0.25, t: 0.24 } // C6
+                ];
+                const now = audioCtx.currentTime;
+                notes.forEach(n => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(n.f, now + n.t);
+                    gain.gain.setValueAtTime(0.14, now + n.t);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now + n.t);
+                    osc.stop(now + n.t + n.d);
+                });
+            } catch (e) { }
+        }
+
+        // 8-Bit 復古 Chiptune BGM 循環旋律
+        const chiptuneMelody = [
+            261.63, 329.63, 392.00, 523.25, 392.00, 329.63,
+            293.66, 369.99, 440.00, 587.33, 440.00, 369.99,
+            329.63, 392.00, 493.88, 659.25, 493.88, 392.00,
+            261.63, 392.00, 523.25, 659.25, 783.99, 523.25
+        ];
+        let chiptuneStep = 0;
+
+        function playChiptuneStep() {
+            if (!isBgmPlaying || !soundEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const now = audioCtx.currentTime;
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(chiptuneMelody[chiptuneStep % chiptuneMelody.length], now);
+                gain.gain.setValueAtTime(0.04, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.16);
+                chiptuneStep++;
+            } catch (e) { }
+        }
+
+        function toggleBgm() {
+            initAudioContext();
+            isBgmPlaying = !isBgmPlaying;
+            const bgmBtn = document.getElementById('settingBgmToggle');
+            if (isBgmPlaying) {
+                if (bgmBtn) {
+                    bgmBtn.textContent = '⏹ 停止 BGM';
+                    bgmBtn.classList.add('active');
+                }
+                bgmTimer = setInterval(playChiptuneStep, 175);
+                showToast('已開啟 8-Bit 冒險進行曲 BGM 🎵');
             } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('user-theme', 'light');
-                themeIcon.className = 'fa-solid fa-sun';
-                themeText.textContent = '切換深色模式';
-            }
-        });
-
-        // === 2. 姓名與星座的點擊快速自訂功能 ===
-        function editInfo(label, elementId) {
-            const el = document.getElementById(elementId);
-            const currentVal = el.innerText.replace(/[✍️✨]/g, '').trim();
-            const newVal = prompt(`請輸入您的「${label}」：`, currentVal.includes('點擊填寫') ? '' : currentVal);
-            if (newVal !== null && newVal.trim() !== '') {
-                el.innerText = newVal.trim();
-                el.style.fontStyle = 'normal';
-                el.style.borderBottom = 'none';
-                localStorage.setItem(`profile-${elementId}`, newVal.trim());
+                if (bgmBtn) {
+                    bgmBtn.textContent = '🎵 播放 BGM';
+                    bgmBtn.classList.remove('active');
+                }
+                if (bgmTimer) clearInterval(bgmTimer);
+                showToast('已關閉 BGM');
             }
         }
 
-        // 讀取已保存的姓名與星座
-        ['nameDisplay', 'zodiacDisplay'].forEach(id => {
-            const saved = localStorage.getItem(`profile-${id}`);
-            if (saved) {
-                const el = document.getElementById(id);
-                el.innerText = saved;
-                el.style.fontStyle = 'normal';
-                el.style.borderBottom = 'none';
+        // ==========================================================================
+        // === B. 專屬客製化動態像素鼠標系統 (Custom Animated Pixel Cursor) ===
+        // ==========================================================================
+        const customCursor = document.getElementById('customPixelCursor');
+        const cursorGraphicWrap = document.getElementById('cursorGraphicWrap');
+        let currentCursorStyle = 'sword'; // sword, wand, paw, glove
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        // 4 款專屬像素鼠標 SVG 繪製定義
+        const cursorSvgs = {
+            sword: `
+                <svg width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+                    <path d="M26 2H30V6H28V8H26V10H24V12H22V14H20V16H18V18H16V20H14V22H12V24H8V28H4V30H2V28H4V24H8V20H10V18H12V16H14V14H16V12H18V10H20V8H22V6H24V4H26V2Z" fill="#0d1117"/>
+                    <path d="M26 4H28V6H26V8H24V10H22V12H20V14H18V16H16V18H14V20H12V22H10V20H12V18H14V16H16V14H18V12H20V10H22V8H24V6H26V4Z" fill="#00f0ff"/>
+                    <path d="M28 4H26V6H24V8H22V10H20V12H18V14H16V16H14V18H12V20H14V18H16V16H18V14H20V12H22V10H24V8H26V6H28V4Z" fill="#ffffff"/>
+                    <path d="M10 20H14V22H16V24H14V26H10V24H8V22H10V20Z" fill="#ffd166"/>
+                    <path d="M12 22H14V24H12V22Z" fill="#ff007f"/>
+                    <path d="M8 24H10V26H8V28H6V26H8V24Z" fill="#8b5a2b"/>
+                    <path d="M4 26H6V28H4V30H2V28H4V26Z" fill="#ffd166"/>
+                </svg>
+            `,
+            wand: `
+                <svg width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+                    <!-- 星塵魔法杖 -->
+                    <path d="M26 2H28V4H30V6H28V8H26V6H24V4H26V2Z" fill="#ffe600"/>
+                    <path d="M24 6H28V10H24V6Z" fill="#ff007f"/>
+                    <path d="M20 8H24V12H20V8Z" fill="#00f0ff"/>
+                    <path d="M16 12H20V16H16V12Z" fill="#9b5de5"/>
+                    <path d="M12 16H16V20H12V16Z" fill="#9b5de5"/>
+                    <path d="M8 20H12V24H8V20Z" fill="#6a0dad"/>
+                    <path d="M4 24H8V28H4V24Z" fill="#ffd166"/>
+                    <path d="M2 28H6V32H2V28Z" fill="#ff9e00"/>
+                </svg>
+            `,
+            paw: `
+                <svg width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+                    <!-- 萌系像素貓爪 -->
+                    <path d="M10 10H14V14H10V10Z" fill="#ff758c"/>
+                    <path d="M18 10H22V14H18V10Z" fill="#ff758c"/>
+                    <path d="M6 14H10V18H6V14Z" fill="#ff758c"/>
+                    <path d="M22 14H26V18H22V14Z" fill="#ff758c"/>
+                    <path d="M10 16H22V24H10V16Z" fill="#ffffff"/>
+                    <path d="M12 18H20V24H12V18Z" fill="#ff758c"/>
+                    <path d="M8 24H24V28H8V24Z" fill="#e2e8f0"/>
+                </svg>
+            `,
+            glove: `
+                <svg width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="image-rendering: pixelated;">
+                    <!-- 街機像素手套 -->
+                    <path d="M6 2H10V14H6V2Z" fill="#ffffff"/>
+                    <path d="M4 2H6V14H4V2Z" fill="#000000"/>
+                    <path d="M10 2H12V12H10V2Z" fill="#000000"/>
+                    <path d="M10 12H18V24H10V12Z" fill="#ffffff"/>
+                    <path d="M18 14H22V22H18V14Z" fill="#ffffff"/>
+                    <path d="M4 14H10V22H4V14Z" fill="#ffffff"/>
+                    <path d="M6 22H20V26H6V22Z" fill="#ff007f"/>
+                </svg>
+            `
+        };
+
+        function setCursorStyle(styleKey) {
+            currentCursorStyle = styleKey;
+            if (cursorSvgs[styleKey]) {
+                cursorGraphicWrap.innerHTML = `
+                    <div class="cursor-glow-aura"></div>
+                    ${cursorSvgs[styleKey]}
+                `;
             }
-        });
-
-        // === 3. 點擊貓咪頭像趣味音效與動畫 ===
-        const avatarImage = document.getElementById('avatarImage');
-        avatarImage.addEventListener('click', () => {
-            avatarImage.style.transform = 'scale(1.2) rotate(15deg)';
-            setTimeout(() => {
-                avatarImage.style.transform = '';
-            }, 300);
-        });
-
-        // === 4. 隨手畫畫創作板核心邏輯 ===
-        const canvas = document.getElementById('doodleCanvas');
-        const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-        let currentColor = '#000000';
-        let currentLineWidth = 4;
-
-        // 自適應畫布大小
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            // 保存當前畫布內容
-            const tempImage = ctx.getImageData(0, 0, canvas.width || 1, canvas.height || 1);
-            canvas.width = rect.width * window.devicePixelRatio;
-            canvas.height = rect.height * window.devicePixelRatio;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-            // 填滿白色底色
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, rect.width, rect.height);
-
-            // 畫布基礎筆刷樣式
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            ctx.strokeStyle = currentColor;
-            ctx.lineWidth = currentLineWidth;
-        }
-
-        window.addEventListener('load', resizeCanvas);
-        window.addEventListener('resize', resizeCanvas);
-
-        // 取得畫布相對座標
-        function getCoords(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
+            const names = {
+                sword: '劍聖',
+                wand: '法杖',
+                paw: '貓爪',
+                glove: '手套'
             };
+            const label = document.getElementById('cursorModeName');
+            if (label) label.textContent = names[styleKey] || '劍聖';
+
+            document.querySelectorAll('[data-cursor]').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-cursor') === styleKey);
+            });
+            showToast(`已切換鼠標造型：${names[styleKey]} ✨`);
         }
 
-        function startDrawing(e) {
-            e.preventDefault();
-            isDrawing = true;
-            const { x, y } = getCoords(e);
-            ctx.beginPath();
-            ctx.moveTo(x, y);
+        // 游標即時跟隨
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            customCursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+            emitTrailParticle(mouseX, mouseY);
+        });
+
+        // 懸停互動元素檢測
+        document.addEventListener('mouseover', (e) => {
+            const isClickable = e.target.closest('a, button, .interactive, .loot-item-card, .pixel-menu-btn');
+            if (isClickable) {
+                document.body.classList.add('cursor-hovering');
+                playHoverSound();
+            } else {
+                document.body.classList.remove('cursor-hovering');
+            }
+        });
+
+        // 點擊觸發揮劍 / 攻擊動畫與跳出戰鬥數字
+        window.addEventListener('mousedown', (e) => {
+            initAudioContext();
+            if (currentCursorStyle === 'sword') {
+                cursorGraphicWrap.classList.add('slashing');
+                playSlashSound();
+            } else if (currentCursorStyle === 'wand') {
+                cursorGraphicWrap.classList.add('casting');
+                playSelectSound();
+            } else if (currentCursorStyle === 'paw') {
+                cursorGraphicWrap.classList.add('scratching');
+                playSlashSound();
+            } else {
+                cursorGraphicWrap.classList.add('slashing');
+                playSelectSound();
+            }
+
+            // 爆發粒子環
+            explodeClickShockwave(e.clientX, e.clientY);
+            // 彈出 RPG 戰鬥浮空數字
+            spawnDamageNumber(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('mouseup', () => {
+            setTimeout(() => {
+                cursorGraphicWrap.classList.remove('slashing', 'casting', 'scratching');
+            }, 180);
+        });
+
+        // 鍵盤空白鍵也能攻擊揮劍
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT') {
+                cursorGraphicWrap.classList.add('slashing');
+                playSlashSound();
+                explodeClickShockwave(mouseX, mouseY);
+                spawnDamageNumber(mouseX, mouseY);
+                setTimeout(() => {
+                    cursorGraphicWrap.classList.remove('slashing');
+                }, 180);
+            }
+        });
+
+        // 彈出 RPG 傷害浮空數字
+        const battlePhrases = ['CRIT 9999!', 'HIT +100!', 'LEVEL UP!', 'SLASH! ⚔️', 'EXP +500!', 'MEOW! 🐾', 'COMBO x10!'];
+        function spawnDamageNumber(x, y) {
+            const popup = document.createElement('div');
+            popup.className = 'pixel-damage-popup';
+            const randomText = battlePhrases[Math.floor(Math.random() * battlePhrases.length)];
+            popup.textContent = randomText;
+            popup.style.left = `${x}px`;
+            popup.style.top = `${y}px`;
+            document.body.appendChild(popup);
+            setTimeout(() => {
+                popup.remove();
+            }, 750);
         }
 
-        function draw(e) {
-            if (!isDrawing) return;
-            e.preventDefault();
-            const { x, y } = getCoords(e);
-            ctx.lineTo(x, y);
-            ctx.stroke();
-        }
+        // ==========================================================================
+        // === C. 鼠標移動軌跡畫布特效引擎 (Multi-Shape Animated Pixel Trails) ===
+        // ==========================================================================
+        const trailCanvas = document.getElementById('pixelTrailCanvas');
+        const trailCtx = trailCanvas.getContext('2d');
+        let currentTrailMode = 'mix'; // mix, stars, hearts, flame, paw, cyber
+        let trailParticles = [];
+        let prevMouseX = mouseX;
+        let prevMouseY = mouseY;
 
-        function stopDrawing() {
-            if (isDrawing) {
-                ctx.closePath();
-                isDrawing = false;
+        function resizeTrailCanvas() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            trailCanvas.width = window.innerWidth * dpr;
+            trailCanvas.height = window.innerHeight * dpr;
+            trailCanvas.style.width = window.innerWidth + 'px';
+            trailCanvas.style.height = window.innerHeight + 'px';
+            trailCtx.scale(dpr, dpr);
+            trailCtx.imageSmoothingEnabled = false;
+        }
+        resizeTrailCanvas();
+        window.addEventListener('resize', resizeTrailCanvas);
+
+        // 依移動生成不同圖案的粒子
+        function emitTrailParticle(x, y) {
+            const dist = Math.hypot(x - prevMouseX, y - prevMouseY);
+            if (dist < 4) return; // 避免極微小晃動噴發太多
+            prevMouseX = x;
+            prevMouseY = y;
+
+            const spawnCount = Math.min(Math.floor(dist / 12) + 1, 3);
+            const shapes = ['star', 'heart', 'gem', 'sparkle', 'coin', 'paw', 'flame'];
+            const colors = ['#ffd166', '#00f0ff', '#ff007f', '#06d6a0', '#9b5de5', '#ff9e00', '#ffffff'];
+
+            for (let i = 0; i < spawnCount; i++) {
+                let assignedShape = 'star';
+                if (currentTrailMode === 'mix') {
+                    assignedShape = shapes[Math.floor(Math.random() * shapes.length)];
+                } else if (currentTrailMode === 'stars') {
+                    assignedShape = Math.random() > 0.4 ? 'star' : 'sparkle';
+                } else if (currentTrailMode === 'hearts') {
+                    assignedShape = Math.random() > 0.3 ? 'heart' : 'gem';
+                } else if (currentTrailMode === 'flame') {
+                    assignedShape = 'flame';
+                } else if (currentTrailMode === 'paw') {
+                    assignedShape = Math.random() > 0.4 ? 'paw' : 'star';
+                } else if (currentTrailMode === 'cyber') {
+                    assignedShape = 'gem';
+                }
+
+                trailParticles.push({
+                    x: x + (Math.random() - 0.5) * 12,
+                    y: y + (Math.random() - 0.5) * 12,
+                    vx: (Math.random() - 0.5) * 2.2,
+                    vy: (Math.random() - 0.5) * 2.2 - (assignedShape === 'flame' || assignedShape === 'heart' ? 1.5 : 0.4),
+                    size: Math.random() * 8 + 10,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.15,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    shape: assignedShape,
+                    life: 1.0,
+                    decay: Math.random() * 0.025 + 0.02
+                });
             }
         }
 
-        // 滑鼠事件
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        window.addEventListener('mouseup', stopDrawing);
+        // 點擊爆發環狀衝擊波粒子 (20 顆)
+        function explodeClickShockwave(x, y) {
+            const count = 22;
+            const colors = ['#ffd166', '#ff007f', '#00f0ff', '#ffffff'];
+            for (let i = 0; i < count; i++) {
+                const angle = (Math.PI * 2 / count) * i + Math.random() * 0.3;
+                const speed = Math.random() * 4.5 + 3.5;
+                trailParticles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: Math.random() * 10 + 12,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.25,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    shape: currentTrailMode === 'mix' ? (Math.random() > 0.5 ? 'star' : 'gem') : 'star',
+                    life: 1.0,
+                    decay: 0.03
+                });
+            }
+        }
 
-        // 觸控螢幕事件 (手機/平板)
-        canvas.addEventListener('touchstart', startDrawing, { passive: false });
-        canvas.addEventListener('touchmove', draw, { passive: false });
-        window.addEventListener('touchend', stopDrawing);
+        // 各種像素圖案繪製函式 (Draw Pixel Art Shapes on Canvas)
+        function drawPixelParticle(p) {
+            trailCtx.save();
+            trailCtx.translate(p.x, p.y);
+            trailCtx.rotate(p.rotation);
+            trailCtx.globalAlpha = p.life;
+            trailCtx.fillStyle = p.color;
 
-        // 顏色選擇器設定
-        const colorDots = document.querySelectorAll('.color-dot');
-        const customColor = document.getElementById('customColor');
+            const s = Math.floor(p.size * p.life);
+            if (s <= 1) {
+                trailCtx.restore();
+                return;
+            }
 
-        colorDots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                colorDots.forEach(d => d.classList.remove('active'));
-                dot.classList.add('active');
-                currentColor = dot.getAttribute('data-color');
-                ctx.strokeStyle = currentColor;
+            if (p.shape === 'star') {
+                // 8-Bit 像素四角星
+                const half = Math.floor(s / 2);
+                const quarter = Math.floor(s / 4);
+                trailCtx.fillRect(-half, -quarter, s, quarter * 2);
+                trailCtx.fillRect(-quarter, -half, quarter * 2, s);
+                trailCtx.fillStyle = '#ffffff';
+                trailCtx.fillRect(-quarter / 2, -quarter / 2, quarter, quarter);
+            } else if (p.shape === 'heart') {
+                // 8-Bit 像素愛心
+                const unit = Math.max(2, Math.floor(s / 5));
+                trailCtx.fillRect(-2 * unit, -2 * unit, unit, unit);
+                trailCtx.fillRect(-unit, -3 * unit, unit, unit);
+                trailCtx.fillRect(0, -2 * unit, unit, unit);
+                trailCtx.fillRect(unit, -3 * unit, unit, unit);
+                trailCtx.fillRect(2 * unit, -2 * unit, unit, unit);
+                trailCtx.fillRect(-2 * unit, -unit, 5 * unit, 2 * unit);
+                trailCtx.fillRect(-unit, unit, 3 * unit, unit);
+                trailCtx.fillRect(0, 2 * unit, unit, unit);
+            } else if (p.shape === 'gem') {
+                // 8-Bit 像素寶石鑽石
+                const half = Math.floor(s / 2);
+                trailCtx.fillRect(-half, 0, s, half);
+                trailCtx.fillRect(-half / 2, -half / 2, half, half / 2);
+                trailCtx.fillStyle = '#ffffff';
+                trailCtx.fillRect(-half / 2, 0, 3, 3);
+            } else if (p.shape === 'sparkle') {
+                // 像素閃光十字
+                const half = Math.floor(s / 2);
+                trailCtx.fillRect(-half, 0, s, 2);
+                trailCtx.fillRect(0, -half, 2, s);
+                trailCtx.fillRect(-2, -2, 4, 4);
+            } else if (p.shape === 'coin') {
+                // 像素金幣
+                const radius = Math.floor(s / 2);
+                trailCtx.fillStyle = '#ffd166';
+                trailCtx.fillRect(-radius, -radius, s, s);
+                trailCtx.fillStyle = '#ff9e00';
+                trailCtx.fillRect(-radius + 2, -radius + 2, s - 4, s - 4);
+                trailCtx.fillStyle = '#ffffff';
+                trailCtx.fillRect(-1, -1, 2, 2);
+            } else if (p.shape === 'paw') {
+                // 像素貓爪
+                const u = Math.max(2, Math.floor(s / 5));
+                trailCtx.fillRect(-2 * u, -2 * u, u, u);
+                trailCtx.fillRect(0, -3 * u, u, u);
+                trailCtx.fillRect(2 * u, -2 * u, u, u);
+                trailCtx.fillRect(-u, -u, 3 * u, 2 * u);
+            } else if (p.shape === 'flame') {
+                // 像素火焰
+                const u = Math.max(2, Math.floor(s / 4));
+                trailCtx.fillStyle = '#ff3366';
+                trailCtx.fillRect(-u, -2 * u, 2 * u, 4 * u);
+                trailCtx.fillStyle = '#ffd166';
+                trailCtx.fillRect(-u / 2, -u, u, 2 * u);
+            }
+
+            trailCtx.restore();
+        }
+
+        // 60fps 粒子動畫主迴圈
+        function renderTrailLoop() {
+            trailCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            for (let i = trailParticles.length - 1; i >= 0; i--) {
+                const p = trailParticles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotSpeed;
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    trailParticles.splice(i, 1);
+                } else {
+                    drawPixelParticle(p);
+                }
+            }
+
+            requestAnimationFrame(renderTrailLoop);
+        }
+        requestAnimationFrame(renderTrailLoop);
+
+        function setTrailStyle(trailKey) {
+            currentTrailMode = trailKey;
+            const names = {
+                mix: '彩虹混合',
+                stars: '像素星塵',
+                hearts: '愛心經驗',
+                flame: '烈焰風暴',
+                paw: '貓咪足印',
+                cyber: '賽博矩陣'
+            };
+            const label = document.getElementById('trailModeName');
+            if (label) label.textContent = names[trailKey] || '星塵';
+
+            document.querySelectorAll('[data-trail]').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-trail') === trailKey);
+            });
+            showToast(`已切換移動軌跡特效：${names[trailKey]} ✨`);
+        }
+
+        // ==========================================================================
+        // === D. 標題畫面背景像素星空畫布 (Start Screen Parallax Pixel Sky) ===
+        // ==========================================================================
+        (function initStartBg() {
+            const bgCanvas = document.getElementById('pixelBgCanvas');
+            if (!bgCanvas) return;
+            const bgCtx = bgCanvas.getContext('2d');
+            let stars = [];
+
+            function resizeBg() {
+                bgCanvas.width = window.innerWidth;
+                bgCanvas.height = window.innerHeight;
+                stars = [];
+                const count = Math.floor(window.innerWidth / 14);
+                for (let i = 0; i < count; i++) {
+                    stars.push({
+                        x: Math.random() * window.innerWidth,
+                        y: Math.random() * window.innerHeight,
+                        size: Math.random() > 0.8 ? 4 : 2,
+                        color: Math.random() > 0.5 ? '#ffd166' : (Math.random() > 0.5 ? '#00f0ff' : '#ff007f'),
+                        blink: Math.random() * Math.PI * 2,
+                        speed: Math.random() * 0.05 + 0.02
+                    });
+                }
+            }
+            resizeBg();
+            window.addEventListener('resize', resizeBg);
+
+            function drawBg() {
+                bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+                stars.forEach(s => {
+                    s.blink += s.speed;
+                    const alpha = Math.max(0.2, (Math.sin(s.blink) + 1) / 2);
+                    bgCtx.globalAlpha = alpha;
+                    bgCtx.fillStyle = s.color;
+                    bgCtx.fillRect(s.x, s.y, s.size, s.size);
+                });
+                requestAnimationFrame(drawBg);
+            }
+            requestAnimationFrame(drawBg);
+        })();
+
+        // ==========================================================================
+        // === E. 像素遊戲選單鍵盤導覽 (Keyboard & Menu Navigation) ===
+        // ==========================================================================
+        const menuButtons = Array.from(document.querySelectorAll('.pixel-menu-btn'));
+        let currentMenuIdx = 0;
+
+        function updateMenuFocus() {
+            menuButtons.forEach((btn, idx) => {
+                btn.classList.toggle('active-focus', idx === currentMenuIdx);
+            });
+            playHoverSound();
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                currentMenuIdx = (currentMenuIdx + 1) % menuButtons.length;
+                updateMenuFocus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                currentMenuIdx = (currentMenuIdx - 1 + menuButtons.length) % menuButtons.length;
+                updateMenuFocus();
+            } else if (e.key === 'Enter') {
+                // 如果目前在標題畫面，觸發焦點按鈕
+                const activeBtn = menuButtons[currentMenuIdx];
+                if (activeBtn) {
+                    activeBtn.click();
+                    playStartFanfare();
+                }
+            }
+        });
+
+        // 點擊「PRESS START TO PLAY」直接啟動開始冒險
+        const pressStartPrompt = document.getElementById('pressStartPrompt');
+        if (pressStartPrompt) {
+            pressStartPrompt.addEventListener('click', () => {
+                playStartFanfare();
+                const aboutSec = document.getElementById('about');
+                if (aboutSec) aboutSec.scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // ==========================================================================
+        // === F. 塗鴉板畫布引擎 (Spell Workshop Doodle Studio) ===
+        // ==========================================================================
+        (function initDoodle() {
+            const canvas = document.getElementById('doodleCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const hint = document.getElementById('doodleGuideHint');
+            let isDrawing = false;
+            let doodleTool = 'pencil'; // pencil, neon, rainbow, eraser, stamp
+            let currentStamp = '🐾';
+            let rainbowHue = 0;
+            let lastX = 0;
+            let lastY = 0;
+            const history = [];
+
+            function resizeDoodle() {
+                const rect = canvas.getBoundingClientRect();
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                ctx.lineCap = 'square';
+                ctx.lineJoin = 'miter';
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, rect.width, rect.height);
+            }
+            resizeDoodle();
+            window.addEventListener('resize', () => setTimeout(resizeDoodle, 100));
+
+            function getCoords(e) {
+                const rect = canvas.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
+
+            function saveHistory() {
+                if (history.length >= 20) history.shift();
+                history.push(canvas.toDataURL());
+            }
+
+            canvas.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                canvas.setPointerCapture(e.pointerId);
+                if (hint) hint.classList.add('hidden');
+                saveHistory();
+
+                const { x, y } = getCoords(e);
+                lastX = x;
+                lastY = y;
+
+                if (doodleTool === 'stamp') {
+                    ctx.font = '32px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(currentStamp, x, y);
+                    return;
+                }
+
+                isDrawing = true;
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + 1, y + 1);
+                applyDoodleStyle();
+                ctx.stroke();
+            });
+
+            canvas.addEventListener('pointermove', (e) => {
+                if (!isDrawing) return;
+                const { x, y } = getCoords(e);
+                applyDoodleStyle();
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                lastX = x;
+                lastY = y;
+            });
+
+            function endDraw(e) {
+                if (isDrawing) {
+                    ctx.closePath();
+                    isDrawing = false;
+                }
+                try { canvas.releasePointerCapture(e.pointerId); } catch (err) { }
+            }
+            canvas.addEventListener('pointerup', endDraw);
+            canvas.addEventListener('pointercancel', endDraw);
+
+            function applyDoodleStyle() {
+                ctx.lineWidth = 6;
+                if (doodleTool === 'eraser') {
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.shadowBlur = 0;
+                } else if (doodleTool === 'neon') {
+                    ctx.strokeStyle = '#00f0ff';
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = '#00f0ff';
+                } else if (doodleTool === 'rainbow') {
+                    rainbowHue = (rainbowHue + 6) % 360;
+                    ctx.strokeStyle = `hsl(${rainbowHue}, 100%, 55%)`;
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = `hsl(${rainbowHue}, 100%, 55%)`;
+                } else {
+                    ctx.strokeStyle = '#0f172a';
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            // 工具切換
+            document.querySelectorAll('.doodle-tool-btn[data-tool]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.doodle-tool-btn, .doodle-stamp-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    doodleTool = btn.getAttribute('data-tool');
+                });
+            });
+
+            document.querySelectorAll('.doodle-stamp-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.doodle-tool-btn, .doodle-stamp-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    doodleTool = 'stamp';
+                    currentStamp = btn.getAttribute('data-stamp');
+                    showToast(`已選取符文印章：${currentStamp}`);
+                });
+            });
+
+            // 復原
+            const undoBtn = document.getElementById('undoCanvasBtn');
+            if (undoBtn) {
+                undoBtn.addEventListener('click', () => {
+                    if (history.length === 0) {
+                        showToast('沒有可復原的步驟');
+                        return;
+                    }
+                    const prev = history.pop();
+                    const img = new Image();
+                    img.onload = () => {
+                        const rect = canvas.getBoundingClientRect();
+                        ctx.clearRect(0, 0, rect.width, rect.height);
+                        ctx.drawImage(img, 0, 0, rect.width, rect.height);
+                    };
+                    img.src = prev;
+                    showToast('已復原上一步');
+                });
+            }
+
+            // 清空
+            const clearBtn = document.getElementById('clearCanvasBtn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    saveHistory();
+                    const rect = canvas.getBoundingClientRect();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, rect.width, rect.height);
+                    if (hint) hint.classList.remove('hidden');
+                    showToast('畫布已清空');
+                });
+            }
+
+            // 下載
+            const saveBtn = document.getElementById('saveCanvasBtn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.download = 'pixel_doodle_artwork.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                    showToast('已下載符文創作畫作 PNG！');
+                });
+            }
+        })();
+
+        // ==========================================================================
+        // === G. 精選作品分類篩選與燈箱 (Works Gallery & Lightbox) ===
+        // ==========================================================================
+        const galleryItems = [
+            {
+                src: 'work1.jpg',
+                title: '水光氛圍人像插畫',
+                desc: '柔和水感光澤、髮絲流動感與周圍漂浮氣泡的折射光影呈現。'
+            },
+            {
+                src: 'work2.png',
+                title: '角色概念設定 ‧ 黑袍金邊少年',
+                desc: '正背雙視圖完整設定，拆解黑金斗篷長袍、俐落剪裁長褲與細緻飾品。'
+            },
+            {
+                src: 'work3.png',
+                title: '角色概念設定 ‧ 藍斗篷馬尾少女',
+                desc: '金黃馬尾搭配深藍斗篷短袍、綁帶長靴，呈現靈動活潑的冒險者風格。'
+            },
+            {
+                src: 'work4.jpg',
+                title: '概念插畫 ‧ 時空裂縫之門',
+                desc: '透視動態構圖，少女伸展身姿穿越次元渦流，觸碰映照記憶的破裂晶石。'
+            },
+            {
+                src: 'work5.png',
+                title: '歐式宮廷貴族角色立繪',
+                desc: '巴洛克緹花紋理燕尾服、精美藍底金絲背心與紳士手杖的全身精緻立繪。'
+            }
+        ];
+
+        let currentLightboxIdx = 0;
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDesc = document.getElementById('lightboxDesc');
+
+        function openLightbox(idx) {
+            currentLightboxIdx = idx;
+            const item = galleryItems[idx];
+            if (!item) return;
+            lightboxImg.src = item.src;
+            lightboxTitle.textContent = item.title;
+            lightboxDesc.textContent = item.desc;
+            lightboxModal.classList.add('active');
+            playSelectSound();
+        }
+
+        function closeLightboxModal() {
+            lightboxModal.classList.remove('active');
+        }
+
+        function closeLightboxOnBackdrop(e) {
+            if (e.target === lightboxModal) {
+                closeLightboxModal();
+            }
+        }
+
+        function changeLightbox(step) {
+            currentLightboxIdx = (currentLightboxIdx + step + galleryItems.length) % galleryItems.length;
+            openLightbox(currentLightboxIdx);
+        }
+
+        // 分類篩選
+        document.querySelectorAll('.loot-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.loot-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.getAttribute('data-filter');
+                document.querySelectorAll('.loot-item-card').forEach(card => {
+                    if (cat === 'all' || card.getAttribute('data-category') === cat) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                playHoverSound();
             });
         });
 
-        customColor.addEventListener('input', (e) => {
-            colorDots.forEach(d => d.classList.remove('active'));
-            currentColor = e.target.value;
-            ctx.strokeStyle = currentColor;
+        // ==========================================================================
+        // === H. 設定視窗與控制按鈕 (Settings Modal & Tool Toggles) ===
+        // ==========================================================================
+        const settingsModal = document.getElementById('settingsModal');
+        const openSettingsBtn = document.getElementById('openSettingsBtn');
+        const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+
+        if (openSettingsBtn) {
+            openSettingsBtn.addEventListener('click', () => {
+                settingsModal.classList.add('active');
+                playSelectSound();
+            });
+        }
+
+        if (closeSettingsBtn) {
+            closeSettingsBtn.addEventListener('click', () => {
+                settingsModal.classList.remove('active');
+            });
+        }
+
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) {
+                settingsModal.classList.remove('active');
+            }
         });
 
-        // 筆刷粗細滑桿
-        const brushSize = document.getElementById('brushSize');
-        brushSize.addEventListener('input', (e) => {
-            currentLineWidth = e.target.value;
-            ctx.lineWidth = currentLineWidth;
+        // 鼠標樣式切換按鈕
+        document.querySelectorAll('[data-cursor]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setCursorStyle(btn.getAttribute('data-cursor'));
+            });
         });
 
-        // 清空畫布按鈕
-        document.getElementById('clearCanvasBtn').addEventListener('click', () => {
-            const rect = canvas.getBoundingClientRect();
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, rect.width, rect.height);
+        const hudCursorBtn = document.getElementById('hudCursorStyleBtn');
+        if (hudCursorBtn) {
+            hudCursorBtn.addEventListener('click', () => {
+                const styles = ['sword', 'wand', 'paw', 'glove'];
+                const nextIdx = (styles.indexOf(currentCursorStyle) + 1) % styles.length;
+                setCursorStyle(styles[nextIdx]);
+            });
+        }
+
+        // 軌跡樣式切換按鈕
+        document.querySelectorAll('[data-trail]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setTrailStyle(btn.getAttribute('data-trail'));
+            });
         });
 
-        // 儲存畫作按鈕 (下載圖片)
-        document.getElementById('saveCanvasBtn').addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.download = '我的畫畫創作.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        });
+        const hudTrailBtn = document.getElementById('hudTrailStyleBtn');
+        if (hudTrailBtn) {
+            hudTrailBtn.addEventListener('click', () => {
+                const modes = ['mix', 'stars', 'hearts', 'flame', 'paw', 'cyber'];
+                const nextIdx = (modes.indexOf(currentTrailMode) + 1) % modes.length;
+                setTrailStyle(modes[nextIdx]);
+            });
+        }
+
+        // 音效切換
+        const hudSoundToggle = document.getElementById('hudSoundToggle');
+        const soundText = document.getElementById('soundText');
+        function setSoundState(state) {
+            soundEnabled = state;
+            if (soundText) soundText.textContent = soundEnabled ? '音效 ON' : '音效 OFF';
+            if (hudSoundToggle) hudSoundToggle.classList.toggle('active', soundEnabled);
+            document.getElementById('settingSoundOn').classList.toggle('active', soundEnabled);
+            document.getElementById('settingSoundOff').classList.toggle('active', !soundEnabled);
+            showToast(soundEnabled ? '已開啟 8-Bit 合成音效 🔊' : '已靜音 🔇');
+        }
+
+        if (hudSoundToggle) {
+            hudSoundToggle.addEventListener('click', () => {
+                setSoundState(!soundEnabled);
+            });
+        }
+        document.getElementById('settingSoundOn').addEventListener('click', () => setSoundState(true));
+        document.getElementById('settingSoundOff').addEventListener('click', () => setSoundState(false));
+
+        // CRT 濾鏡切換
+        const crtOverlay = document.getElementById('crtOverlay');
+        const hudCrtToggle = document.getElementById('hudCrtToggle');
+        function setCrtState(active) {
+            crtOverlay.classList.toggle('active', active);
+            if (hudCrtToggle) hudCrtToggle.classList.toggle('active', active);
+            document.getElementById('settingCrtOn').classList.toggle('active', active);
+            document.getElementById('settingCrtOff').classList.toggle('active', !active);
+            showToast(active ? '已開啟復古街機 CRT 掃描線濾鏡 📺' : '已關閉 CRT 濾鏡');
+        }
+
+        if (hudCrtToggle) {
+            hudCrtToggle.addEventListener('click', () => {
+                setCrtState(!crtOverlay.classList.contains('active'));
+            });
+        }
+        document.getElementById('settingCrtOn').addEventListener('click', () => setCrtState(true));
+        document.getElementById('settingCrtOff').addEventListener('click', () => setCrtState(false));
+
+        // BGM 開關
+        document.getElementById('settingBgmToggle').addEventListener('click', toggleBgm);
+
+        // 深淺色主題切換
+        const hudThemeToggle = document.getElementById('hudThemeToggle');
+        if (hudThemeToggle) {
+            hudThemeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'light') {
+                    document.documentElement.removeAttribute('data-theme');
+                    showToast('已切換深色像素模式 🌙');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    showToast('已切換淺色像素模式 ☀️');
+                }
+            });
+        }
+
+        // 點擊貓咪坐騎頭像趣味動畫
+        const mascotAvatar = document.getElementById('mascotAvatar');
+        if (mascotAvatar) {
+            mascotAvatar.addEventListener('click', () => {
+                mascotAvatar.style.transform = 'scale(1.2) rotate(15deg)';
+                playSelectSound();
+                showToast('喵！冒險夥伴為你加油！🐾');
+                setTimeout(() => {
+                    mascotAvatar.style.transform = '';
+                }, 300);
+            });
+        }
+
+        // 複製聯絡資訊
+        function copyContactText(text, label) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(`已複製${label}：${text}`);
+                });
+            } else {
+                showToast(`聯絡電話：${text}`);
+            }
+        }
+
+        // Toast 彈出函式
+        function showToast(msg) {
+            const toast = document.getElementById('pixelToast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2200);
+        }
+
+        // 初始化
+        setCursorStyle('sword');
+        setTrailStyle('mix');
     </script>
 </body>
 
